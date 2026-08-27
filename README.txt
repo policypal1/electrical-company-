@@ -4,7 +4,7 @@ Files:
 - index.html
 - styles.css
 - script.js
-- assets/jv-electric-hero-bg.webp
+- jv-electric-hero-bg.webp
 
 Hero background:
 The uploaded black/yellow background has been converted to WebP and is already connected in styles.css.

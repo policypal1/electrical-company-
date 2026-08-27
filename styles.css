@@ -209,7 +209,7 @@ a {
   isolation: isolate;
   min-height: calc(100svh - 82px);
   overflow: hidden;
-  background: #111214 url("assets/jv-electric-hero-bg.webp") center center / cover no-repeat;
+  background: #111214 url("jv-electric-hero-bg.webp") center center / cover no-repeat;
 }
 
 .hero::before {

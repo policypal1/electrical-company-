@@ -3353,3 +3353,278 @@ input[type="search"]::-webkit-search-results-decoration {
     gap: 24px;
   }
 }
+
+
+/* ===== v12 requested layout fixes ===== */
+
+/* Put Service Area before Reviews in the DOM. This section is intentionally simple and spacious. */
+.service-area-section {
+  background: #111214;
+}
+
+.service-area-inner {
+  width: min(1240px, calc(100% - 56px));
+  grid-template-columns: minmax(280px, .62fr) minmax(600px, 1.38fr);
+  gap: 64px;
+  padding: 104px 0 110px;
+}
+
+.service-area-copy {
+  align-self: center;
+}
+
+.service-area-copy h2 {
+  max-width: 480px;
+}
+
+.service-area-copy p {
+  max-width: 470px;
+}
+
+.service-area-visual {
+  width: 100%;
+}
+
+.service-area-map-card {
+  min-height: 520px;
+  width: 100%;
+  border-radius: 24px;
+}
+
+.service-area-tags,
+.service-area-mini-stats {
+  display: none !important;
+}
+
+/* Reviews: prevent any inherited white blocks / patches. */
+.reviews-section,
+.reviews-inner,
+.reviews-grid,
+.review-card,
+.reviews-actions {
+  background-color: transparent;
+}
+
+.review-card {
+  background: rgba(18, 20, 23, 0.82);
+}
+
+/* About: both columns are the same visual height on desktop. */
+.about-inner {
+  width: min(1180px, calc(100% - 56px));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 62px;
+}
+
+.about-visual,
+.about-content {
+  width: 100%;
+  max-width: none;
+  min-height: 560px;
+}
+
+.about-visual {
+  position: relative;
+  padding: 0;
+}
+
+.about-photo-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  aspect-ratio: auto;
+}
+
+.about-photo-placeholder::after {
+  position: absolute;
+}
+
+.about-experience-card {
+  right: 20px;
+  bottom: 20px;
+  width: 188px;
+  min-height: 128px;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 0 0;
+}
+
+.about-content h2 {
+  max-width: 100%;
+  font-size: clamp(42px, 4.1vw, 60px);
+}
+
+.about-lead {
+  max-width: 100%;
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.about-points {
+  margin-top: 24px;
+}
+
+.about-point {
+  padding: 16px 0;
+}
+
+.about-point p {
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* Contact: distinct existing background image + substantially wider form. */
+.contact-section {
+  background:
+    linear-gradient(90deg, rgba(7,8,10,.94) 0%, rgba(7,8,10,.84) 34%, rgba(7,8,10,.72) 68%, rgba(7,8,10,.88) 100%),
+    url("jv-electric-contact-bg.webp") center center / cover no-repeat,
+    #0d0e10;
+}
+
+.contact-section::before {
+  background:
+    radial-gradient(circle at 12% 42%, rgba(244,196,0,.14), transparent 25%),
+    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.22));
+}
+
+.contact-inner {
+  width: min(1280px, calc(100% - 56px));
+  grid-template-columns: minmax(300px, .58fr) minmax(620px, 1.42fr);
+  gap: 54px;
+  align-items: center;
+}
+
+.contact-copy h2 {
+  max-width: 500px;
+}
+
+.contact-copy p {
+  max-width: 490px;
+}
+
+.contact-methods {
+  display: none !important;
+}
+
+.contact-form-card {
+  width: 100%;
+  max-width: none;
+  padding: 32px;
+  background: rgba(15,17,20,.88);
+  backdrop-filter: blur(7px);
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.contact-form textarea {
+  min-height: 160px;
+}
+
+/* FAQ is below contact and nothing is open by default. */
+.faq-heading-simple {
+  grid-template-columns: 1fr;
+  margin-bottom: 34px;
+}
+
+.faq-heading-simple > div {
+  max-width: 760px;
+}
+
+.faq-item .faq-panel {
+  max-height: 0;
+}
+
+.faq-item.is-open .faq-panel {
+  max-height: 220px;
+}
+
+@media (max-width: 1080px) {
+  .service-area-inner,
+  .about-inner,
+  .contact-inner {
+    width: min(100% - 40px, 1000px);
+    grid-template-columns: 1fr;
+  }
+
+  .service-area-map-card {
+    min-height: 430px;
+  }
+
+  .about-visual,
+  .about-content {
+    min-height: auto;
+  }
+
+  .about-visual {
+    height: 540px;
+  }
+
+  .contact-inner {
+    gap: 34px;
+  }
+}
+
+@media (max-width: 620px) {
+  .service-area-inner,
+  .about-inner,
+  .contact-inner {
+    width: calc(100% - 32px);
+  }
+
+  .service-area-inner {
+    padding: 62px 0 68px;
+    gap: 28px;
+  }
+
+  .service-area-map-card {
+    min-height: 320px;
+  }
+
+  .about-inner {
+    gap: 28px;
+  }
+
+  .about-visual {
+    height: 390px;
+  }
+
+  .about-photo-placeholder {
+    min-height: 390px;
+  }
+
+  .about-experience-card {
+    right: 14px;
+    bottom: 14px;
+    width: 160px;
+    min-height: 112px;
+  }
+
+  .about-experience-card strong {
+    font-size: 48px;
+  }
+
+  .contact-inner {
+    padding: 62px 0 68px;
+    gap: 26px;
+  }
+
+  .contact-form-card {
+    padding: 22px 18px;
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr;
+  }
+}

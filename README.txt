@@ -59,3 +59,13 @@ Update v11:
 - Restyled reviews section to dark theme.
 - Refined About section layout/alignment and removed About CTA.
 - Added Service Area, FAQ, Contact, and Footer sections.
+
+
+Update v12:
+- Service Area moved above Reviews.
+- FAQ moved below Get in Touch and all questions initialize closed.
+- Service Area city chips and mini-stat cards removed; map area enlarged.
+- About section columns aligned to the same height, with experience card contained inside image.
+- Contact form widened; Call/Email/Facebook cards removed.
+- Contact uses a distinct background image asset.
+- FAQ caveat paragraph removed.

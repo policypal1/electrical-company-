@@ -44,3 +44,10 @@ Update v9:
 - Added subtle neutral texture and black structural accents to white sections.
 - Removed Google/Facebook source chips and Customer Name placeholders from review cards.
 - Kept Google and Facebook review CTA buttons.
+
+
+Update v10:
+- Made all How It Works cards use one consistent light style.
+- Converted Reviews into the dark alternating section.
+- Restored reviewer-name placeholders and removed decorative quotation marks.
+- Added a new white About JV Electric section with owner/team photo placeholder, 10+ years card, family/veteran-owned, Spanish-speaking, and residential-specialist content.

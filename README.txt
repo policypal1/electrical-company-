@@ -1,15 +1,19 @@
-JV Electric LLC Header
+JV Electric LLC - Header + Hero Starter
 
-Updated responsive header starter for the JV Electric LLC website.
-
-Changes in this version:
-- Barlow typeface
+Included:
+- Responsive desktop header
+- Responsive mobile hamburger menu
+- Logo placeholder
 - Centered desktop navigation
-- Removed 24/7 emergency-service header text
-- Added "LOGO GOES HERE" placeholder
-- JV Electric LLC brand name links to ./ to return to/reload the homepage
-- Desktop Get an Estimate CTA retained
-- Mobile hamburger menu retained
-- Mobile Get an Estimate CTA retained inside menu
+- Get an Estimate header CTA
+- Responsive hero section
+- Headline + subheadline only
+- Call Now + Get a Quote actions
+- Large right-side electrical image placeholder with fade treatment
+- Barlow font via Google Fonts
 
-Open index.html in a browser to preview.
+Before launch:
+1. Replace the logo placeholder with the real JV Electric LLC logo.
+2. Replace href="tel:" with the real business phone number.
+3. Replace the hero image placeholder with a real electrical/project image.
+4. Connect the quote/contact anchors to the final contact section or form.

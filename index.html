@@ -108,6 +108,7 @@
       </div>
     </section>
 
+    
     <section class="services-section" id="services">
       <div class="services-inner">
         <div class="services-heading">
@@ -118,8 +119,17 @@
           <p>From quick repairs to major upgrades, JV Electric handles residential electrical work across Southwest Washington. If it runs on power in your home, ask us about it.</p>
         </div>
 
+        <div class="services-tools">
+          <label class="services-search" for="services-search-input">
+            <svg class="services-search-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"/></svg>
+            <input id="services-search-input" type="search" inputmode="search" autocomplete="off" placeholder="Search services: panel, EV charger, RV, hot tub..." aria-describedby="services-search-meta" />
+            <button class="services-search-clear" type="button" aria-label="Clear service search" hidden>×</button>
+          </label>
+          <p class="services-search-meta" id="services-search-meta">Showing all 16 services.</p>
+        </div>
+
         <div class="services-grid" id="services-grid">
-          <article class="service-card">
+          <article class="service-card" data-aliases="panel|pannel|panle|breaker box|service panel|main panel|electrical panel|subpanel|service upgrade|amp upgrade">
             <div class="service-media service-media-1" aria-label="Photo placeholder for Panel Upgrades">
               <span>PANEL / SERVICE PHOTO</span>
             </div>
@@ -131,7 +141,8 @@
               </div>
             </div>
           </article>
-          <article class="service-card">
+
+          <article class="service-card" data-aliases="ev|ev charger|car charger|electric vehicle|tesla|tesla charger|level 2 charger|wall connector">
             <div class="service-media service-media-2" aria-label="Photo placeholder for EV Chargers">
               <span>EV CHARGER PHOTO</span>
             </div>
@@ -143,7 +154,8 @@
               </div>
             </div>
           </article>
-          <article class="service-card">
+
+          <article class="service-card" data-aliases="lighting|lights|light fixture|light fixtures|recessed lighting|can lights|security lighting|outdoor lights|indoor lights">
             <div class="service-media service-media-3" aria-label="Photo placeholder for Lighting">
               <span>LIGHTING PHOTO</span>
             </div>
@@ -155,19 +167,21 @@
               </div>
             </div>
           </article>
-          <article class="service-card">
-            <div class="service-media service-media-4" aria-label="Photo placeholder for Outlets & Switches">
+
+          <article class="service-card" data-aliases="outlet|outlets|switch|switches|gfci|plug|plugs|usb outlet|receptacle|receptacles">
+            <div class="service-media service-media-4" aria-label="Photo placeholder for Outlets &amp; Switches">
               <span>OUTLET / SWITCH PHOTO</span>
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm2 5v2m6-2v2m-6 4h6"/></svg></div>
               <div class="service-copy">
-                <h3>Outlets & Switches</h3>
+                <h3>Outlets &amp; Switches</h3>
                 <p>New outlets, GFCI protection, switches, USB receptacles, and replacements.</p>
               </div>
             </div>
           </article>
-          <article class="service-card service-secondary">
+
+          <article class="service-card service-secondary" data-aliases="repair|repairs|troubleshooting|troubleshoot|flickering lights|breaker keeps tripping|dead outlet|power issue|electrical problem">
             <div class="service-media service-media-5" aria-label="Photo placeholder for Electrical Repairs">
               <span>REPAIR PHOTO</span>
             </div>
@@ -179,19 +193,21 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-secondary">
-            <div class="service-media service-media-6" aria-label="Photo placeholder for Swim Spas & Hot Tubs">
+
+          <article class="service-card service-secondary" data-aliases="hot tub|spa|swim spa|jacuzzi|hot tub wiring|spa wiring">
+            <div class="service-media service-media-6" aria-label="Photo placeholder for Swim Spas &amp; Hot Tubs">
               <span>SPA / HOT TUB PHOTO</span>
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 14h16M7 14v3m10-3v3M6 10h12l-1-5H7l-1 5Zm1 10h10"/></svg></div>
               <div class="service-copy">
-                <h3>Swim Spas & Hot Tubs</h3>
+                <h3>Swim Spas &amp; Hot Tubs</h3>
                 <p>Dedicated circuits and safe electrical connections for spas and outdoor equipment.</p>
               </div>
             </div>
           </article>
-          <article class="service-card service-secondary">
+
+          <article class="service-card service-secondary" data-aliases="rv|rv outlet|rv plug|motorhome|motor home|camper|travel trailer|shore power|30 amp|50 amp|rv receptacle">
             <div class="service-media service-media-7" aria-label="Photo placeholder for RV Outlets">
               <span>RV OUTLET PHOTO</span>
             </div>
@@ -203,7 +219,8 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-secondary">
+
+          <article class="service-card service-secondary" data-aliases="dedicated circuit|new circuit|appliance circuit|20 amp circuit|240v|240 volt|dedicated power">
             <div class="service-media service-media-8" aria-label="Photo placeholder for Dedicated Circuits">
               <span>DEDICATED CIRCUIT PHOTO</span>
             </div>
@@ -215,7 +232,8 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
+
+          <article class="service-card service-extra" data-aliases="remodel|renovation|addition|bathroom remodel|kitchen remodel|rewire|rewiring">
             <div class="service-media service-media-9" aria-label="Photo placeholder for Remodel Wiring">
               <span>REMODEL WIRING PHOTO</span>
             </div>
@@ -227,7 +245,8 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
+
+          <article class="service-card service-extra" data-aliases="appliance|range|oven|dryer|dishwasher|microwave|laundry|kitchen circuit">
             <div class="service-media service-media-10" aria-label="Photo placeholder for Appliance Circuits">
               <span>APPLIANCE CIRCUIT PHOTO</span>
             </div>
@@ -239,19 +258,21 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
-            <div class="service-media service-media-11" aria-label="Photo placeholder for Smoke & CO Detectors">
+
+          <article class="service-card service-extra" data-aliases="smoke detector|carbon monoxide|co detector|alarm|alarms|detectors">
+            <div class="service-media service-media-11" aria-label="Photo placeholder for Smoke &amp; CO Detectors">
               <span>DETECTOR PHOTO</span>
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7Zm0 4v4m0 4h.01"/></svg></div>
               <div class="service-copy">
-                <h3>Smoke & CO Detectors</h3>
+                <h3>Smoke &amp; CO Detectors</h3>
                 <p>Hardwired smoke and carbon monoxide detector installation and replacement.</p>
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
+
+          <article class="service-card service-extra" data-aliases="ceiling fan|fan|fans|fan install|fan replacement">
             <div class="service-media service-media-12" aria-label="Photo placeholder for Ceiling Fans">
               <span>CEILING FAN PHOTO</span>
             </div>
@@ -263,7 +284,8 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
+
+          <article class="service-card service-extra" data-aliases="surge|surge protection|whole home surge|surge protector">
             <div class="service-media service-media-13" aria-label="Photo placeholder for Surge Protection">
               <span>SURGE PROTECTION PHOTO</span>
             </div>
@@ -275,19 +297,21 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
-            <div class="service-media service-media-14" aria-label="Photo placeholder for Garage & Shop Power">
+
+          <article class="service-card service-extra" data-aliases="garage|shop|workshop|shed|shop power|garage outlets|garage wiring">
+            <div class="service-media service-media-14" aria-label="Photo placeholder for Garage &amp; Shop Power">
               <span>GARAGE / SHOP PHOTO</span>
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V8h12v10M9 8V5h6v3m-5 4h4"/></svg></div>
               <div class="service-copy">
-                <h3>Garage & Shop Power</h3>
+                <h3>Garage &amp; Shop Power</h3>
                 <p>Outlets, lighting, circuits, and electrical upgrades for garages and workspaces.</p>
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
+
+          <article class="service-card service-extra" data-aliases="outdoor|exterior|backyard|patio|landscape lighting|exterior outlet|weatherproof|porch light">
             <div class="service-media service-media-15" aria-label="Photo placeholder for Outdoor Electrical">
               <span>OUTDOOR ELECTRICAL PHOTO</span>
             </div>
@@ -299,7 +323,8 @@
               </div>
             </div>
           </article>
-          <article class="service-card service-extra">
+
+          <article class="service-card service-extra" data-aliases="electrical updates|home electrical|general electrical|modernization|upgrades|replace old wiring|home update">
             <div class="service-media service-media-16" aria-label="Photo placeholder for Electrical Updates">
               <span>RESIDENTIAL WORK PHOTO</span>
             </div>
@@ -311,6 +336,10 @@
               </div>
             </div>
           </article>
+        </div>
+
+        <div class="services-empty" id="services-empty" hidden>
+          <p>No exact match found. Try terms like <strong>panel</strong>, <strong>EV</strong>, <strong>motorhome</strong>, or <strong>hot tub</strong>.</p>
         </div>
 
         <div class="services-footer">
@@ -330,7 +359,7 @@
             <span class="section-kicker section-kicker-light">Recent Work</span>
             <h2>See the Work for Yourself.</h2>
           </div>
-          <p>Use real JV Electric project photos here. The layout is built to make the work feel like the proof, not another wall of text.</p>
+          <p>Use real JV Electric project photos here. The new dark background keeps this section premium while letting the work stay front and center.</p>
         </div>
 
         <div class="work-gallery" aria-label="JV Electric project gallery">
@@ -349,6 +378,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <script src="script.js"></script>

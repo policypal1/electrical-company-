@@ -51,3 +51,11 @@ Update v10:
 - Converted Reviews into the dark alternating section.
 - Restored reviewer-name placeholders and removed decorative quotation marks.
 - Added a new white About JV Electric section with owner/team photo placeholder, 10+ years card, family/veteran-owned, Spanish-speaking, and residential-specialist content.
+
+
+Update v11:
+- Fixed mobile search clear button issue by hiding browser native search cancel icon.
+- Added custom dark background image for reviews.
+- Restyled reviews section to dark theme.
+- Refined About section layout/alignment and removed About CTA.
+- Added Service Area, FAQ, Contact, and Footer sections.

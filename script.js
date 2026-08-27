@@ -261,3 +261,25 @@ if (servicesGrid && servicesToggle) {
   updateServiceLabel();
   applyServiceSearch();
 }
+
+
+const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+faqItems.forEach((item) => {
+  const button = item.querySelector('.faq-button');
+  if (!button) return;
+  button.addEventListener('click', () => {
+    const isOpen = item.classList.contains('is-open');
+    faqItems.forEach((other) => {
+      other.classList.remove('is-open');
+      const otherButton = other.querySelector('.faq-button');
+      if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('is-open');
+      button.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+const footerYear = document.getElementById('footer-year');
+if (footerYear) footerYear.textContent = String(new Date().getFullYear());

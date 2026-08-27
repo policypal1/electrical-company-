@@ -1,14 +1,14 @@
 :root {
   --header-bg: #111214;
-  --header-bg-soft: #17191c;
-  --yellow: #f5c400;
-  --yellow-hover: #ffd633;
+  --header-bg-soft: #181a1d;
+  --yellow: #f4c400;
+  --yellow-hover: #ffd42a;
   --white: #ffffff;
-  --gray-100: #f5f6f7;
+  --gray-100: #f4f5f6;
   --gray-300: #c9cdd2;
   --gray-500: #8d949d;
   --border: rgba(255, 255, 255, 0.1);
-  --shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+  --shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
 }
 
 * {
@@ -21,7 +21,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Barlow", Arial, sans-serif;
   color: #17191c;
   background: #f3f4f5;
 }
@@ -46,85 +46,84 @@ a {
 }
 
 .header-inner {
-  width: min(1180px, calc(100% - 40px));
+  width: min(1240px, calc(100% - 40px));
   min-height: 82px;
   margin: 0 auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto minmax(260px, 1fr);
   align-items: center;
   gap: 28px;
 }
 
-.brand {
-  display: inline-flex;
+.brand-area {
+  min-width: 0;
+  display: flex;
   align-items: center;
-  gap: 11px;
-  flex-shrink: 0;
-  color: var(--white);
+  gap: 13px;
+  justify-self: start;
 }
 
-.brand-mark {
-  width: 42px;
-  height: 42px;
+.logo-placeholder {
+  width: 76px;
+  height: 46px;
+  flex: 0 0 auto;
   display: grid;
   place-items: center;
-  border-radius: 10px;
-  background: var(--yellow);
-  color: #111214;
-}
-
-.brand-mark svg {
-  width: 24px;
-  height: 24px;
-}
-
-.brand-copy {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
+  padding: 4px 7px;
+  border: 1px dashed rgba(255, 255, 255, 0.42);
+  border-radius: 5px;
+  color: var(--gray-500);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.05;
+  text-align: center;
+  letter-spacing: 0.04em;
 }
 
 .brand-name {
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 0.03em;
+  color: var(--white);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
-.brand-sub {
-  margin-top: 5px;
+.brand-name:hover,
+.brand-name:focus-visible {
   color: var(--yellow);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.25em;
 }
 
 .desktop-nav {
-  margin-left: auto;
+  justify-self: center;
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  gap: 31px;
 }
 
 .desktop-nav a {
   position: relative;
-  padding: 29px 0 27px;
+  padding: 30px 0 28px;
   color: var(--gray-300);
-  font-size: 14px;
-  font-weight: 600;
-  transition: color 180ms ease;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 160ms ease;
 }
 
 .desktop-nav a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 19px;
+  bottom: 20px;
   width: 100%;
   height: 2px;
   border-radius: 999px;
   background: var(--yellow);
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 180ms ease;
+  transition: transform 160ms ease;
 }
 
 .desktop-nav a:hover,
@@ -138,30 +137,9 @@ a {
 }
 
 .desktop-actions {
+  justify-self: end;
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-left: 6px;
-}
-
-.emergency-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--gray-300);
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  display: inline-block;
-  background: var(--yellow);
-  box-shadow: 0 0 0 4px rgba(245, 196, 0, 0.13);
-  flex-shrink: 0;
 }
 
 .estimate-btn {
@@ -169,13 +147,14 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 18px;
-  border-radius: 8px;
+  padding: 0 20px;
+  border-radius: 5px;
   background: var(--yellow);
   color: #111214;
-  font-size: 13px;
-  font-weight: 800;
-  transition: transform 180ms ease, background 180ms ease;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: transform 160ms ease, background 160ms ease;
 }
 
 .estimate-btn:hover,
@@ -194,7 +173,7 @@ a {
   flex-direction: column;
   gap: 5px;
   border: 1px solid var(--border);
-  border-radius: 9px;
+  border-radius: 7px;
   background: var(--header-bg-soft);
   cursor: pointer;
 }
@@ -232,16 +211,12 @@ a {
   font-size: 16px;
 }
 
-@media (max-width: 1120px) {
-  .emergency-link {
-    display: none;
-  }
-}
-
-@media (max-width: 920px) {
+@media (max-width: 1080px) {
   .header-inner {
-    width: min(100% - 28px, 1180px);
+    width: min(100% - 28px, 1240px);
     min-height: 72px;
+    display: flex;
+    gap: 16px;
   }
 
   .desktop-nav,
@@ -249,17 +224,23 @@ a {
     display: none;
   }
 
-  .menu-toggle {
-    display: flex;
+  .brand-area {
+    min-width: 0;
+    gap: 10px;
   }
 
-  .brand-mark {
-    width: 39px;
-    height: 39px;
+  .logo-placeholder {
+    width: 58px;
+    height: 38px;
+    font-size: 7px;
   }
 
   .brand-name {
-    font-size: 16px;
+    font-size: 17px;
+  }
+
+  .menu-toggle {
+    display: flex;
   }
 
   .mobile-menu {
@@ -285,10 +266,10 @@ a {
 
   .mobile-menu nav a {
     padding: 15px 12px;
-    border-radius: 8px;
+    border-radius: 6px;
     color: var(--gray-100);
-    font-size: 15px;
-    font-weight: 650;
+    font-size: 16px;
+    font-weight: 500;
   }
 
   .mobile-menu nav a:hover,
@@ -302,16 +283,6 @@ a {
     border-top: 1px solid var(--border);
   }
 
-  .mobile-menu-footer p {
-    margin: 0 0 14px;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: var(--gray-300);
-    font-size: 12px;
-    font-weight: 700;
-  }
-
   .mobile-menu-footer .estimate-btn {
     width: 100%;
     min-height: 48px;
@@ -323,17 +294,11 @@ a {
     width: calc(100% - 22px);
   }
 
-  .brand-mark {
-    width: 37px;
-    height: 37px;
-    border-radius: 8px;
+  .logo-placeholder {
+    width: 50px;
   }
 
   .brand-name {
-    font-size: 14px;
-  }
-
-  .brand-sub {
-    font-size: 9px;
+    font-size: 16px;
   }
 }

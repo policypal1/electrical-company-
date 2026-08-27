@@ -1,16 +1,15 @@
-JV Electric LLC Header Starter
+JV Electric LLC Header
 
-Files:
-- index.html
-- styles.css
-- script.js
+Updated responsive header starter for the JV Electric LLC website.
 
-Design:
-- Charcoal/black header
-- Yellow accent + CTA
-- White/gray text
-- Desktop classic navigation
-- Mobile logo + hamburger menu
+Changes in this version:
+- Barlow typeface
+- Centered desktop navigation
+- Removed 24/7 emergency-service header text
+- Added "LOGO GOES HERE" placeholder
+- JV Electric LLC brand name links to ./ to return to/reload the homepage
+- Desktop Get an Estimate CTA retained
+- Mobile hamburger menu retained
+- Mobile Get an Estimate CTA retained inside menu
 
-Note:
-The current brand mark is a temporary lightning-bolt placeholder because the official JV Electric LLC logo has not been supplied yet. Replace the .brand block with the real logo asset when available.
+Open index.html in a browser to preview.

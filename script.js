@@ -267,25 +267,67 @@ const footerYear = document.getElementById('footer-year');
 if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 
 
-const faqItemsV12 = Array.from(document.querySelectorAll('.faq-item'));
-faqItemsV12.forEach((item) => {
+const faqItemsV13 = Array.from(document.querySelectorAll('.faq-item'));
+
+const closeFaqItem = (item, animate = true) => {
+  const button = item.querySelector('.faq-button');
+  const panel = item.querySelector('.faq-panel');
+  if (!button || !panel) return;
+
+  button.setAttribute('aria-expanded', 'false');
   item.classList.remove('is-open');
+
+  if (!animate) {
+    panel.style.height = '0px';
+    panel.style.opacity = '0';
+    return;
+  }
+
+  if (panel.style.height === 'auto' || !panel.style.height) {
+    panel.style.height = `${panel.scrollHeight}px`;
+    panel.offsetHeight;
+  }
+
+  requestAnimationFrame(() => {
+    panel.style.height = '0px';
+    panel.style.opacity = '0';
+  });
+};
+
+const openFaqItem = (item) => {
+  const button = item.querySelector('.faq-button');
+  const panel = item.querySelector('.faq-panel');
+  if (!button || !panel) return;
+
+  item.classList.add('is-open');
+  button.setAttribute('aria-expanded', 'true');
+  panel.style.opacity = '1';
+  panel.style.height = `${panel.scrollHeight}px`;
+
+  const onEnd = (event) => {
+    if (event.propertyName !== 'height') return;
+    if (item.classList.contains('is-open')) panel.style.height = 'auto';
+    panel.removeEventListener('transitionend', onEnd);
+  };
+  panel.addEventListener('transitionend', onEnd);
+};
+
+faqItemsV13.forEach((item) => {
+  closeFaqItem(item, false);
   const button = item.querySelector('.faq-button');
   if (!button) return;
-  button.setAttribute('aria-expanded', 'false');
 
   button.addEventListener('click', () => {
     const shouldOpen = !item.classList.contains('is-open');
 
-    faqItemsV12.forEach((other) => {
-      other.classList.remove('is-open');
-      const otherButton = other.querySelector('.faq-button');
-      if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+    faqItemsV13.forEach((other) => {
+      if (other !== item) closeFaqItem(other, true);
     });
 
     if (shouldOpen) {
-      item.classList.add('is-open');
-      button.setAttribute('aria-expanded', 'true');
+      openFaqItem(item);
+    } else {
+      closeFaqItem(item, true);
     }
   });
 });

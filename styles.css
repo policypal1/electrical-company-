@@ -3628,3 +3628,67 @@ input[type="search"]::-webkit-search-results-decoration {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ===== v13 final cleanup ===== */
+
+/* Service Area: map on the left, copy on the right. */
+.service-area-inner {
+  grid-template-columns: minmax(600px, 1.38fr) minmax(280px, .62fr);
+}
+
+/* Reviews: every card is equal. No featured state and no decorative quote marks. */
+.review-card,
+.review-card-featured {
+  transform: none !important;
+  border-color: rgba(255,255,255,.12) !important;
+  box-shadow: 0 20px 48px rgba(0,0,0,.24) !important;
+  background: rgba(18,20,23,.82) !important;
+}
+
+.review-card:hover,
+.review-card-featured:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(244,196,0,.28) !important;
+  box-shadow: 0 26px 54px rgba(0,0,0,.32) !important;
+}
+
+.review-card::before,
+.review-card-featured::before {
+  content: none !important;
+  display: none !important;
+}
+
+.review-card .review-stars,
+.review-card-featured .review-stars {
+  color: var(--yellow) !important;
+}
+
+/* FAQ: smoother height/opacity animation. JS sets the actual panel height. */
+.faq-panel,
+.faq-item .faq-panel,
+.faq-item.is-open .faq-panel {
+  max-height: none !important;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    height 380ms cubic-bezier(.22,.72,.24,1),
+    opacity 240ms ease;
+  will-change: height, opacity;
+}
+
+.faq-item.is-open .faq-panel {
+  opacity: 1;
+}
+
+.faq-plus::before,
+.faq-plus::after {
+  transition: transform 280ms cubic-bezier(.22,.72,.24,1), opacity 220ms ease;
+}
+
+@media (max-width: 1080px) {
+  .service-area-inner {
+    grid-template-columns: 1fr;
+  }
+}

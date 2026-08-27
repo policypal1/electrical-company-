@@ -69,3 +69,9 @@ Update v12:
 - Contact form widened; Call/Email/Facebook cards removed.
 - Contact uses a distinct background image asset.
 - FAQ caveat paragraph removed.
+
+
+Update v13:
+- Flipped Service Area layout so the large map is left and copy is right.
+- Removed featured/highlighted review styling and all decorative review quote marks.
+- Smoothed FAQ accordion open/close animation.

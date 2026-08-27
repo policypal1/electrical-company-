@@ -75,3 +75,13 @@ Update v13:
 - Flipped Service Area layout so the large map is left and copy is right.
 - Removed featured/highlighted review styling and all decorative review quote marks.
 - Smoothed FAQ accordion open/close animation.
+
+
+Update v14 desktop wrap-up:
+- Desktop-only Services heading/search restructure.
+- Removed desktop services intro copy and default service count line.
+- Smoothed desktop View All Services expansion.
+- Removed desktop Recent Work guidance paragraph.
+- Removed desktop How It Works CTA.
+- Desktop section alternation set to: process white, service area dark, reviews white, about dark, contact white, FAQ dark.
+- Mobile CSS/layout left unchanged.

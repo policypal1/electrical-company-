@@ -3692,3 +3692,277 @@ input[type="search"]::-webkit-search-results-decoration {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ===== v14 desktop-only wrap-up ===== */
+@media (min-width: 761px) {
+  /* Services: move the headline lower and place search where the old body copy lived. */
+  .services-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(360px, .76fr);
+    column-gap: 78px;
+    align-items: end;
+  }
+
+  .services-heading {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 22px 0 34px;
+  }
+
+  .services-heading > p {
+    display: none !important;
+  }
+
+  .services-tools {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    width: 100%;
+    margin: 0 0 34px;
+    display: block;
+  }
+
+  .services-search {
+    width: 100%;
+    max-width: none;
+    min-height: 60px;
+  }
+
+  .services-search-meta {
+    display: none !important;
+  }
+
+  .services-grid,
+  .services-empty,
+  .services-footer {
+    grid-column: 1 / -1;
+  }
+
+  /* The grid's height is animated in JS; keep the reveal on the cards subtle. */
+  .services-grid {
+    will-change: height;
+  }
+
+  .services-grid.is-expanded .service-extra {
+    animation: serviceRevealDesktop 420ms cubic-bezier(.22,.78,.24,1) both;
+  }
+
+  @keyframes serviceRevealDesktop {
+    from { opacity: 0; transform: translateY(20px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Recent Work: remove the internal placeholder guidance copy. */
+  .work-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .work-heading > p {
+    display: none !important;
+  }
+
+  /* How it works: keep the section, remove the extra CTA. */
+  .process-cta {
+    display: none !important;
+  }
+
+  /* Desktop section alternation:
+     How It Works white -> Service Area dark -> Reviews white -> About dark -> Contact white -> FAQ dark. */
+
+  /* Reviews = white */
+  .reviews-section {
+    background:
+      radial-gradient(circle at 12% 16%, rgba(244,196,0,.08), transparent 24%),
+      linear-gradient(180deg, #fafaf8 0%, #f2f2ee 100%) !important;
+    color: #151618;
+  }
+
+  .reviews-section::before {
+    background:
+      linear-gradient(rgba(17,18,20,.026) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17,18,20,.026) 1px, transparent 1px) !important;
+    background-size: 36px 36px !important;
+    opacity: .62;
+  }
+
+  .reviews-heading h2 {
+    color: #111214;
+  }
+
+  .reviews-heading p {
+    color: #656a70;
+  }
+
+  .reviews-section .section-kicker-light {
+    color: #8a6d00;
+  }
+
+  .reviews-grid,
+  .reviews-inner,
+  .reviews-actions {
+    background: transparent !important;
+  }
+
+  .review-card,
+  .review-card-featured {
+    background: #fff !important;
+    border-color: #dedfdc !important;
+    color: #151618;
+    box-shadow: 0 16px 34px rgba(17,18,20,.07) !important;
+    transform: none !important;
+  }
+
+  .review-text {
+    color: #5e6368;
+  }
+
+  .review-author {
+    color: #111214;
+  }
+
+  .reviews-link-secondary {
+    color: #111214;
+    border-color: #c9cbc7;
+    background: #fff;
+  }
+
+  /* About = dark, using a different CSS texture instead of reusing another image. */
+  .about-section {
+    background:
+      radial-gradient(circle at 80% 18%, rgba(244,196,0,.1), transparent 24%),
+      repeating-linear-gradient(128deg, rgba(255,255,255,.018) 0 2px, transparent 2px 28px),
+      #101113 !important;
+    color: #fff;
+  }
+
+  .about-section::before {
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) !important;
+    background-size: 46px 100% !important;
+    opacity: .5;
+  }
+
+  .about-content h2,
+  .about-point h3 {
+    color: #fff;
+  }
+
+  .about-lead,
+  .about-point p {
+    color: rgba(255,255,255,.67);
+  }
+
+  .about-points,
+  .about-point {
+    border-color: rgba(255,255,255,.1);
+  }
+
+  .about-section .section-kicker {
+    color: var(--yellow);
+  }
+
+  .about-point-icon {
+    background: #fff;
+    color: #111214;
+  }
+
+  .about-photo-placeholder {
+    border-color: rgba(255,255,255,.14);
+    box-shadow: 0 24px 60px rgba(0,0,0,.3);
+  }
+
+  /* Contact = white */
+  .contact-section {
+    background:
+      radial-gradient(circle at 8% 18%, rgba(244,196,0,.1), transparent 23%),
+      linear-gradient(180deg, #fafaf8 0%, #f1f1ed 100%) !important;
+    color: #151618;
+  }
+
+  .contact-section::before {
+    background:
+      linear-gradient(rgba(17,18,20,.024) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17,18,20,.024) 1px, transparent 1px) !important;
+    background-size: 38px 38px !important;
+    opacity: .7;
+  }
+
+  .contact-copy h2,
+  .contact-form-card h3 {
+    color: #111214;
+  }
+
+  .contact-copy p {
+    color: #656a70;
+  }
+
+  .contact-section .section-kicker-light {
+    color: #8a6d00;
+  }
+
+  .contact-form-card {
+    background: #fff !important;
+    border-color: #dedfdc !important;
+    box-shadow: 0 18px 42px rgba(17,18,20,.08) !important;
+    backdrop-filter: none !important;
+  }
+
+  .contact-form span {
+    color: #3f4347;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    background: #f8f8f5;
+    border-color: #d8d9d5;
+    color: #111214;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: #8b9095;
+  }
+
+  /* FAQ = dark */
+  .faq-section {
+    background:
+      radial-gradient(circle at 86% 16%, rgba(244,196,0,.09), transparent 22%),
+      radial-gradient(circle, rgba(255,255,255,.045) 1px, transparent 1.2px),
+      #0f1012 !important;
+    background-size: auto, 26px 26px, auto !important;
+    color: #fff;
+  }
+
+  .faq-section::before {
+    background: none !important;
+  }
+
+  .faq-heading h2 {
+    color: #fff;
+  }
+
+  .faq-section .section-kicker {
+    color: var(--yellow);
+  }
+
+  .faq-item {
+    background: rgba(255,255,255,.045);
+    border-color: rgba(255,255,255,.1);
+    box-shadow: none;
+  }
+
+  .faq-button {
+    color: #fff;
+  }
+
+  .faq-plus::before,
+  .faq-plus::after {
+    background: var(--yellow);
+  }
+
+  .faq-panel p {
+    color: rgba(255,255,255,.66);
+  }
+}

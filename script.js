@@ -239,8 +239,41 @@ if (servicesGrid && servicesToggle) {
   };
 
   servicesToggle.addEventListener('click', () => {
-    const expanded = servicesGrid.classList.toggle('is-expanded');
-    servicesToggle.setAttribute('aria-expanded', String(expanded));
+    const animateDesktopGrid = window.innerWidth >= 761 && !servicesGrid.classList.contains('is-searching');
+
+    if (!animateDesktopGrid) {
+      const expanded = servicesGrid.classList.toggle('is-expanded');
+      servicesToggle.setAttribute('aria-expanded', String(expanded));
+      updateServiceLabel();
+      return;
+    }
+
+    const startHeight = servicesGrid.getBoundingClientRect().height;
+    const willExpand = !servicesGrid.classList.contains('is-expanded');
+
+    servicesGrid.style.height = 'auto';
+    servicesGrid.classList.toggle('is-expanded', willExpand);
+    const endHeight = servicesGrid.getBoundingClientRect().height;
+
+    servicesGrid.style.height = `${startHeight}px`;
+    servicesGrid.style.overflow = 'hidden';
+    servicesGrid.style.transition = 'height 520ms cubic-bezier(.22,.78,.24,1)';
+    servicesGrid.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      servicesGrid.style.height = `${endHeight}px`;
+    });
+
+    const cleanup = (event) => {
+      if (event.propertyName !== 'height') return;
+      servicesGrid.style.height = '';
+      servicesGrid.style.overflow = '';
+      servicesGrid.style.transition = '';
+      servicesGrid.removeEventListener('transitionend', cleanup);
+    };
+
+    servicesGrid.addEventListener('transitionend', cleanup);
+    servicesToggle.setAttribute('aria-expanded', String(willExpand));
     updateServiceLabel();
   });
 

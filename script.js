@@ -24,3 +24,42 @@ if (menuToggle && mobileMenu) {
     if (window.innerWidth > 1080) closeMenu();
   });
 }
+
+const heroVisual = document.querySelector('.hero-visual');
+const mainProjectCard = document.querySelector('.project-card-main');
+
+if (heroVisual && mainProjectCard) {
+  const setMainFocus = (enabled) => {
+    if (window.innerWidth <= 760) return;
+    heroVisual.classList.toggle('main-focused', enabled);
+    mainProjectCard.setAttribute('aria-pressed', String(enabled));
+  };
+
+  const toggleMainFocus = () => {
+    if (window.innerWidth <= 760) return;
+    setMainFocus(!heroVisual.classList.contains('main-focused'));
+  };
+
+  mainProjectCard.addEventListener('click', (event) => {
+    event.stopPropagation();
+    toggleMainFocus();
+  });
+
+  mainProjectCard.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleMainFocus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!heroVisual.contains(event.target)) setMainFocus(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 760) {
+      heroVisual.classList.remove('main-focused');
+      mainProjectCard.setAttribute('aria-pressed', 'false');
+    }
+  });
+}

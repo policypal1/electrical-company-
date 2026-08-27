@@ -1,4 +1,6 @@
-JV Electric LLC - Header + Hero v2
+JV Electric LLC website starter
+
+All files are intentionally kept in the project root/main folder.
 
 Files:
 - index.html
@@ -6,11 +8,11 @@ Files:
 - script.js
 - jv-electric-hero-bg.webp
 
-Hero background:
-The uploaded black/yellow background has been converted to WebP and is already connected in styles.css.
+Current build includes:
+- Responsive desktop/mobile header
+- Full hero with three layered project photo placeholders
+- Desktop 3D hover/click interaction on the main project card
+- Desktop-only company trust bar
+- Mobile-specific hero spacing and height refinements
 
-Project images:
-The two right-side cards are placeholders. Replace the placeholder divs in index.html with JV Electric project photos when available.
-
-Phone number:
-Add the real number to the href="tel:" link for the Call Now button.
+Replace the logo and project-photo placeholders when final media is provided.

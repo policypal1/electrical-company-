@@ -63,3 +63,18 @@ if (heroVisual && mainProjectCard) {
     }
   });
 }
+
+const servicesGrid = document.querySelector('#services-grid');
+const servicesToggle = document.querySelector('.services-toggle');
+
+if (servicesGrid && servicesToggle) {
+  const toggleLabel = servicesToggle.querySelector('span');
+
+  servicesToggle.addEventListener('click', () => {
+    const expanded = servicesGrid.classList.toggle('is-expanded');
+    servicesToggle.setAttribute('aria-expanded', String(expanded));
+    if (toggleLabel) {
+      toggleLabel.textContent = expanded ? 'Show Fewer Services' : 'View All Residential Services';
+    }
+  });
+}

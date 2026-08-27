@@ -1,18 +1,16 @@
-JV Electric LLC website starter
+JV Electric LLC single-page website build.
 
-All files are intentionally kept in the project root/main folder.
-
-Files:
+All files intentionally live in the main/root directory for GitHub + Vercel:
 - index.html
 - styles.css
 - script.js
+- favicon.svg (placeholder)
 - jv-electric-hero-bg.webp
 
 Current build includes:
-- Responsive desktop/mobile header
-- Full hero with three layered project photo placeholders
-- Desktop 3D hover/click interaction on the main project card
-- Desktop-only company trust bar
-- Mobile-specific hero spacing and height refinements
+- Responsive header
+- Hero section with interactive 3D project cards
+- Desktop trust bar
+- Responsive residential services section with expandable service cards
 
-Replace the logo and project-photo placeholders when final media is provided.
+Replace the logo, phone number, work-photo placeholders, and favicon when final assets are available.

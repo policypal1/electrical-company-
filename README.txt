@@ -36,3 +36,11 @@ Update v8:
 - Confirmed mobile service cards are horizontally swipeable, including filtered results.
 - Replaced Recent Work background with newest uploaded black/yellow image.
 - Added white Reviews section with three real-review placeholders and Google/Facebook link placeholders.
+
+
+Update v9:
+- Added How It Works section between Recent Work and Reviews.
+- Removed flat yellow radial decoration from Reviews.
+- Added subtle neutral texture and black structural accents to white sections.
+- Removed Google/Facebook source chips and Customer Name placeholders from review cards.
+- Kept Google and Facebook review CTA buttons.

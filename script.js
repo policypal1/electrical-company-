@@ -70,11 +70,24 @@ const servicesToggle = document.querySelector('.services-toggle');
 if (servicesGrid && servicesToggle) {
   const toggleLabel = servicesToggle.querySelector('span');
 
+  const updateServiceLabel = () => {
+    const expanded = servicesGrid.classList.contains('is-expanded');
+    if (!toggleLabel) return;
+    if (expanded) {
+      toggleLabel.textContent = 'Show Fewer Services';
+    } else {
+      toggleLabel.textContent = window.innerWidth <= 620
+        ? 'View All 16 Services'
+        : 'View All Residential Services';
+    }
+  };
+
   servicesToggle.addEventListener('click', () => {
     const expanded = servicesGrid.classList.toggle('is-expanded');
     servicesToggle.setAttribute('aria-expanded', String(expanded));
-    if (toggleLabel) {
-      toggleLabel.textContent = expanded ? 'Show Fewer Services' : 'View All Residential Services';
-    }
+    updateServiceLabel();
   });
+
+  window.addEventListener('resize', updateServiceLabel);
+  updateServiceLabel();
 }

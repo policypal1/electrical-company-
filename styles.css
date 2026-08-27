@@ -3966,3 +3966,225 @@ input[type="search"]::-webkit-search-results-decoration {
     color: rgba(255,255,255,.66);
   }
 }
+
+
+/* Desktop polish v15 - mobile intentionally unchanged */
+@media (min-width: 761px) {
+  /* Service Area: distinct dark treatment with no yellow wash. */
+  .service-area-section {
+    background:
+      linear-gradient(115deg, rgba(255,255,255,.025) 0 1px, transparent 1px 100%),
+      linear-gradient(180deg, #15171a 0%, #0c0d0f 100%) !important;
+    background-size: 64px 64px, auto !important;
+  }
+
+  .service-area-section::before {
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.022) 0 1px, transparent 1px 34px),
+      linear-gradient(90deg, rgba(0,0,0,.12), transparent 48%, rgba(0,0,0,.18)) !important;
+    opacity: 1 !important;
+  }
+
+  /* Reviews: clean white grid, no yellow tint. */
+  .reviews-section {
+    background: #f7f7f4 !important;
+  }
+
+  .reviews-section::before {
+    background:
+      linear-gradient(rgba(17,18,20,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17,18,20,.035) 1px, transparent 1px) !important;
+    background-size: 36px 36px !important;
+    opacity: .7 !important;
+  }
+
+  .reviews-heading {
+    align-items: center;
+  }
+
+  .reviews-heading > p {
+    display: none !important;
+  }
+
+  .reviews-heading-controls {
+    display: grid;
+    justify-items: end;
+    gap: 14px;
+  }
+
+  .reviews-heading-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .reviews-cycle-controls {
+    display: flex;
+    gap: 9px;
+  }
+
+  .reviews-cycle-button {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #d5d7d3;
+    border-radius: 10px;
+    background: #fff;
+    color: #111214;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(17,18,20,.06);
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .reviews-cycle-button:hover,
+  .reviews-cycle-button:focus-visible {
+    transform: translateY(-2px);
+    border-color: #b8bbb6;
+    box-shadow: 0 12px 24px rgba(17,18,20,.1);
+  }
+
+  .reviews-cycle-button svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .reviews-grid {
+    transition: opacity 160ms ease, transform 220ms cubic-bezier(.22,.78,.24,1);
+  }
+
+  .reviews-grid.is-cycling-next {
+    opacity: .35;
+    transform: translateX(-18px);
+  }
+
+  .reviews-grid.is-cycling-prev {
+    opacity: .35;
+    transform: translateX(18px);
+  }
+
+  /* Keep bottom review links for mobile only. */
+  .reviews-actions {
+    display: none !important;
+  }
+
+  /* About: remove bulk and use a cleaner, non-yellow dark texture. */
+  .about-section {
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.022) 0 1px, transparent 1px 50%),
+      linear-gradient(45deg, rgba(255,255,255,.012) 0 1px, transparent 1px 50%),
+      #111315 !important;
+    background-size: 54px 54px, 54px 54px, auto !important;
+  }
+
+  .about-section::before {
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(255,255,255,.018) 1px, transparent 1px) !important;
+    background-size: 72px 72px !important;
+    opacity: .55 !important;
+  }
+
+  .about-lead,
+  .about-point p {
+    display: none !important;
+  }
+
+  .about-content {
+    align-self: stretch;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .about-points {
+    margin-top: 28px !important;
+  }
+
+  .about-point {
+    min-height: 82px;
+    grid-template-columns: 48px minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 18px !important;
+    padding: 16px 0 !important;
+  }
+
+  .about-point-icon {
+    width: 48px !important;
+    height: 48px !important;
+    display: grid !important;
+    place-items: center !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    border-radius: 12px !important;
+    text-align: center !important;
+  }
+
+  .about-point h3 {
+    margin: 0 !important;
+    font-size: 18px !important;
+  }
+
+  .about-experience-card {
+    border-top: 0 !important;
+    border: 1px solid rgba(255,255,255,.11) !important;
+    background: rgba(14,15,17,.94) !important;
+    box-shadow: 0 20px 46px rgba(0,0,0,.3) !important;
+  }
+
+  .about-experience-card::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 34px;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.24);
+  }
+
+  .about-experience-card strong {
+    padding-top: 12px;
+    color: #fff !important;
+  }
+
+  /* Contact: clean white grid only, no yellow glow. */
+  .contact-section {
+    background: #f7f7f4 !important;
+  }
+
+  .contact-section::before {
+    background:
+      linear-gradient(rgba(17,18,20,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17,18,20,.035) 1px, transparent 1px) !important;
+    background-size: 38px 38px !important;
+    opacity: .72 !important;
+  }
+
+  /* FAQ: remove the yellow corner highlight entirely. */
+  .faq-section {
+    background:
+      radial-gradient(circle, rgba(255,255,255,.045) 1px, transparent 1.15px),
+      #0f1012 !important;
+    background-size: 26px 26px, auto !important;
+  }
+
+  .faq-section::before {
+    background: none !important;
+  }
+}
+
+/* Mobile keeps the existing review controls at the bottom and hides desktop extras. */
+@media (max-width: 760px) {
+  .reviews-heading-controls {
+    display: none !important;
+  }
+}

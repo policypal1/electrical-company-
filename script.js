@@ -364,3 +364,36 @@ faqItemsV13.forEach((item) => {
     }
   });
 });
+
+/* Desktop review cycling. This reorders the existing real/placeholder review cards,
+   so it will keep working when more review cards are added later. */
+const reviewsGridV15 = document.querySelector('.reviews-grid');
+const reviewsPrevV15 = document.querySelector('.reviews-cycle-prev');
+const reviewsNextV15 = document.querySelector('.reviews-cycle-next');
+let reviewsCyclingV15 = false;
+
+const cycleReviewsV15 = (direction) => {
+  if (!reviewsGridV15 || reviewsCyclingV15 || window.innerWidth <= 760) return;
+  const cards = Array.from(reviewsGridV15.children);
+  if (cards.length < 2) return;
+
+  reviewsCyclingV15 = true;
+  const className = direction === 'next' ? 'is-cycling-next' : 'is-cycling-prev';
+  reviewsGridV15.classList.add(className);
+
+  window.setTimeout(() => {
+    if (direction === 'next') {
+      reviewsGridV15.appendChild(reviewsGridV15.firstElementChild);
+    } else {
+      reviewsGridV15.insertBefore(reviewsGridV15.lastElementChild, reviewsGridV15.firstElementChild);
+    }
+
+    reviewsGridV15.classList.remove(className);
+    window.setTimeout(() => {
+      reviewsCyclingV15 = false;
+    }, 220);
+  }, 160);
+};
+
+if (reviewsPrevV15) reviewsPrevV15.addEventListener('click', () => cycleReviewsV15('prev'));
+if (reviewsNextV15) reviewsNextV15.addEventListener('click', () => cycleReviewsV15('next'));

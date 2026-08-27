@@ -85,3 +85,13 @@ Update v14 desktop wrap-up:
 - Removed desktop How It Works CTA.
 - Desktop section alternation set to: process white, service area dark, reviews white, about dark, contact white, FAQ dark.
 - Mobile CSS/layout left unchanged.
+
+
+Desktop polish v15:
+- Reviews now use a clean white grid with no yellow tint.
+- Google/Facebook links moved into the desktop review heading with cycle arrows.
+- About copy simplified on desktop; numbered items centered and changed to 1/2/3.
+- 10+ experience badge restyled without the yellow top bar.
+- Service Area, About, Contact, and FAQ backgrounds differentiated.
+- Contact uses a clean white grid; FAQ yellow corner glow removed.
+- Mobile intentionally preserved.

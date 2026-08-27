@@ -1,19 +1,16 @@
-JV Electric LLC - Header + Hero Starter
+JV Electric LLC - Header + Hero v2
 
-Included:
-- Responsive desktop header
-- Responsive mobile hamburger menu
-- Logo placeholder
-- Centered desktop navigation
-- Get an Estimate header CTA
-- Responsive hero section
-- Headline + subheadline only
-- Call Now + Get a Quote actions
-- Large right-side electrical image placeholder with fade treatment
-- Barlow font via Google Fonts
+Files:
+- index.html
+- styles.css
+- script.js
+- assets/jv-electric-hero-bg.webp
 
-Before launch:
-1. Replace the logo placeholder with the real JV Electric LLC logo.
-2. Replace href="tel:" with the real business phone number.
-3. Replace the hero image placeholder with a real electrical/project image.
-4. Connect the quote/contact anchors to the final contact section or form.
+Hero background:
+The uploaded black/yellow background has been converted to WebP and is already connected in styles.css.
+
+Project images:
+The two right-side cards are placeholders. Replace the placeholder divs in index.html with JV Electric project photos when available.
+
+Phone number:
+Add the real number to the href="tel:" link for the Call Now button.

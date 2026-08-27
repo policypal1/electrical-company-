@@ -21,6 +21,6 @@ if (menuToggle && mobileMenu) {
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 920) closeMenu();
+    if (window.innerWidth > 1080) closeMenu();
   });
 }

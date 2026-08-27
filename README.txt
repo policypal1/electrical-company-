@@ -28,3 +28,11 @@ Update v7:
 - Converted that image to WebP in the project root.
 - Kept fuzzy/synonym service search on desktop and mobile.
 - Kept Recent Work as a normal four-photo mobile stack, with alternating portrait/landscape heights.
+
+
+Update v8:
+- Fixed duplicate X in service search by hiding browser-native search clear control.
+- Fixed oversized mobile search panel caused by flex-basis sizing.
+- Confirmed mobile service cards are horizontally swipeable, including filtered results.
+- Replaced Recent Work background with newest uploaded black/yellow image.
+- Added white Reviews section with three real-review placeholders and Google/Facebook link placeholders.

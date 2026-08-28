@@ -15,8 +15,9 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="brand-area">
-        <div class="logo-placeholder" aria-label="Logo placeholder">LOGO GOES HERE</div>
-        <a class="brand-name" href="./" aria-label="JV Electric LLC home page">JV Electric LLC</a>
+        <a class="brand-logo" href="./" aria-label="JV Electric LLC home page">
+          <img src="jv-electric-logo-wordmark.webp" alt="JV Electric" />
+        </a>
         <a class="mobile-brand-logo" href="./" aria-label="JV Electric LLC home page">
           <img src="jv-electric-logo-wordmark.webp" alt="JV Electric" />
         </a>
@@ -128,7 +129,7 @@
             <input id="services-search-input" type="search" inputmode="search" autocomplete="off" placeholder="What do you need? House wiring, breaker box, RV hookup..." aria-describedby="services-search-meta" />
             <button class="services-search-clear" type="button" aria-label="Clear service search" hidden>×</button>
           </label>
-          <p class="services-search-meta" id="services-search-meta">Showing all 16 services.</p>
+          <p class="services-search-meta" id="services-search-meta">Browse all residential services or search by project type.</p>
         </div>
 
         <div class="services-rail-shell">
@@ -406,7 +407,7 @@
               <svg viewBox="0 0 24 24"><path d="M6.5 3h3l1.5 4-2 1.5a14 14 0 0 0 6.5 6.5L17 13l4 1.5v3A3.5 3.5 0 0 1 17.5 21C9.5 21 3 14.5 3 6.5A3.5 3.5 0 0 1 6.5 3Z"/></svg>
             </div>
             <div>
-              <h3>Tell Us What You Need</h3>
+              <h3>Reach Out</h3>
               <p>Call or request an estimate and give us a quick rundown of the electrical work you need done.</p>
             </div>
           </article>
@@ -439,17 +440,19 @@
 
     <section class="service-area-section" id="service-area">
       <div class="service-area-inner">
+        <div class="service-area-copy">
+          <span class="section-kicker section-kicker-light">Service Area</span>
+          <h2>Proudly Serving Southwest Washington.</h2>
+          <p class="service-area-copy-desktop">JV Electric serves homeowners from Longview down through Vancouver, with travel available north toward Olympia. If you are nearby and need residential electrical help, reach out and ask.</p>
+        </div>
+
         <div class="service-area-visual">
           <div class="service-area-map-card">
             <span>LARGE SERVICE AREA MAP / IMAGE</span>
           </div>
         </div>
 
-        <div class="service-area-copy">
-          <span class="section-kicker section-kicker-light">Service Area</span>
-          <h2>Proudly Serving Southwest Washington.</h2>
-          <p>JV Electric serves homeowners from Longview down through Vancouver, with travel available north toward Olympia. If you are nearby and need residential electrical help, reach out and ask.</p>
-        </div>
+        <p class="service-area-copy-mobile">JV Electric serves homeowners from Longview down through Vancouver, with travel available north toward Olympia. If you are nearby and need residential electrical help, reach out and ask.</p>
       </div>
     </section>
 
@@ -460,45 +463,59 @@
             <span class="section-kicker section-kicker-light">Customer Reviews</span>
             <h2>What Homeowners Are Saying.</h2>
           </div>
-          <div class="reviews-heading-controls" aria-label="Review links and controls">
+          <div class="reviews-heading-controls" aria-label="Review links">
             <div class="reviews-heading-links">
-              <a class="reviews-link" href="https://www.google.com/search?q=jv+electric&amp;sca_esv=c18f865cebe507ff&amp;authuser=2&amp;sxsrf=APpeQntnNRZ6Z4IAOovIforVbBDB4ZjYOQ%3A1787941473165&amp;source=hp&amp;ei=YdKRaqWmB-730PEPlve4kA8&amp;iflsig=ABILxe8AAAAAapHgcduAdl5xH8-h20gTLKlbN4yV1LQu&amp;oq=jv+ele&amp;gs_lp=Egdnd3Mtd2l6IgZqdiBlbGUqAggCMgQQIxgnMgQQIxgnMgoQABiABBiKBRhDMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhivARjHARiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABEjVFVAAWO4KcAJ4AJABAJgBW6ABwgOqAQE2uAEByAEA-AEBmAIIoALpA8ICEBAuGIAEGIoFGEMYxwEYrwHCAhAQLhiABBiKBRhDGMcBGNEDwgIOEC4YgAQYigUYsQMYgwHCAg4QLhiABBixAxjHARjRA8ICCBAAGIAEGLEDwgILEC4YgAQYsQMY5QTCAgsQABiABBixAxiDAcICChAuGIAEGIoFGEPCAgkQABgBGIAEGAqYAwCSBwM3LjGgB7xGsgcDNS4xuAfiA8IHBTAuNi4yyAcYgAgB&amp;sclient=gws-wiz#lrd=0x252cd380745cc13f:0x73b03e4c27be6410,1,,,," target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Google reviews">View Google Reviews</a>
-              <a class="reviews-link reviews-link-secondary" href="https://www.facebook.com/profile.php?id=61584432115757&amp;sk=reviews" target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Facebook reviews">View Facebook Reviews</a>
-            </div>
-            <div class="reviews-cycle-controls" aria-label="Cycle customer reviews">
-              <button class="reviews-cycle-button reviews-cycle-prev" type="button" aria-label="Previous reviews">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-              </button>
-              <button class="reviews-cycle-button reviews-cycle-next" type="button" aria-label="Next reviews">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-              </button>
+              <a class="reviews-link" href="https://www.google.com/search?q=jv+electric&amp;sca_esv=c18f865cebe507ff&amp;authuser=2&amp;sxsrf=APpeQntnNRZ6Z4IAOovIforVbBDB4ZjYOQ%3A1787941473165&amp;source=hp&amp;ei=YdKRaqWmB-730PEPlve4kA8&amp;iflsig=ABILxe8AAAAAapHgcduAdl5xH8-h20gTLKlbN4yV1LQu&amp;oq=jv+ele&amp;gs_lp=Egdnd3Mtd2l6IgZqdiBlbGUqAggCMgQQIxgnMgQQIxgnMgoQABiABBiKBRhDMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhivARjHARiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABEjVFVAAWO4KcAJ4AJABAJgBW6ABwgOqAQE2uAEByAEA-AEBmAIIoALpA8ICEBAuGIAEGIoFGEMYxwEYrwHCAhAQLhiABBiKBRhDGMcBGNEDwgIOEC4YgAQYigUYsQMYgwHCAg4QLhiABBixAxjHARjRA8ICCBAAGIAEGLEDwgILEC4YgAQYsQMY5QTCAgsQABiABBixAxiDAcICChAuGIAEGIoFGEPCAgkQABgBGIAEGAqYAwCSBwM3LjGgB7xGsgcDNS4xuAfiA8IHBTAuNi4yyAcYgAgB&amp;sclient=gws-wiz#lrd=0x252cd380745cc13f:0x73b03e4c27be6410,1,,,," target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Google reviews">View Google Reviews <span class="external-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+              <a class="reviews-link reviews-link-secondary" href="https://www.facebook.com/profile.php?id=61584432115757&amp;sk=reviews" target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Facebook reviews">View Facebook Reviews <span class="external-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
             </div>
           </div>
         </div>
 
-        <div class="reviews-grid" aria-label="JV Electric customer review placeholders">
-          <article class="review-card">
-            <div class="review-stars" aria-label="Five star rating placeholder">★★★★★</div>
-            <p class="review-text">Paste a strong real review here. Reviews mentioning communication, reliability, and clean finished work will be especially effective.</p>
-            <div class="review-author">Customer Name</div>
-          </article>
+        <div class="reviews-carousel-shell">
+          <button class="reviews-cycle-button reviews-cycle-prev" type="button" aria-label="Previous reviews">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
 
-          <article class="review-card">
-            <div class="review-stars" aria-label="Five star rating placeholder">★★★★★</div>
-            <p class="review-text">Use one of the strongest real reviews here. This center card is designed for a review that highlights quality work and an easy overall experience.</p>
-            <div class="review-author">Customer Name</div>
-          </article>
+          <div class="reviews-grid" aria-label="JV Electric customer reviews">
+            <article class="review-card">
+              <div class="review-stars" aria-label="Five star rating">★★★★★</div>
+              <p class="review-text">We had a great experience working with Daniel. He was kind, reliable, and very responsive. He came out quickly, fixed our long-term garbage disposal issue right away, and even double-checked the kitchen lights. You can tell he takes pride in his work and genuinely cares about helping customers.</p>
+              <div class="review-author">Pepe Jimenez</div>
+            </article>
 
-          <article class="review-card">
-            <div class="review-stars" aria-label="Five star rating placeholder">★★★★★</div>
-            <p class="review-text">Paste another real review here. Specific feedback about panel work, EV chargers, troubleshooting, or residential upgrades will work well.</p>
-            <div class="review-author">Customer Name</div>
-          </article>
+            <article class="review-card review-card-featured">
+              <div class="review-stars" aria-label="Five star rating">★★★★★</div>
+              <p class="review-text">Juan has been doing various electrical tasks for us for some time now, from simple indoor outlets to subpanels and our new mini split with an exterior surge protector. Always prompt and polite. He does exactly what we need and makes sure we are happy before the job is done.</p>
+              <div class="review-author">Heidi Heidi</div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-stars" aria-label="Five star rating">★★★★★</div>
+              <p class="review-text">Did a great job installing a hot water heater, as well as electrical hookups for a washer and dryer. Super reliable and communicative. He made time to come out earlier and quickly get our new hot water heater going. Great pricing. Can&apos;t recommend him enough.</p>
+              <div class="review-author">Austin Bowen</div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-stars" aria-label="Five star rating">★★★★★</div>
+              <p class="review-text">I had a great experience with this electrician. He was extremely polite, responded right away, and came out immediately when I needed help. The price was very fair, and the whole process felt smooth and stress-free. I will definitely be a repeat customer. Highly recommend.</p>
+              <div class="review-author">Skylar Hanks</div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-stars" aria-label="Five star rating">★★★★★</div>
+              <p class="review-text">Juan fixed my heat pump and did a great job. He is very knowledgeable and a very nice guy.</p>
+              <div class="review-author">Barbara Walton</div>
+            </article>
+          </div>
+
+          <button class="reviews-cycle-button reviews-cycle-next" type="button" aria-label="Next reviews">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
         </div>
 
         <div class="reviews-actions">
-          <a class="reviews-link" href="https://www.google.com/search?q=jv+electric&amp;sca_esv=c18f865cebe507ff&amp;authuser=2&amp;sxsrf=APpeQntnNRZ6Z4IAOovIforVbBDB4ZjYOQ%3A1787941473165&amp;source=hp&amp;ei=YdKRaqWmB-730PEPlve4kA8&amp;iflsig=ABILxe8AAAAAapHgcduAdl5xH8-h20gTLKlbN4yV1LQu&amp;oq=jv+ele&amp;gs_lp=Egdnd3Mtd2l6IgZqdiBlbGUqAggCMgQQIxgnMgQQIxgnMgoQABiABBiKBRhDMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhivARjHARiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABEjVFVAAWO4KcAJ4AJABAJgBW6ABwgOqAQE2uAEByAEA-AEBmAIIoALpA8ICEBAuGIAEGIoFGEMYxwEYrwHCAhAQLhiABBiKBRhDGMcBGNEDwgIOEC4YgAQYigUYsQMYgwHCAg4QLhiABBixAxjHARjRA8ICCBAAGIAEGLEDwgILEC4YgAQYsQMY5QTCAgsQABiABBixAxiDAcICChAuGIAEGIoFGEPCAgkQABgBGIAEGAqYAwCSBwM3LjGgB7xGsgcDNS4xuAfiA8IHBTAuNi4yyAcYgAgB&amp;sclient=gws-wiz#lrd=0x252cd380745cc13f:0x73b03e4c27be6410,1,,,," target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Google reviews">View Google Reviews</a>
-          <a class="reviews-link reviews-link-secondary" href="https://www.facebook.com/profile.php?id=61584432115757&amp;sk=reviews" target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Facebook reviews">View Facebook Reviews</a>
+          <a class="reviews-link" href="https://www.google.com/search?q=jv+electric&amp;sca_esv=c18f865cebe507ff&amp;authuser=2&amp;sxsrf=APpeQntnNRZ6Z4IAOovIforVbBDB4ZjYOQ%3A1787941473165&amp;source=hp&amp;ei=YdKRaqWmB-730PEPlve4kA8&amp;iflsig=ABILxe8AAAAAapHgcduAdl5xH8-h20gTLKlbN4yV1LQu&amp;oq=jv+ele&amp;gs_lp=Egdnd3Mtd2l6IgZqdiBlbGUqAggCMgQQIxgnMgQQIxgnMgoQABiABBiKBRhDMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhivARjHARiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABEjVFVAAWO4KcAJ4AJABAJgBW6ABwgOqAQE2uAEByAEA-AEBmAIIoALpA8ICEBAuGIAEGIoFGEMYxwEYrwHCAhAQLhiABBiKBRhDGMcBGNEDwgIOEC4YgAQYigUYsQMYgwHCAg4QLhiABBixAxjHARjRA8ICCBAAGIAEGLEDwgILEC4YgAQYsQMY5QTCAgsQABiABBixAxiDAcICChAuGIAEGIoFGEPCAgkQABgBGIAEGAqYAwCSBwM3LjGgB7xGsgcDNS4xuAfiA8IHBTAuNi4yyAcYgAgB&amp;sclient=gws-wiz#lrd=0x252cd380745cc13f:0x73b03e4c27be6410,1,,,," target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Google reviews">View Google Reviews <span class="external-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+          <a class="reviews-link reviews-link-secondary" href="https://www.facebook.com/profile.php?id=61584432115757&amp;sk=reviews" target="_blank" rel="noopener noreferrer" aria-label="Open JV Electric Facebook reviews">View Facebook Reviews <span class="external-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
         </div>
       </div>
     </section>
@@ -518,7 +535,7 @@
         <div class="about-content">
           <div>
             <span class="section-kicker">About JV Electric</span>
-            <h2>Local Electrical Work With a Personal Standard.</h2>
+            <h2>Local Electrical Work With a Professional Standard.</h2>
             <p class="about-lead">JV Electric LLC is a family-owned, veteran-owned residential electrical company serving homeowners across Southwest Washington. The goal is simple: communicate clearly, do dependable work, and make it easy to get the electrical help your home needs.</p>
           </div>
 
@@ -556,7 +573,7 @@
         <div class="contact-copy">
           <span class="section-kicker section-kicker-light">Get in Touch</span>
           <h2>Ready to Get the Electrical Work Handled?</h2>
-          <p>Send a quick estimate request and tell JV Electric what you need. We’ll follow up with you about the project and next steps.</p>
+          <p>Send a quick estimate request and we’ll follow up with you about the project, pricing, and next steps.</p>
         </div>
 
         <div class="contact-form-card">
@@ -583,8 +600,8 @@
               </label>
             </div>
             <label>
-              <span>How can we help?</span>
-              <textarea rows="6" placeholder="Tell us about your project"></textarea>
+              <span>Project Details</span>
+              <textarea rows="6" placeholder="Share a few details about your project"></textarea>
             </label>
             <button type="submit">Request Estimate</button>
           </form>
@@ -664,9 +681,10 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="logo-placeholder logo-placeholder-footer" aria-label="Logo placeholder">LOGO</div>
+        <a class="footer-logo" href="./" aria-label="JV Electric LLC home page">
+          <img src="jv-electric-logo-wordmark.webp" alt="JV Electric" />
+        </a>
         <div>
-          <strong>JV Electric LLC</strong>
           <p>Your Power, Our Priority.</p>
         </div>
       </div>
@@ -675,6 +693,7 @@
         <h3>Quick Links</h3>
         <a href="#home">Home</a>
         <a href="#services">Services</a>
+        <a href="#about">About</a>
         <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
       </div>
@@ -688,12 +707,24 @@
         <h3>Contact</h3>
         <a href="tel:+13604423618">(360) 442-3618</a>
         <a href="mailto:jvelectriic@gmail.com">jvelectriic@gmail.com</a>
-        <a href="https://www.facebook.com/profile.php?id=61584432115757&amp;sk=reviews" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://www.google.com/search?q=jv+electric&amp;sca_esv=c18f865cebe507ff&amp;authuser=2&amp;sxsrf=APpeQntnNRZ6Z4IAOovIforVbBDB4ZjYOQ%3A1787941473165&amp;source=hp&amp;ei=YdKRaqWmB-730PEPlve4kA8&amp;iflsig=ABILxe8AAAAAapHgcduAdl5xH8-h20gTLKlbN4yV1LQu&amp;oq=jv+ele&amp;gs_lp=Egdnd3Mtd2l6IgZqdiBlbGUqAggCMgQQIxgnMgQQIxgnMgoQABiABBiKBRhDMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhivARjHARiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABEjVFVAAWO4KcAJ4AJABAJgBW6ABwgOqAQE2uAEByAEA-AEBmAIIoALpA8ICEBAuGIAEGIoFGEMYxwEYrwHCAhAQLhiABBiKBRhDGMcBGNEDwgIOEC4YgAQYigUYsQMYgwHCAg4QLhiABBixAxjHARjRA8ICCBAAGIAEGLEDwgILEC4YgAQYsQMY5QTCAgsQABiABBixAxiDAcICChAuGIAEGIoFGEPCAgkQABgBGIAEGAqYAwCSBwM3LjGgB7xGsgcDNS4xuAfiA8IHBTAuNi4yyAcYgAgB&amp;sclient=gws-wiz#lrd=0x252cd380745cc13f:0x73b03e4c27be6410,1,,,," target="_blank" rel="noopener noreferrer">Google Reviews ↗</a>
+      </div>
+
+      <div class="footer-column footer-column-legal">
+        <h3>Legal</h3>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="accessibility.html">Accessibility</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <p>© <span id="footer-year">2026</span> JV Electric LLC. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="accessibility.html">Accessibility</a>
+      </div>
     </div>
   </footer>
 

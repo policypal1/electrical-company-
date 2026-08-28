@@ -31,13 +31,11 @@ const mainProjectCard = document.querySelector('.project-card-main');
 
 if (heroVisual && mainProjectCard) {
   const setMainFocus = (enabled) => {
-    if (window.innerWidth <= 1080) return;
     heroVisual.classList.toggle('main-focused', enabled);
     mainProjectCard.setAttribute('aria-pressed', String(enabled));
   };
 
   const toggleMainFocus = () => {
-    if (window.innerWidth <= 1080) return;
     setMainFocus(!heroVisual.classList.contains('main-focused'));
   };
 
@@ -58,9 +56,8 @@ if (heroVisual && mainProjectCard) {
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth <= 1080) {
-      heroVisual.classList.remove('main-focused');
-      mainProjectCard.setAttribute('aria-pressed', 'false');
+    if (window.innerWidth > 760) {
+      mainProjectCard.setAttribute('aria-pressed', String(heroVisual.classList.contains('main-focused')));
     }
   });
 }
@@ -261,7 +258,7 @@ if (servicesGrid && servicesToggle) {
     if (servicesSearchMeta) {
       servicesSearchMeta.textContent = isSearching
         ? `${visibleCount} ${visibleCount === 1 ? 'service' : 'services'} found for “${query.trim()}”.`
-        : `Showing all ${totalServices} services.`;
+        : `Browse all ${totalServices} residential services.`;
     }
 
     if (servicesEmpty) {
@@ -321,8 +318,19 @@ if (servicesGrid && servicesToggle) {
     });
   }
 
-  window.addEventListener('resize', updateServiceLabel);
-  updateServiceLabel();
+  const syncMobileServicesState = () => {
+    if (window.innerWidth <= 760) {
+      servicesGrid.classList.add('is-expanded');
+      servicesToggle.setAttribute('aria-expanded', 'true');
+    }
+    updateServiceLabel();
+  };
+
+  window.addEventListener('resize', () => {
+    syncMobileServicesState();
+    updateServiceArrowsV17();
+  });
+  syncMobileServicesState();
   applyServiceSearch();
 }
 
@@ -448,3 +456,11 @@ if(reviewsNextV15)reviewsNextV15.addEventListener('click',()=>scrollMobileReview
 const mobileFloatingCallV17=document.querySelector('.mobile-floating-call');const heroSectionV17=document.querySelector('.hero');
 const updateFloatingCallV17=()=>{if(!mobileFloatingCallV17||!heroSectionV17)return;mobileFloatingCallV17.classList.toggle('is-visible',innerWidth<=760&&heroSectionV17.getBoundingClientRect().bottom<=12)};
 addEventListener('scroll',updateFloatingCallV17,{passive:true});addEventListener('resize',updateFloatingCallV17);addEventListener('load',updateFloatingCallV17);updateFloatingCallV17();
+
+// ===== v19 requested refinements =====
+document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEach((logoLink) => {
+  logoLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.location.assign('./');
+  });
+});

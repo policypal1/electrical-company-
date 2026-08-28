@@ -5687,3 +5687,194 @@ html, body {
     transform: translateX(16px) !important;
   }
 }
+
+/* ===== v22 final mobile refinements ===== */
+@media (max-width: 760px) {
+  /* Main work photo should clearly pop to the front on tap. */
+  .hero-visual {
+    isolation: isolate;
+    overflow: visible;
+  }
+
+  .hero-visual.main-focused .project-card-main {
+    z-index: 80 !important;
+    transform: translateX(-50%) translateY(-10px) translateZ(260px) scale(1.11) rotateY(-1deg) rotateZ(.1deg) !important;
+    filter: brightness(1.06) !important;
+    box-shadow: 0 44px 88px rgba(0,0,0,.48) !important;
+    border-color: rgba(255,212,1,.42) !important;
+  }
+
+  .hero-visual.main-focused .project-card-small {
+    z-index: 3 !important;
+    transform: translateX(-22px) translateY(26px) translateZ(-90px) rotateY(9deg) rotateZ(-2deg) scale(.89) !important;
+    filter: brightness(.8) saturate(.82) !important;
+  }
+
+  .hero-visual.main-focused .project-card-third {
+    z-index: 3 !important;
+    transform: translateX(22px) translateY(26px) translateZ(-90px) rotateY(-9deg) rotateZ(2deg) scale(.89) !important;
+    filter: brightness(.8) saturate(.82) !important;
+  }
+
+  /* Mini customer reviews section: black with subtle yellow accents. */
+  .hero-review-strip {
+    background:
+      linear-gradient(180deg, #090a0b 0%, #0d0f12 100%) !important;
+    color: #fff !important;
+    padding: 24px 0 26px !important;
+    border-top: 1px solid rgba(255,255,255,.05);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+
+  .hero-review-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,212,1,.08) 0 2px, transparent 2px 22px),
+      linear-gradient(90deg, rgba(255,212,1,.08), transparent 22%, transparent 78%, rgba(255,212,1,.06));
+    opacity: .4;
+  }
+
+  .hero-review-strip-shell {
+    position: relative;
+    z-index: 1;
+    width: calc(100% - 26px);
+  }
+
+  .hero-review-strip-heading {
+    margin-bottom: 14px;
+  }
+
+  .hero-review-strip-heading span {
+    color: var(--brand-gold) !important;
+  }
+
+  .hero-review-strip-heading h2,
+  .hero-review-strip-heading > a {
+    color: #fff !important;
+  }
+
+  .hero-review-strip-heading > a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hero-review-card {
+    min-height: 204px;
+    background: #101215 !important;
+    border: 1px solid rgba(255,212,1,.16) !important;
+    box-shadow: 0 16px 30px rgba(0,0,0,.2) !important;
+  }
+
+  .hero-review-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--brand-gold), rgba(255,212,1,.35));
+  }
+
+  .hero-review-button {
+    background: rgba(14,15,17,.96) !important;
+    border-color: rgba(255,212,1,.24) !important;
+    color: #fff !important;
+  }
+
+  .hero-review-dot {
+    border-color: rgba(255,255,255,.3) !important;
+    background: transparent !important;
+  }
+
+  .hero-review-dot.is-active {
+    background: var(--brand-gold) !important;
+    border-color: var(--brand-gold) !important;
+  }
+
+  /* Service area: more stripes, no yellow glow, keep bolt city tags. */
+  .service-area-section {
+    background: #0d0f12 !important;
+  }
+
+  .service-area-section::before {
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.045) 0 2px, transparent 2px 19px),
+      linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)) !important;
+    opacity: 1 !important;
+  }
+
+  .service-area-tags {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .service-area-tags span {
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.05) !important;
+    border: 1px solid rgba(255,255,255,.1) !important;
+    color: #fff !important;
+    font-weight: 700;
+    justify-content: flex-start;
+  }
+
+  .service-area-tags span i {
+    margin-right: 8px;
+    color: var(--brand-gold) !important;
+  }
+
+  /* Tighter footer on mobile. */
+  .site-footer {
+    background: #070809;
+  }
+
+  .footer-inner,
+  .footer-inner-compact {
+    width: min(100% - 24px, 1000px) !important;
+    padding: 20px 0 14px !important;
+    gap: 18px !important;
+  }
+
+  .footer-brand-compact {
+    gap: 8px !important;
+  }
+
+  .footer-logo img {
+    width: 122px !important;
+  }
+
+  .footer-brand-compact p {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+
+  .footer-column-group {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px 14px !important;
+  }
+
+  .footer-column h3 {
+    margin: 0 0 8px !important;
+    font-size: 15px !important;
+  }
+
+  .footer-column a,
+  .footer-column p,
+  .footer-legal-mobile a {
+    margin: 0 0 6px !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+  }
+
+  .footer-bottom,
+  .footer-bottom-compact {
+    width: min(100% - 24px, 1000px) !important;
+    padding: 12px 0 14px !important;
+  }
+
+  .footer-bottom p {
+    font-size: 12px !important;
+  }
+}

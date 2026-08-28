@@ -783,3 +783,114 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
     window.addEventListener('resize', syncMainReviewMode);
   }
 })();
+
+// ===== v22 final mobile refinements =====
+(() => {
+  const heroVisualEl = document.querySelector('.hero-visual');
+  const mainCardEl = document.querySelector('.project-card-main');
+
+  if (heroVisualEl && mainCardEl) {
+    const focusMainCard = () => {
+      if (window.innerWidth <= 760) {
+        heroVisualEl.classList.add('main-focused');
+        mainCardEl.setAttribute('aria-pressed', 'true');
+      }
+    };
+
+    mainCardEl.addEventListener('touchstart', focusMainCard, { passive: true });
+    mainCardEl.addEventListener('pointerdown', focusMainCard);
+    mainCardEl.addEventListener('click', () => {
+      if (window.innerWidth <= 760) {
+        heroVisualEl.classList.add('main-focused');
+        mainCardEl.setAttribute('aria-pressed', 'true');
+      }
+    });
+  }
+
+  // Replace the mini customer-reviews carousel with a simpler, non-bouncy mobile slider.
+  const oldTrack = document.querySelector('.hero-review-track');
+  const heroCarousel = document.querySelector('.hero-review-carousel');
+  const heroDots = document.querySelector('.hero-review-dots');
+  const heroPrevBtnOld = document.querySelector('.hero-review-prev');
+  const heroNextBtnOld = document.querySelector('.hero-review-next');
+
+  if (oldTrack && heroCarousel && heroDots && heroPrevBtnOld && heroNextBtnOld) {
+    const cleanTrack = oldTrack.cloneNode(true);
+    cleanTrack.querySelectorAll('.carousel-clone').forEach((node) => node.remove());
+    oldTrack.replaceWith(cleanTrack);
+
+    const heroPrevBtn = heroPrevBtnOld.cloneNode(true);
+    heroPrevBtnOld.replaceWith(heroPrevBtn);
+    const heroNextBtn = heroNextBtnOld.cloneNode(true);
+    heroNextBtnOld.replaceWith(heroNextBtn);
+
+    const cards = () => Array.from(cleanTrack.querySelectorAll('.hero-review-card'));
+    let currentIndex = 0;
+
+    const renderDots = () => {
+      heroDots.innerHTML = '';
+      cards().forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = `hero-review-dot${index === currentIndex ? ' is-active' : ''}`;
+        dot.setAttribute('aria-label', `Go to highlighted review ${index + 1}`);
+        dot.addEventListener('click', () => goTo(index));
+        heroDots.appendChild(dot);
+      });
+    };
+
+    const goTo = (index) => {
+      const list = cards();
+      if (!list.length) return;
+      currentIndex = (index + list.length) % list.length;
+      const card = list[currentIndex];
+      const left = Math.max(0, card.offsetLeft - ((cleanTrack.clientWidth - card.offsetWidth) / 2));
+      cleanTrack.scrollTo({ left, behavior: 'smooth' });
+      renderDots();
+    };
+
+    heroPrevBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 760) goTo(currentIndex - 1);
+    });
+
+    heroNextBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 760) goTo(currentIndex + 1);
+    });
+
+    let scrollTimer = 0;
+    cleanTrack.addEventListener('scroll', () => {
+      if (window.innerWidth > 760) return;
+      clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        const list = cards();
+        if (!list.length) return;
+        const center = cleanTrack.scrollLeft + cleanTrack.clientWidth / 2;
+        let bestIndex = 0;
+        let bestDistance = Infinity;
+        list.forEach((card, index) => {
+          const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+          const dist = Math.abs(cardCenter - center);
+          if (dist < bestDistance) {
+            bestDistance = dist;
+            bestIndex = index;
+          }
+        });
+        currentIndex = bestIndex;
+        renderDots();
+      }, 70);
+    }, { passive: true });
+
+    const syncHeroStrip = () => {
+      if (window.innerWidth <= 760) {
+        goTo(currentIndex);
+      } else {
+        cleanTrack.scrollLeft = 0;
+        heroDots.innerHTML = '';
+      }
+    };
+
+    window.addEventListener('resize', syncHeroStrip);
+    renderDots();
+    syncHeroStrip();
+  }
+})();

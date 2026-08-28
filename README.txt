@@ -4,7 +4,7 @@ All files intentionally live in the main/root directory for GitHub + Vercel:
 - index.html
 - styles.css
 - script.js
-- favicon.svg (placeholder)
+- favicon-32.png / favicon-48.png / favicon-180.png (supplied JV mark)
 - jv-electric-hero-bg.webp
 
 Current build includes:
@@ -115,8 +115,8 @@ Client details received:
 - Google Reviews: supplied client link is wired into both review CTAs
 - Facebook Reviews: https://www.facebook.com/profile.php?id=61584432115757&sk=reviews
 - Project photos: pending
-- Logo: jv-electric-logo.webp (full supplied image converted to WebP)
-- Mobile/header wordmark crop: jv-electric-logo-wordmark.webp
+- Logo: jv-electric-logo-full.png (supplied transparent full wordmark)
+- Favicon/source mark: jv-electric-logo-mark.png (supplied transparent JV mark)
 
 
 Update v17:
@@ -129,3 +129,16 @@ Update v17:
 - Mobile sections now alternate Reviews white, About black, Contact white, FAQ black; removed the yellow Contact glow.
 - Desktop Reviews now use the How It Works/Get in Touch white grid; About now uses the FAQ dark dotted background.
 - No GitHub changes were made.
+
+Update v21:
+- Restored the desktop About JV Electric layout and kept desktop changes limited to the requested three-at-a-time reviews carousel.
+- Mobile hero review strip is now a yellow mini-section with real supplied Facebook reviews, names, arrows, dots, and smooth cycling.
+- Fixed mobile service carousel edge behavior so the page itself does not shift horizontally.
+- Main mobile project photo now comes fully forward on tap and pushes the supporting cards back.
+- Restored How It Works numbers to neutral gray; mobile estimate CTA remains centered and yellow.
+- Mobile service area uses compact city bubbles and no extra paragraph/glow.
+- Mobile 10+ experience badge now matches the desktop dark-gray treatment and is pinned bottom-right.
+- Mobile form placeholders simplified.
+- Mobile footer now lays out Quick Links + Service Area above Legal + Contact.
+- Removed mobile decorative yellow glow patches while retaining intentional yellow brand accents.
+- Main logos use the supplied transparent PNG assets; JV-only mark is used for favicon images.

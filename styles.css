@@ -5253,3 +5253,437 @@ html, body {
     grid-column: 1 / -1;
   }
 }
+
+/* ===== v21 focused mobile refinements + requested desktop fixes ===== */
+.about-desktop-layout { display: block; }
+.about-mobile-layout { display: none; }
+.footer-legal-mobile { display: none; }
+
+/* Desktop review carousel: always one straight row of exactly three cards. */
+@media (min-width: 761px) {
+  .reviews-carousel-shell {
+    overflow: hidden;
+  }
+
+  .reviews-carousel-shell .reviews-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    transform: none;
+  }
+
+  .reviews-carousel-shell .review-card,
+  .reviews-carousel-shell .review-card-featured {
+    width: auto !important;
+    min-width: 0 !important;
+    height: 100%;
+    min-height: 300px;
+    transform: none !important;
+  }
+
+  .reviews-carousel-shell .review-card:nth-child(n+4) {
+    display: none !important;
+  }
+
+  /* Restore the exact desktop About layout from before the mobile-only pass. */
+  .about-desktop-layout { display: block !important; }
+  .about-mobile-layout { display: none !important; }
+
+  .about-desktop-layout .about-inner {
+    width: min(1180px, calc(100% - 56px)) !important;
+    margin: 0 auto;
+    padding: 106px 0 110px;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 62px !important;
+  }
+
+  .about-desktop-layout .about-visual,
+  .about-desktop-layout .about-content {
+    width: 100%;
+    max-width: none !important;
+    min-height: 560px;
+  }
+
+  .about-desktop-layout .about-visual {
+    position: relative;
+    padding: 0 !important;
+  }
+
+  .about-desktop-layout .about-photo-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 560px;
+    aspect-ratio: auto;
+  }
+
+  .about-desktop-layout .about-experience-card {
+    position: absolute !important;
+    right: 20px !important;
+    bottom: 20px !important;
+    left: auto !important;
+    top: auto !important;
+    width: 188px !important;
+    min-height: 128px !important;
+    margin: 0 !important;
+  }
+
+  .about-desktop-layout .about-content {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px 0 0;
+  }
+
+  .about-desktop-layout .about-content h2 {
+    max-width: 100%;
+    font-size: clamp(42px, 4.1vw, 60px);
+  }
+
+  .about-desktop-layout .about-points {
+    margin-top: 28px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Mobile-only About layout. */
+  .about-desktop-layout { display: none !important; }
+  .about-mobile-layout { display: block !important; }
+
+  /* Remove decorative yellow glows/patches. Yellow remains only as deliberate accents/CTAs. */
+  .hero::before {
+    background: linear-gradient(90deg, rgba(8,9,11,.97) 0%, rgba(8,9,11,.92) 34%, rgba(8,9,11,.68) 68%, rgba(8,9,11,.48) 100%) !important;
+  }
+
+  .work-section::before {
+    background:
+      linear-gradient(135deg, transparent 0 58%, rgba(255,255,255,.018) 58% 59%, transparent 59% 100%),
+      linear-gradient(90deg, rgba(8,9,10,.25), rgba(8,9,10,.1), rgba(8,9,10,.32)) !important;
+  }
+
+  .about-section::after {
+    display: none !important;
+  }
+
+  .service-area-section::before {
+    background: linear-gradient(135deg, transparent 0 62%, rgba(255,255,255,.02) 62% 63%, transparent 63% 100%) !important;
+  }
+
+  /* Main project photo comes clearly to the front and moves the side cards away. */
+  .hero-visual.main-focused .project-card-main {
+    z-index: 40 !important;
+    transform: translateX(-50%) translateY(-8px) translateZ(220px) scale(1.075) rotateY(-1deg) rotateZ(.15deg) !important;
+    filter: brightness(1.04) !important;
+    box-shadow: 0 36px 74px rgba(0,0,0,.42) !important;
+  }
+
+  .hero-visual.main-focused .project-card-small {
+    z-index: 3 !important;
+    transform: translateX(-18px) translateY(22px) translateZ(-70px) rotateY(8deg) rotateZ(-2deg) scale(.91) !important;
+    filter: brightness(.82) saturate(.86) !important;
+  }
+
+  .hero-visual.main-focused .project-card-third {
+    z-index: 3 !important;
+    transform: translateX(18px) translateY(22px) translateZ(-70px) rotateY(-8deg) rotateZ(2deg) scale(.91) !important;
+    filter: brightness(.82) saturate(.86) !important;
+  }
+
+  /* Yellow mini review band directly after the hero/trust content. */
+  .hero-review-strip {
+    display: block !important;
+    padding: 26px 0 30px !important;
+    background: var(--brand-gold) !important;
+    color: #060606 !important;
+  }
+
+  .hero-review-strip-shell {
+    width: calc(100% - 28px);
+    margin: 0 auto;
+  }
+
+  .hero-review-strip-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .hero-review-strip-heading span {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .hero-review-strip-heading h2 {
+    margin: 0;
+    color: #060606;
+    font-size: 25px;
+    line-height: 1.04;
+  }
+
+  .hero-review-strip-heading > a {
+    flex: 0 0 auto;
+    color: #060606;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .hero-review-carousel {
+    position: relative;
+  }
+
+  .hero-review-track {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .hero-review-track::-webkit-scrollbar { display: none; }
+
+  .hero-review-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    min-height: 194px;
+    padding: 22px 22px 20px;
+    scroll-snap-align: center;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    background: #111214;
+    color: #fff;
+    box-shadow: 0 16px 30px rgba(0,0,0,.18);
+  }
+
+  .hero-review-card .hero-review-stars {
+    color: var(--brand-gold);
+    font-size: 15px;
+    letter-spacing: .12em;
+  }
+
+  .hero-review-card p {
+    margin: 16px 0 18px;
+    color: rgba(255,255,255,.88);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .hero-review-card strong,
+  .hero-review-card > span:last-child {
+    display: block;
+  }
+
+  .hero-review-card strong {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .hero-review-card > span:last-child {
+    margin-top: 3px;
+    color: rgba(255,255,255,.52);
+    font-size: 12px;
+  }
+
+  .hero-review-button {
+    position: absolute;
+    z-index: 6;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
+    background: rgba(6,6,6,.92);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(0,0,0,.2);
+  }
+
+  .hero-review-button svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .hero-review-prev { left: 8px; }
+  .hero-review-next { right: 8px; }
+
+  .hero-review-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 13px;
+  }
+
+  .hero-review-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 1px solid rgba(6,6,6,.38);
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .hero-review-dot.is-active {
+    width: 19px;
+    background: #060606;
+    border-color: #060606;
+  }
+
+  /* Process returns to neutral gray numbering. */
+  .process-number,
+  .process-step-dark .process-number {
+    color: #b8bcc1 !important;
+  }
+
+  .process-cta-mobile {
+    background: var(--brand-gold) !important;
+    border-color: var(--brand-gold) !important;
+    color: #060606 !important;
+    align-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* City bubbles replace the explanatory paragraph on mobile. */
+  .service-area-copy-desktop,
+  .service-area-copy-mobile {
+    display: none !important;
+  }
+
+  .service-area-tags {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .service-area-tags span {
+    min-height: 46px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.055);
+    border-color: rgba(255,255,255,.11);
+  }
+
+  /* Mobile main review carousel: cards stay flat and arrows sit at the sides. */
+  .reviews-carousel-shell .review-card,
+  .reviews-carousel-shell .review-card-featured {
+    transform: none !important;
+  }
+
+  .reviews-carousel-shell .review-card:hover,
+  .reviews-carousel-shell .review-card-featured:hover {
+    transform: none !important;
+  }
+
+  .reviews-dot {
+    transition: width 180ms ease, background 180ms ease, border-color 180ms ease;
+  }
+
+  .reviews-dot.is-active {
+    width: 18px;
+  }
+
+  /* Mobile 10+ badge uses the same dark-gray desktop treatment and stays bottom-right. */
+  .about-mobile-layout .about-visual {
+    position: relative !important;
+  }
+
+  .about-mobile-layout .about-experience-card {
+    position: absolute !important;
+    left: auto !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: 16px !important;
+    width: 188px !important;
+    min-height: 128px !important;
+    margin: 0 !important;
+    padding: 22px 20px 18px !important;
+    border-top: 0 !important;
+    border: 1px solid rgba(255,255,255,.11) !important;
+    border-radius: 16px !important;
+    background: rgba(14,15,17,.94) !important;
+    box-shadow: 0 20px 46px rgba(0,0,0,.3) !important;
+  }
+
+  .about-mobile-layout .about-experience-card::before {
+    content: "" !important;
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 34px;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.24) !important;
+  }
+
+  .about-mobile-layout .about-experience-card strong {
+    display: block;
+    padding-top: 12px !important;
+    margin-bottom: 8px;
+    color: #fff !important;
+    font-size: 60px !important;
+    line-height: .9;
+  }
+
+  .about-mobile-layout .about-experience-card span {
+    color: #fff;
+    font-size: 14px !important;
+    line-height: 1.35;
+  }
+
+  /* Footer: top row Quick Links + Service Area, bottom row Legal + Contact. */
+  .footer-legal-inline { display: none !important; }
+  .footer-legal-mobile { display: grid !important; }
+
+  .footer-column-group {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px 18px !important;
+  }
+
+  .footer-column:last-child {
+    grid-column: auto !important;
+  }
+}
+
+/* Restore original neutral process numbering on every breakpoint. */
+.process-number,
+.process-step-dark .process-number {
+  color: #b8bcc1 !important;
+}
+
+@media (min-width: 761px) {
+  .reviews-grid {
+    transition: opacity 160ms ease, transform 220ms cubic-bezier(.22,.78,.24,1);
+  }
+  .reviews-grid.is-cycling-next {
+    opacity: .35;
+    transform: translateX(-16px) !important;
+  }
+  .reviews-grid.is-cycling-prev {
+    opacity: .35;
+    transform: translateX(16px) !important;
+  }
+}

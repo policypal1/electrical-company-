@@ -465,148 +465,321 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
   });
 });
 
-// ===== v20 requested refinements =====
+// ===== v21 focused carousel and mobile interaction fixes =====
 (() => {
-  const servicesGridEl = document.querySelector('#services-grid');
+  const cloneButton = (root, selector) => {
+    const oldButton = root?.querySelector(selector);
+    if (!oldButton) return null;
+    const newButton = oldButton.cloneNode(true);
+    oldButton.replaceWith(newButton);
+    return newButton;
+  };
+
+  const centeredLeft = (track, card) => {
+    const max = Math.max(0, track.scrollWidth - track.clientWidth);
+    return Math.max(0, Math.min(max, card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2)));
+  };
+
+  const jumpTo = (track, card) => {
+    if (!track || !card) return;
+    const previous = track.style.scrollBehavior;
+    track.style.scrollBehavior = 'auto';
+    track.scrollLeft = centeredLeft(track, card);
+    requestAnimationFrame(() => {
+      track.style.scrollBehavior = previous;
+    });
+  };
+
+  /* Services: keep movement inside the horizontal rail and stop at the ends. */
+  const servicesTrack = document.querySelector('#services-grid');
   const servicesShell = document.querySelector('.services-rail-shell');
-  if (servicesGridEl && servicesShell) {
-    const getVisibleCards = () => Array.from(servicesGridEl.querySelectorAll('.service-card')).filter((card) => !card.classList.contains('is-hidden'));
+  if (servicesTrack && servicesShell) {
+    const prev = cloneButton(servicesShell, '.services-rail-prev');
+    const next = cloneButton(servicesShell, '.services-rail-next');
 
-    const scrollToCard = (card) => {
-      if (!card) return;
-      const max = Math.max(0, servicesGridEl.scrollWidth - servicesGridEl.clientWidth);
-      const left = Math.max(0, Math.min(max, card.offsetLeft - ((servicesGridEl.clientWidth - card.offsetWidth) / 2)));
-      servicesGridEl.scrollTo({ left, behavior: 'smooth' });
-    };
+    const cards = () => Array.from(servicesTrack.querySelectorAll('.service-card')).filter((card) => {
+      const style = getComputedStyle(card);
+      return !card.classList.contains('is-hidden') && style.display !== 'none' && style.visibility !== 'hidden';
+    });
 
-    const rebindButton = (selector, handler) => {
-      const oldButton = servicesShell.querySelector(selector);
-      if (!oldButton) return null;
-      const newButton = oldButton.cloneNode(true);
-      oldButton.replaceWith(newButton);
-      newButton.addEventListener('click', handler);
-      return newButton;
-    };
-
-    const findNearestCardIndex = (cards) => {
-      const center = servicesGridEl.scrollLeft + (servicesGridEl.clientWidth / 2);
-      let bestIndex = 0;
-      let bestDistance = Infinity;
-      cards.forEach((card, index) => {
-        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-        const distance = Math.abs(cardCenter - center);
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          bestIndex = index;
+    const nearestIndex = () => {
+      const visible = cards();
+      if (!visible.length) return 0;
+      const center = servicesTrack.scrollLeft + (servicesTrack.clientWidth / 2);
+      let best = 0;
+      let distance = Infinity;
+      visible.forEach((card, index) => {
+        const d = Math.abs((card.offsetLeft + card.offsetWidth / 2) - center);
+        if (d < distance) {
+          best = index;
+          distance = d;
         }
       });
-      return bestIndex;
+      return best;
     };
 
-    rebindButton('.services-rail-prev', () => {
-      if (window.innerWidth > 760) return;
-      const cards = getVisibleCards();
-      if (!cards.length) return;
-      const index = findNearestCardIndex(cards);
-      const nextIndex = index <= 0 ? cards.length - 1 : index - 1;
-      scrollToCard(cards[nextIndex]);
-    });
+    const update = () => {
+      if (!prev || !next || window.innerWidth > 760) return;
+      const visible = cards();
+      const index = nearestIndex();
+      prev.classList.toggle('is-disabled', index <= 0);
+      next.classList.toggle('is-disabled', index >= visible.length - 1);
+    };
 
-    rebindButton('.services-rail-next', () => {
+    const go = (direction) => {
       if (window.innerWidth > 760) return;
-      const cards = getVisibleCards();
-      if (!cards.length) return;
-      const index = findNearestCardIndex(cards);
-      const nextIndex = index >= cards.length - 1 ? 0 : index + 1;
-      scrollToCard(cards[nextIndex]);
-    });
+      const visible = cards();
+      if (!visible.length) return;
+      const current = nearestIndex();
+      const target = Math.max(0, Math.min(visible.length - 1, current + direction));
+      servicesTrack.scrollTo({ left: centeredLeft(servicesTrack, visible[target]), behavior: 'smooth' });
+      window.setTimeout(update, 330);
+    };
+
+    prev?.addEventListener('click', () => go(-1));
+    next?.addEventListener('click', () => go(1));
+
+    let serviceScrollTimer;
+    servicesTrack.addEventListener('scroll', () => {
+      clearTimeout(serviceScrollTimer);
+      serviceScrollTimer = window.setTimeout(update, 90);
+    }, { passive: true });
+
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+    update();
   }
 
-  const reviewsShell = document.querySelector('.reviews-carousel-shell');
-  const reviewsGridEl = document.querySelector('.reviews-grid');
-  if (reviewsShell && reviewsGridEl) {
-    const reviewCards = () => Array.from(reviewsGridEl.querySelectorAll('.review-card'));
-    const dotsWrap = document.createElement('div');
-    dotsWrap.className = 'reviews-dots';
-    reviewsShell.insertAdjacentElement('afterend', dotsWrap);
+  const buildDots = (wrap, count, activeIndex, className, activeClass, onClick) => {
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    for (let i = 0; i < count; i += 1) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `${className}${i === activeIndex ? ` ${activeClass}` : ''}`;
+      dot.setAttribute('aria-label', `Go to review ${i + 1}`);
+      dot.addEventListener('click', () => onClick(i));
+      wrap.appendChild(dot);
+    }
+  };
 
-    const getActiveIndex = () => {
-      const cards = reviewCards();
-      const center = reviewsGridEl.scrollLeft + (reviewsGridEl.clientWidth / 2);
-      let bestIndex = 0;
-      let bestDistance = Infinity;
-      cards.forEach((card, index) => {
-        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-        const distance = Math.abs(cardCenter - center);
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          bestIndex = index;
-        }
-      });
-      return bestIndex;
+  const makeInfiniteMobileCarousel = ({ track, cardSelector, prev, next, dots, dotClass, activeDotClass }) => {
+    if (!track) return () => {};
+    let logicalIndex = 0;
+    let settleTimer = 0;
+    let cloneFirst = null;
+    let cloneLast = null;
+
+    const originals = () => Array.from(track.querySelectorAll(`${cardSelector}:not(.carousel-clone)`));
+
+    const renderDots = () => {
+      const count = originals().length;
+      buildDots(dots, count, logicalIndex, dotClass, activeDotClass, (index) => goToLogical(index));
     };
 
-    const goToReview = (index) => {
-      const cards = reviewCards();
-      const card = cards[index];
-      if (!card) return;
-      if (window.innerWidth > 760) {
-        // desktop: rotate DOM order until selected card is first
-        while (Array.from(reviewsGridEl.children).indexOf(card) > 0) {
-          reviewsGridEl.appendChild(reviewsGridEl.firstElementChild);
-        }
+    const teardownClones = () => {
+      track.querySelectorAll('.carousel-clone').forEach((clone) => clone.remove());
+      cloneFirst = null;
+      cloneLast = null;
+    };
+
+    const setupClones = () => {
+      teardownClones();
+      const cards = originals();
+      if (cards.length < 2) return;
+      cloneLast = cards[cards.length - 1].cloneNode(true);
+      cloneFirst = cards[0].cloneNode(true);
+      cloneLast.classList.add('carousel-clone');
+      cloneFirst.classList.add('carousel-clone');
+      cloneLast.setAttribute('aria-hidden', 'true');
+      cloneFirst.setAttribute('aria-hidden', 'true');
+      track.insertBefore(cloneLast, cards[0]);
+      track.appendChild(cloneFirst);
+      requestAnimationFrame(() => jumpTo(track, originals()[logicalIndex]));
+    };
+
+    const goToLogical = (index) => {
+      const cards = originals();
+      if (!cards.length) return;
+      logicalIndex = (index + cards.length) % cards.length;
+      track.scrollTo({ left: centeredLeft(track, cards[logicalIndex]), behavior: 'smooth' });
+      renderDots();
+    };
+
+    const move = (direction) => {
+      const cards = originals();
+      if (cards.length < 2) return;
+
+      if (direction > 0 && logicalIndex === cards.length - 1 && cloneFirst) {
+        logicalIndex = 0;
+        track.scrollTo({ left: centeredLeft(track, cloneFirst), behavior: 'smooth' });
         renderDots();
+        window.setTimeout(() => jumpTo(track, cards[0]), 390);
         return;
       }
-      const max = Math.max(0, reviewsGridEl.scrollWidth - reviewsGridEl.clientWidth);
-      const left = Math.max(0, Math.min(max, card.offsetLeft - ((reviewsGridEl.clientWidth - card.offsetWidth) / 2)));
-      reviewsGridEl.scrollTo({ left, behavior: 'smooth' });
-      renderDots(index);
+
+      if (direction < 0 && logicalIndex === 0 && cloneLast) {
+        logicalIndex = cards.length - 1;
+        track.scrollTo({ left: centeredLeft(track, cloneLast), behavior: 'smooth' });
+        renderDots();
+        window.setTimeout(() => jumpTo(track, cards[cards.length - 1]), 390);
+        return;
+      }
+
+      goToLogical(logicalIndex + direction);
     };
 
-    const renderDots = (forcedIndex = null) => {
-      const cards = reviewCards();
-      const activeIndex = forcedIndex ?? getActiveIndex();
-      dotsWrap.innerHTML = '';
-      cards.forEach((_, index) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = `reviews-dot${index === activeIndex ? ' is-active' : ''}`;
-        dot.setAttribute('aria-label', `Go to review ${index + 1}`);
-        dot.addEventListener('click', () => goToReview(index));
-        dotsWrap.appendChild(dot);
-      });
-    };
-
-    const rebindReviewButton = (selector, direction) => {
-      const oldButton = reviewsShell.querySelector(selector);
-      if (!oldButton) return;
-      const newButton = oldButton.cloneNode(true);
-      oldButton.replaceWith(newButton);
-      newButton.addEventListener('click', () => {
-        const cards = reviewCards();
-        if (!cards.length) return;
-        if (window.innerWidth > 760) {
-          if (direction === 'next') {
-            reviewsGridEl.appendChild(reviewsGridEl.firstElementChild);
-          } else {
-            reviewsGridEl.insertBefore(reviewsGridEl.lastElementChild, reviewsGridEl.firstElementChild);
+    const settleFromManualScroll = () => {
+      clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(() => {
+        const children = Array.from(track.children).filter((child) => child.matches(cardSelector));
+        const cards = originals();
+        if (!children.length || !cards.length) return;
+        const center = track.scrollLeft + track.clientWidth / 2;
+        let nearest = children[0];
+        let distance = Infinity;
+        children.forEach((card) => {
+          const d = Math.abs((card.offsetLeft + card.offsetWidth / 2) - center);
+          if (d < distance) {
+            nearest = card;
+            distance = d;
           }
-          renderDots(0);
-          return;
+        });
+
+        if (nearest === cloneLast) {
+          logicalIndex = cards.length - 1;
+          jumpTo(track, cards[cards.length - 1]);
+        } else if (nearest === cloneFirst) {
+          logicalIndex = 0;
+          jumpTo(track, cards[0]);
+        } else {
+          logicalIndex = Math.max(0, cards.indexOf(nearest));
         }
-        const currentIndex = getActiveIndex();
-        const nextIndex = direction === 'next'
-          ? (currentIndex + 1) % cards.length
-          : (currentIndex - 1 + cards.length) % cards.length;
-        goToReview(nextIndex);
-      });
+        renderDots();
+      }, 110);
     };
 
-    rebindReviewButton('.reviews-cycle-prev', 'prev');
-    rebindReviewButton('.reviews-cycle-next', 'next');
-    reviewsGridEl.addEventListener('scroll', () => window.requestAnimationFrame(() => renderDots()), { passive: true });
-    window.addEventListener('resize', () => renderDots());
+    const prevHandler = () => move(-1);
+    const nextHandler = () => move(1);
+    const scrollHandler = () => settleFromManualScroll();
+
+    prev?.addEventListener('click', prevHandler);
+    next?.addEventListener('click', nextHandler);
+    track.addEventListener('scroll', scrollHandler, { passive: true });
+
+    setupClones();
     renderDots();
+
+    return () => {
+      clearTimeout(settleTimer);
+      prev?.removeEventListener('click', prevHandler);
+      next?.removeEventListener('click', nextHandler);
+      track.removeEventListener('scroll', scrollHandler);
+      teardownClones();
+    };
+  };
+
+  /* Mini yellow review carousel below the hero. */
+  const heroReviewTrack = document.querySelector('.hero-review-track');
+  const heroReviewCarousel = document.querySelector('.hero-review-carousel');
+  const heroReviewDots = document.querySelector('.hero-review-dots');
+  if (heroReviewTrack && heroReviewCarousel) {
+    const heroPrev = cloneButton(heroReviewCarousel, '.hero-review-prev');
+    const heroNext = cloneButton(heroReviewCarousel, '.hero-review-next');
+    let destroyHeroCarousel = null;
+    let heroWasMobile = null;
+
+    const syncHeroReviewMode = () => {
+      const isMobile = window.innerWidth <= 760;
+      if (heroWasMobile === isMobile) return;
+      heroWasMobile = isMobile;
+      if (destroyHeroCarousel) {
+        destroyHeroCarousel();
+        destroyHeroCarousel = null;
+      }
+      if (isMobile) {
+        destroyHeroCarousel = makeInfiniteMobileCarousel({
+          track: heroReviewTrack,
+          cardSelector: '.hero-review-card',
+          prev: heroPrev,
+          next: heroNext,
+          dots: heroReviewDots,
+          dotClass: 'hero-review-dot',
+          activeDotClass: 'is-active'
+        });
+      }
+    };
+
+    syncHeroReviewMode();
+    window.addEventListener('resize', syncHeroReviewMode);
+  }
+
+  /* Main review section: three-card page carousel on desktop, seamless single-card carousel on mobile. */
+  const reviewsShell = document.querySelector('.reviews-carousel-shell');
+  const reviewsTrack = document.querySelector('.reviews-grid');
+  if (reviewsShell && reviewsTrack) {
+    const prev = cloneButton(reviewsShell, '.reviews-cycle-prev');
+    const next = cloneButton(reviewsShell, '.reviews-cycle-next');
+    let dots = document.querySelector('.reviews-dots');
+    if (!dots) {
+      dots = document.createElement('div');
+      dots.className = 'reviews-dots';
+      reviewsShell.insertAdjacentElement('afterend', dots);
+    }
+
+    let destroyMobileReviews = null;
+    let reviewsWereMobile = null;
+
+    const removeMobileClones = () => {
+      reviewsTrack.querySelectorAll('.carousel-clone').forEach((clone) => clone.remove());
+    };
+
+    const desktopCycle = (direction) => {
+      if (window.innerWidth <= 760) return;
+      removeMobileClones();
+      const cards = Array.from(reviewsTrack.querySelectorAll('.review-card'));
+      if (cards.length < 2) return;
+      const className = direction > 0 ? 'is-cycling-next' : 'is-cycling-prev';
+      reviewsTrack.classList.add(className);
+      window.setTimeout(() => {
+        if (direction > 0) {
+          reviewsTrack.appendChild(reviewsTrack.firstElementChild);
+        } else {
+          reviewsTrack.insertBefore(reviewsTrack.lastElementChild, reviewsTrack.firstElementChild);
+        }
+        reviewsTrack.classList.remove(className);
+      }, 150);
+    };
+
+    const syncMainReviewMode = () => {
+      const isMobile = window.innerWidth <= 760;
+      if (reviewsWereMobile === isMobile) return;
+      reviewsWereMobile = isMobile;
+      if (destroyMobileReviews) {
+        destroyMobileReviews();
+        destroyMobileReviews = null;
+      }
+
+      if (isMobile) {
+        destroyMobileReviews = makeInfiniteMobileCarousel({
+          track: reviewsTrack,
+          cardSelector: '.review-card',
+          prev,
+          next,
+          dots,
+          dotClass: 'reviews-dot',
+          activeDotClass: 'is-active'
+        });
+      } else {
+        removeMobileClones();
+        dots.innerHTML = '';
+      }
+    };
+
+    prev?.addEventListener('click', () => desktopCycle(-1));
+    next?.addEventListener('click', () => desktopCycle(1));
+
+    syncMainReviewMode();
+    window.addEventListener('resize', syncMainReviewMode);
   }
 })();

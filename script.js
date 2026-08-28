@@ -31,13 +31,13 @@ const mainProjectCard = document.querySelector('.project-card-main');
 
 if (heroVisual && mainProjectCard) {
   const setMainFocus = (enabled) => {
-    if (window.innerWidth <= 760) return;
+    if (window.innerWidth <= 1080) return;
     heroVisual.classList.toggle('main-focused', enabled);
     mainProjectCard.setAttribute('aria-pressed', String(enabled));
   };
 
   const toggleMainFocus = () => {
-    if (window.innerWidth <= 760) return;
+    if (window.innerWidth <= 1080) return;
     setMainFocus(!heroVisual.classList.contains('main-focused'));
   };
 
@@ -58,7 +58,7 @@ if (heroVisual && mainProjectCard) {
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth <= 760) {
+    if (window.innerWidth <= 1080) {
       heroVisual.classList.remove('main-focused');
       mainProjectCard.setAttribute('aria-pressed', 'false');
     }
@@ -106,26 +106,27 @@ const levenshtein = (a, b) => {
 const fuzzyWordMatch = (queryWord, candidateWord) => {
   if (!queryWord || !candidateWord) return false;
   if (candidateWord.includes(queryWord) || queryWord.includes(candidateWord)) return true;
-  const maxDistance = queryWord.length <= 4 ? 1 : queryWord.length <= 7 ? 2 : 3;
+  const maxDistance = queryWord.length <= 6 ? 1 : queryWord.length <= 10 ? 2 : 3;
   return levenshtein(queryWord, candidateWord) <= maxDistance;
 };
 
 const synonymGroups = [
-  ['panel', 'pannel', 'panle', 'breaker box', 'service panel', 'main panel', 'electrical panel', 'subpanel', 'service upgrade'],
-  ['ev', 'ev charger', 'car charger', 'electric vehicle', 'tesla charger', 'level 2 charger', 'wall connector'],
-  ['lighting', 'lights', 'light fixture', 'light fixtures', 'recessed lighting', 'can lights', 'security lighting'],
-  ['outlet', 'outlets', 'switch', 'switches', 'plug', 'plugs', 'receptacle', 'receptacles', 'gfci'],
-  ['repair', 'repairs', 'troubleshooting', 'dead outlet', 'flickering lights', 'breaker keeps tripping'],
-  ['hot tub', 'spa', 'swim spa', 'jacuzzi'],
-  ['rv', 'rv outlet', 'rv plug', 'motorhome', 'motor home', 'camper', 'travel trailer', 'shore power', '30 amp', '50 amp'],
-  ['dedicated circuit', 'new circuit', '240v', '240 volt', 'appliance circuit'],
-  ['remodel', 'renovation', 'addition', 'rewire', 'rewiring'],
-  ['smoke detector', 'co detector', 'carbon monoxide', 'alarm'],
-  ['ceiling fan', 'fan', 'fans'],
-  ['surge', 'surge protection', 'surge protector'],
-  ['garage', 'shop', 'workshop', 'shed'],
-  ['outdoor', 'exterior', 'backyard', 'patio', 'weatherproof'],
-  ['electrical updates', 'general electrical', 'home electrical', 'modernization', 'upgrades']
+  ['panel','panels','panel upgrade','panel replacement','breaker panel','breaker box','fuse box','electrical box','main panel','main breaker','service panel','service upgrade','subpanel','200 amp','100 amp'],
+  ['ev','ev charger','ev charging','electric vehicle','electric car','car charger','home charger','tesla','tesla charger','wall connector','level 2 charger','charging station','nema 14 50','14 50 outlet'],
+  ['lighting','lights','light','light fixture','recessed lights','can lights','ceiling light','security lights','outdoor lights','porch light','motion light'],
+  ['outlet','outlets','wall outlet','socket','sockets','switch','switches','light switch','plug','plugs','receptacle','gfci','gfi','usb outlet','add outlet','replace outlet'],
+  ['repair','repairs','electrical repair','troubleshooting','diagnose','dead outlet','outlet not working','flickering lights','breaker keeps tripping','no power','lost power','power issue','electrical problem','short circuit'],
+  ['hot tub','hot tub hookup','hot tub wiring','spa','spa hookup','spa wiring','swim spa','jacuzzi','hot tub power','50 amp spa'],
+  ['rv','rv outlet','rv plug','rv hookup','rv power','motorhome','motor home','motor','camper','travel trailer','trailer hookup','shore power','30 amp rv','50 amp rv','rv receptacle'],
+  ['dedicated circuit','new circuit','add circuit','circuit install','220','220v','220 volt','240v','240 volt','240 outlet','220 outlet','dedicated power','appliance circuit','mini split circuit','ac circuit'],
+  ['remodel','remodel wiring','renovation','addition','rewire','rewiring','house rewire','home rewire','whole house wiring','house wiring','home wiring','residential wiring','wiring','wire','new wiring','kitchen wiring','bathroom wiring'],
+  ['appliance','appliance circuit','range','stove','stove outlet','oven','dryer','dryer circuit','dryer outlet','dryer plug','dishwasher','microwave','laundry circuit','kitchen circuit'],
+  ['smoke detector','smoke alarm','carbon monoxide','co detector','carbon monoxide detector','hardwired smoke detector','alarm','alarms'],
+  ['ceiling fan','ceiling fans','fan','fans','fan install','fan replacement','fan wiring'],
+  ['surge','surge protection','surge protector','whole home surge','whole house surge','panel surge protector'],
+  ['garage','garage power','garage outlets','garage wiring','shop','shop power','shop wiring','workshop','shed','shed power','shed wiring'],
+  ['outdoor','outside','exterior','backyard','backyard power','patio','patio power','landscape lighting','outdoor outlet','weatherproof outlet','porch light','deck lighting'],
+  ['electrical updates','electrical upgrade','home electrical','house electrical','general electrical','residential electrical','electrician','electrical work','home electrical work','modernization','old wiring','code correction']
 ].map((group) => group.map(normalizeText));
 
 const expandQuery = (query) => {
@@ -173,31 +174,56 @@ if (servicesGrid && servicesToggle) {
     }
   };
 
+  const searchStopWords = new Set(['a', 'an', 'and', 'for', 'the', 'to', 'of', 'in', 'on', 'at', 'with', 'my', 'our', 'i', 'need', 'want']);
+
+  const getMeaningfulQueryTokens = (query) => Array.from(new Set(
+    tokenize(query).filter((token) => !searchStopWords.has(token))
+  ));
+
   const scoreService = (query, service) => {
     const normalizedQuery = normalizeText(query);
     if (!normalizedQuery) return 1;
 
+    const queryTokens = getMeaningfulQueryTokens(query);
     let score = 0;
-    const expandedQueries = expandQuery(query);
-    const queryTokens = Array.from(new Set(expandedQueries.flatMap((entry) => tokenize(entry))));
+    let matchedTokens = 0;
 
-    if (service.titleText.includes(normalizedQuery)) score += 160;
-    if (service.searchText.includes(normalizedQuery)) score += 110;
+    if (service.titleText === normalizedQuery) score += 240;
+    else if (service.titleText.includes(normalizedQuery)) score += 180;
 
-    expandedQueries.forEach((term) => {
-      if (service.searchText.includes(term)) {
-        score += term.includes(' ') ? 45 : 26;
+    if (service.searchText.includes(normalizedQuery)) score += 150;
+
+    queryTokens.forEach((queryToken) => {
+      const exactish = service.tokens.some((candidateToken) =>
+        candidateToken === queryToken ||
+        (queryToken.length >= 5 && candidateToken.startsWith(queryToken)) ||
+        (candidateToken.length >= 5 && queryToken.startsWith(candidateToken))
+      );
+
+      const titleTokens = tokenize(service.titleText);
+      const titleHit = titleTokens.some((titleToken) =>
+        titleToken === queryToken || fuzzyWordMatch(queryToken, titleToken)
+      );
+
+      if (exactish) {
+        matchedTokens += 1;
+        score += titleHit ? 62 : 38;
+        return;
+      }
+
+      const fuzzy = service.tokens.some((candidateToken) => fuzzyWordMatch(queryToken, candidateToken));
+      if (fuzzy) {
+        matchedTokens += 1;
+        score += titleHit ? 48 : 26;
       }
     });
 
-    let matchedTokens = 0;
-    queryTokens.forEach((queryToken) => {
-      const hasMatch = service.tokens.some((candidateToken) => fuzzyWordMatch(queryToken, candidateToken));
-      if (hasMatch) matchedTokens += 1;
-    });
-
-    if (matchedTokens > 0) score += matchedTokens * 22;
-    if (queryTokens.length > 0 && matchedTokens === queryTokens.length) score += 54;
+    if (queryTokens.length > 0) {
+      const coverage = matchedTokens / queryTokens.length;
+      if (coverage === 1) score += 82;
+      else if (coverage >= .66) score += 44;
+      else if (coverage >= .5) score += 18;
+    }
 
     return score;
   };
@@ -220,8 +246,13 @@ if (servicesGrid && servicesToggle) {
 
     let visibleCount = 0;
 
+    const meaningfulQueryTokens = getMeaningfulQueryTokens(query);
+    const minimumScore = meaningfulQueryTokens.length >= 2 ? 60 : 24;
+    const bestScore = ranked.length ? ranked[0].score : 0;
+    const relevanceFloor = Math.max(minimumScore, Math.floor(bestScore * 0.85));
+
     ranked.forEach((service, index) => {
-      const show = !isSearching || service.score > 0;
+      const show = !isSearching || service.score >= relevanceFloor;
       service.card.classList.toggle('is-hidden', !show);
       service.card.style.order = String(index + 1);
       if (show) visibleCount += 1;
@@ -397,3 +428,23 @@ const cycleReviewsV15 = (direction) => {
 
 if (reviewsPrevV15) reviewsPrevV15.addEventListener('click', () => cycleReviewsV15('prev'));
 if (reviewsNextV15) reviewsNextV15.addEventListener('click', () => cycleReviewsV15('next'));
+
+
+// ===== v17 mobile interactions =====
+const servicesPrevV17=document.querySelector('.services-rail-prev');
+const servicesNextV17=document.querySelector('.services-rail-next');
+const visibleServiceCardsV17=()=>servicesGrid?Array.from(servicesGrid.querySelectorAll('.service-card')).filter(card=>{const s=getComputedStyle(card);return !card.classList.contains('is-hidden')&&s.display!=='none'&&s.visibility!=='hidden'}):[];
+const updateServiceArrowsV17=()=>{if(!servicesGrid||!servicesPrevV17||!servicesNextV17)return;if(innerWidth>760){servicesPrevV17.classList.remove('is-disabled');servicesNextV17.classList.remove('is-disabled');return}const max=Math.max(0,servicesGrid.scrollWidth-servicesGrid.clientWidth);servicesPrevV17.classList.toggle('is-disabled',servicesGrid.scrollLeft<=4);servicesNextV17.classList.toggle('is-disabled',servicesGrid.scrollLeft>=max-4)};
+const scrollServicesV17=dir=>{if(!servicesGrid||innerWidth>760)return;const cards=visibleServiceCardsV17();if(!cards.length)return;const r=servicesGrid.getBoundingClientRect(),center=r.left+r.width/2;let idx=0,best=Infinity;cards.forEach((card,i)=>{const x=card.getBoundingClientRect(),d=Math.abs(x.left+x.width/2-center);if(d<best){best=d;idx=i}});idx=Math.max(0,Math.min(cards.length-1,idx+(dir==='next'?1:-1)));cards[idx].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})};
+if(servicesPrevV17)servicesPrevV17.addEventListener('click',()=>scrollServicesV17('prev'));
+if(servicesNextV17)servicesNextV17.addEventListener('click',()=>scrollServicesV17('next'));
+if(servicesGrid){servicesGrid.addEventListener('scroll',()=>requestAnimationFrame(updateServiceArrowsV17),{passive:true});new MutationObserver(()=>requestAnimationFrame(()=>{if(innerWidth<=760)servicesGrid.scrollTo({left:0,behavior:'smooth'});updateServiceArrowsV17()})).observe(servicesGrid,{attributes:true,subtree:true,attributeFilter:['class','style']})}
+addEventListener('resize',updateServiceArrowsV17);addEventListener('load',updateServiceArrowsV17);
+
+const scrollMobileReviewsV17=dir=>{if(!reviewsGridV15||innerWidth>760)return;const cards=Array.from(reviewsGridV15.querySelectorAll('.review-card'));if(!cards.length)return;const r=reviewsGridV15.getBoundingClientRect(),center=r.left+r.width/2;let idx=0,best=Infinity;cards.forEach((card,i)=>{const x=card.getBoundingClientRect(),d=Math.abs(x.left+x.width/2-center);if(d<best){best=d;idx=i}});idx=Math.max(0,Math.min(cards.length-1,idx+(dir==='next'?1:-1)));cards[idx].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})};
+if(reviewsPrevV15)reviewsPrevV15.addEventListener('click',()=>scrollMobileReviewsV17('prev'));
+if(reviewsNextV15)reviewsNextV15.addEventListener('click',()=>scrollMobileReviewsV17('next'));
+
+const mobileFloatingCallV17=document.querySelector('.mobile-floating-call');const heroSectionV17=document.querySelector('.hero');
+const updateFloatingCallV17=()=>{if(!mobileFloatingCallV17||!heroSectionV17)return;mobileFloatingCallV17.classList.toggle('is-visible',innerWidth<=760&&heroSectionV17.getBoundingClientRect().bottom<=12)};
+addEventListener('scroll',updateFloatingCallV17,{passive:true});addEventListener('resize',updateFloatingCallV17);addEventListener('load',updateFloatingCallV17);updateFloatingCallV17();

@@ -117,3 +117,15 @@ Client details received:
 - Project photos: pending
 - Logo: jv-electric-logo.webp (full supplied image converted to WebP)
 - Mobile/header wordmark crop: jv-electric-logo-wordmark.webp
+
+
+Update v17:
+- Fixed mobile/tablet hero main-photo focus so it stays on-screen.
+- Added mobile service carousel arrows while keeping swipe.
+- Expanded service search with homeowner terms such as house wiring, breaker box, RV hookup/motorhome, 220/240V, sockets, no-power troubleshooting, and more.
+- Simplified the mobile How It Works intro and moved Start With an Estimate below the steps.
+- Added a mobile Call Now button that appears after the hero.
+- Mobile reviews are now a one-card carousel on the white grid background.
+- Mobile sections now alternate Reviews white, About black, Contact white, FAQ black; removed the yellow Contact glow.
+- Desktop Reviews now use the How It Works/Get in Touch white grid; About now uses the FAQ dark dotted background.
+- No GitHub changes were made.

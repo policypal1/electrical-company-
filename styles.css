@@ -4188,3 +4188,231 @@ input[type="search"]::-webkit-search-results-decoration {
     display: none !important;
   }
 }
+
+
+/* ===== v16 mobile-first polish + supplied JV Electric details ===== */
+/* Desktop layout/design above 1080px is intentionally untouched. */
+
+:root {
+  --brand-gold: #FFD401;
+  --brand-black: #060606;
+  --brand-white: #FFFFFF;
+}
+
+/* New mobile-only elements are hidden by default so desktop renders exactly as v15. */
+.mobile-brand-logo,
+.hero-slogan {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  /* Match the supplied logo's true black background on the mobile/tablet header. */
+  .site-header {
+    background: var(--brand-black);
+  }
+
+  .header-inner {
+    min-height: 76px;
+  }
+
+  /* The supplied wordmark already says JV Electric, so remove the duplicate placeholder/name on mobile. */
+  .brand-area > .logo-placeholder,
+  .brand-area > .brand-name {
+    display: none;
+  }
+
+  .mobile-brand-logo {
+    width: 178px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+    overflow: hidden;
+  }
+
+  .mobile-brand-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .menu-toggle {
+    border-color: rgba(255, 255, 255, 0.13);
+    background: #0d0d0d;
+  }
+
+  /* Smooth, quick dropdown instead of display:none -> display:block snapping. */
+  .mobile-menu {
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    padding: 0 14px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-9px);
+    background: var(--brand-black);
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
+    pointer-events: none;
+    transition:
+      max-height 240ms cubic-bezier(.22,.78,.24,1),
+      padding 220ms cubic-bezier(.22,.78,.24,1),
+      opacity 135ms ease,
+      transform 200ms cubic-bezier(.22,.78,.24,1),
+      border-color 160ms ease,
+      box-shadow 180ms ease,
+      visibility 0s linear 240ms;
+  }
+
+  .mobile-menu.is-open {
+    display: block;
+    max-height: 470px;
+    padding: 10px 14px 18px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    border-top-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.24);
+    pointer-events: auto;
+    transition:
+      max-height 240ms cubic-bezier(.22,.78,.24,1),
+      padding 220ms cubic-bezier(.22,.78,.24,1),
+      opacity 135ms ease,
+      transform 200ms cubic-bezier(.22,.78,.24,1),
+      border-color 160ms ease,
+      box-shadow 180ms ease,
+      visibility 0s linear 0s;
+  }
+
+  .mobile-menu nav a,
+  .mobile-menu-footer {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition:
+      opacity 120ms ease,
+      transform 180ms cubic-bezier(.22,.78,.24,1);
+  }
+
+  .mobile-menu.is-open nav a,
+  .mobile-menu.is-open .mobile-menu-footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu.is-open nav a:nth-child(2) { transition-delay: 18ms; }
+  .mobile-menu.is-open nav a:nth-child(3) { transition-delay: 30ms; }
+  .mobile-menu.is-open nav a:nth-child(4) { transition-delay: 42ms; }
+  .mobile-menu.is-open nav a:nth-child(5) { transition-delay: 54ms; }
+  .mobile-menu.is-open .mobile-menu-footer { transition-delay: 58ms; }
+
+  .mobile-menu-footer .estimate-btn {
+    background: var(--brand-gold);
+    color: var(--brand-black);
+  }
+}
+
+@media (max-width: 760px) {
+  /* Give the hero substantially more breathing room on phones. */
+  .hero-inner {
+    width: calc(100% - 44px);
+    gap: 44px;
+    padding: 78px 0 68px;
+  }
+
+  .hero-copy {
+    max-width: none;
+    padding: 0 4px;
+  }
+
+  .hero-slogan {
+    display: block;
+    max-width: none;
+    margin: 0 0 20px;
+    color: var(--brand-gold);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    max-width: 600px;
+  }
+
+  .hero p:not(.hero-slogan) {
+    margin-top: 26px;
+  }
+
+  .hero-actions {
+    margin-top: 34px;
+  }
+
+  .hero-visual {
+    width: min(100%, 620px);
+    height: 410px;
+    min-height: 410px;
+    margin: 10px auto 0;
+  }
+
+  /* Center the main work card on mobile, then keep the two supporting cards offset around it. */
+  .project-card-main {
+    width: 88%;
+    height: 76%;
+    left: 50%;
+    right: auto;
+    top: 1%;
+    transform: translateX(-50%) rotateY(-6deg) rotateZ(1deg) translateZ(12px);
+  }
+
+  .project-card-small {
+    left: 0;
+    bottom: 0;
+  }
+
+  .project-card-third {
+    right: 0;
+    bottom: 0;
+  }
+
+  .hero-call {
+    background: var(--brand-gold);
+    color: var(--brand-black);
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-brand-logo {
+    width: 158px;
+    height: 44px;
+  }
+
+  .hero-inner {
+    width: calc(100% - 36px);
+    gap: 38px;
+    padding: 64px 0 58px;
+  }
+
+  .hero-copy {
+    padding: 0 2px;
+  }
+
+  .hero-slogan {
+    margin-bottom: 18px;
+    font-size: 12px;
+  }
+
+  .hero-visual {
+    height: 350px;
+    min-height: 350px;
+    margin-top: 8px;
+  }
+
+  .project-card-main {
+    width: 90%;
+    height: 75%;
+  }
+}

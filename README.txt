@@ -95,3 +95,25 @@ Desktop polish v15:
 - Service Area, About, Contact, and FAQ backgrounds differentiated.
 - Contact uses a clean white grid; FAQ yellow corner glow removed.
 - Mobile intentionally preserved.
+
+Mobile polish v16:
+- Desktop layout/design intentionally preserved from v15.
+- Added a smooth, fast animated mobile/tablet header dropdown.
+- Added the supplied JV Electric logo as WebP assets; mobile header now shows a single wordmark instead of duplicate placeholder/name text.
+- Added more mobile hero spacing and centered the main work-photo card.
+- Added the slogan “Your Power, Our Priority.” to the mobile hero and footer.
+- Added the supplied phone, email, Google Reviews link, Facebook Reviews link, and Washington contractor registration/license number.
+- Contact copy no longer references waiting on final email setup.
+- Project-photo placeholders remain because final iPhone project photos are still pending.
+
+Client details received:
+- Brand colors: Yellow/Gold #FFD401; Black #060606; White #FFFFFF
+- Washington contractor registration/license: JVELEEL754PU
+- Display email: jvelectriic@gmail.com
+- Display phone: (360) 442-3618
+- Slogan: Your Power, Our Priority.
+- Google Reviews: supplied client link is wired into both review CTAs
+- Facebook Reviews: https://www.facebook.com/profile.php?id=61584432115757&sk=reviews
+- Project photos: pending
+- Logo: jv-electric-logo.webp (full supplied image converted to WebP)
+- Mobile/header wordmark crop: jv-electric-logo-wordmark.webp

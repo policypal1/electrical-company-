@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="favicon-180.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -16,10 +17,10 @@
     <div class="header-inner">
       <div class="brand-area">
         <a class="brand-logo" href="./" aria-label="JV Electric LLC home page">
-          <img src="jv-electric-logo-wordmark.webp" alt="JV Electric" />
+          <img src="jv-electric-logo-full.png" alt="JV Electric" />
         </a>
         <a class="mobile-brand-logo" href="./" aria-label="JV Electric LLC home page">
-          <img src="jv-electric-logo-wordmark.webp" alt="JV Electric" />
+          <img src="jv-electric-logo-full.png" alt="JV Electric" />
         </a>
       </div>
 
@@ -112,7 +113,14 @@
       </div>
     </section>
 
-    
+    <section class="hero-review-strip" aria-label="Highlighted review">
+      <div class="hero-review-strip-inner">
+        <div class="hero-review-stars" aria-hidden="true">★★★★★</div>
+        <p>“Quoted me over text, showed up on time, and the price stayed exactly what they said.”</p>
+        <a href="#reviews">See Reviews</a>
+      </div>
+    </section>
+
     <section class="services-section" id="services">
       <div class="services-inner">
         <div class="services-heading">
@@ -443,7 +451,13 @@
         <div class="service-area-copy">
           <span class="section-kicker section-kicker-light">Service Area</span>
           <h2>Proudly Serving Southwest Washington.</h2>
-          <p class="service-area-copy-desktop">JV Electric serves homeowners from Longview down through Vancouver, with travel available north toward Olympia. If you are nearby and need residential electrical help, reach out and ask.</p>
+          <p class="service-area-copy-desktop">Serving homeowners across Southwest Washington.</p>
+          <div class="service-area-tags" aria-label="Areas served">
+            <span><i aria-hidden="true">⚡</i> Longview</span>
+            <span><i aria-hidden="true">⚡</i> Kelso</span>
+            <span><i aria-hidden="true">⚡</i> Vancouver</span>
+            <span><i aria-hidden="true">⚡</i> Olympia</span>
+          </div>
         </div>
 
         <div class="service-area-visual">
@@ -452,7 +466,7 @@
           </div>
         </div>
 
-        <p class="service-area-copy-mobile">JV Electric serves homeowners from Longview down through Vancouver, with travel available north toward Olympia. If you are nearby and need residential electrical help, reach out and ask.</p>
+        <p class="service-area-copy-mobile">Serving homeowners across Southwest Washington.</p>
       </div>
     </section>
 
@@ -522,21 +536,20 @@
 
     <section class="about-section" id="about">
       <div class="about-inner">
-        <div class="about-visual">
-          <div class="about-photo-placeholder">
-            <span>OWNER / TEAM / TRUCK PHOTO</span>
-          </div>
-          <div class="about-experience-card">
-            <strong>10+</strong>
-            <span>Years of Residential Electrical Experience</span>
-          </div>
-        </div>
-
         <div class="about-content">
-          <div>
+          <div class="about-heading-block">
             <span class="section-kicker">About JV Electric</span>
             <h2>Local Electrical Work With a Professional Standard.</h2>
-            <p class="about-lead">JV Electric LLC is a family-owned, veteran-owned residential electrical company serving homeowners across Southwest Washington. The goal is simple: communicate clearly, do dependable work, and make it easy to get the electrical help your home needs.</p>
+          </div>
+
+          <div class="about-visual about-visual-mobile-inline">
+            <div class="about-photo-placeholder">
+              <span>OWNER / TEAM / TRUCK PHOTO</span>
+            </div>
+            <div class="about-experience-card">
+              <strong>10+</strong>
+              <span>Years of Residential Electrical Experience</span>
+            </div>
           </div>
 
           <div class="about-points">
@@ -582,21 +595,21 @@
             <div class="contact-form-row">
               <label>
                 <span>Name</span>
-                <input type="text" placeholder="Your name" />
+                <input type="text" placeholder="Ex: John Smith" />
               </label>
               <label>
                 <span>Phone</span>
-                <input type="tel" placeholder="Best phone number" />
+                <input type="tel" placeholder="Ex: (360) 555-1234" />
               </label>
             </div>
             <div class="contact-form-row">
               <label>
                 <span>Email</span>
-                <input type="email" placeholder="Your email" />
+                <input type="email" placeholder="Ex: john@email.com" />
               </label>
               <label>
                 <span>Project Type</span>
-                <input type="text" placeholder="Panel, EV charger, lighting, etc." />
+                <input type="text" placeholder="Ex: Panel upgrade" />
               </label>
             </div>
             <label>
@@ -679,52 +692,46 @@
   </a>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
+    <div class="footer-inner footer-inner-compact">
+      <div class="footer-brand footer-brand-compact">
         <a class="footer-logo" href="./" aria-label="JV Electric LLC home page">
-          <img src="jv-electric-logo-wordmark.webp" alt="JV Electric" />
+          <img src="jv-electric-logo-full.png" alt="JV Electric" />
         </a>
-        <div>
-          <p>Your Power, Our Priority.</p>
+        <p>Your Power, Our Priority.</p>
+        <div class="footer-legal-inline">
+          <h3>Legal</h3>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-use.html">Terms of Use</a>
+          <a href="accessibility.html">Accessibility</a>
         </div>
       </div>
 
-      <div class="footer-column">
-        <h3>Quick Links</h3>
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#contact">Contact</a>
-      </div>
+      <div class="footer-column-group">
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#contact">Contact</a>
+        </div>
 
-      <div class="footer-column">
-        <h3>Service Area</h3>
-        <p>Longview to Vancouver<br />North toward Olympia</p>
-      </div>
+        <div class="footer-column">
+          <h3>Service Area</h3>
+          <p>Longview to Vancouver<br />North toward Olympia</p>
+        </div>
 
-      <div class="footer-column">
-        <h3>Contact</h3>
-        <a href="tel:+13604423618">(360) 442-3618</a>
-        <a href="mailto:jvelectriic@gmail.com">jvelectriic@gmail.com</a>
-        <a href="https://www.google.com/search?q=jv+electric&amp;sca_esv=c18f865cebe507ff&amp;authuser=2&amp;sxsrf=APpeQntnNRZ6Z4IAOovIforVbBDB4ZjYOQ%3A1787941473165&amp;source=hp&amp;ei=YdKRaqWmB-730PEPlve4kA8&amp;iflsig=ABILxe8AAAAAapHgcduAdl5xH8-h20gTLKlbN4yV1LQu&amp;oq=jv+ele&amp;gs_lp=Egdnd3Mtd2l6IgZqdiBlbGUqAggCMgQQIxgnMgQQIxgnMgoQABiABBiKBRhDMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhivARjHARiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABEjVFVAAWO4KcAJ4AJABAJgBW6ABwgOqAQE2uAEByAEA-AEBmAIIoALpA8ICEBAuGIAEGIoFGEMYxwEYrwHCAhAQLhiABBiKBRhDGMcBGNEDwgIOEC4YgAQYigUYsQMYgwHCAg4QLhiABBixAxjHARjRA8ICCBAAGIAEGLEDwgILEC4YgAQYsQMY5QTCAgsQABiABBixAxiDAcICChAuGIAEGIoFGEPCAgkQABgBGIAEGAqYAwCSBwM3LjGgB7xGsgcDNS4xuAfiA8IHBTAuNi4yyAcYgAgB&amp;sclient=gws-wiz#lrd=0x252cd380745cc13f:0x73b03e4c27be6410,1,,,," target="_blank" rel="noopener noreferrer">Google Reviews ↗</a>
-      </div>
-
-      <div class="footer-column footer-column-legal">
-        <h3>Legal</h3>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-use.html">Terms of Use</a>
-        <a href="accessibility.html">Accessibility</a>
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <a href="tel:+13604423618">(360) 442-3618</a>
+          <a href="mailto:jvelectriic@gmail.com">jvelectriic@gmail.com</a>
+          <a href="https://www.google.com/search?q=jv+electric&amp;sca_esv=c18f865cebe507ff&amp;authuser=2&amp;sxsrf=APpeQntnNRZ6Z4IAOovIforVbBDB4ZjYOQ%3A1787941473165&amp;source=hp&amp;ei=YdKRaqWmB-730PEPlve4kA8&amp;iflsig=ABILxe8AAAAAapHgcduAdl5xH8-h20gTLKlbN4yV1LQu&amp;oq=jv+ele&amp;gs_lp=Egdnd3Mtd2l6IgZqdiBlbGUqAggCMgQQIxgnMgQQIxgnMgoQABiABBiKBRhDMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhivARjHARiABDIFEAAYgAQyCxAuGIAEGMcBGK8BMgUQABiABEjVFVAAWO4KcAJ4AJABAJgBW6ABwgOqAQE2uAEByAEA-AEBmAIIoALpA8ICEBAuGIAEGIoFGEMYxwEYrwHCAhAQLhiABBiKBRhDGMcBGNEDwgIOEC4YgAQYigUYsQMYgwHCAg4QLhiABBixAxjHARjRA8ICCBAAGIAEGLEDwgILEC4YgAQYsQMY5QTCAgsQABiABBixAxiDAcICChAuGIAEGIoFGEPCAgkQABgBGIAEGAqYAwCSBwM3LjGgB7xGsgcDNS4xuAfiA8IHBTAuNi4yyAcYgAgB&amp;sclient=gws-wiz#lrd=0x252cd380745cc13f:0x73b03e4c27be6410,1,,,," target="_blank" rel="noopener noreferrer">Google Reviews <span class="external-link-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+        </div>
       </div>
     </div>
 
-    <div class="footer-bottom">
+    <div class="footer-bottom footer-bottom-compact">
       <p>© <span id="footer-year">2026</span> JV Electric LLC. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-use.html">Terms of Use</a>
-        <a href="accessibility.html">Accessibility</a>
-      </div>
     </div>
   </footer>
 

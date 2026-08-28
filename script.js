@@ -464,3 +464,149 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
     window.location.assign('./');
   });
 });
+
+// ===== v20 requested refinements =====
+(() => {
+  const servicesGridEl = document.querySelector('#services-grid');
+  const servicesShell = document.querySelector('.services-rail-shell');
+  if (servicesGridEl && servicesShell) {
+    const getVisibleCards = () => Array.from(servicesGridEl.querySelectorAll('.service-card')).filter((card) => !card.classList.contains('is-hidden'));
+
+    const scrollToCard = (card) => {
+      if (!card) return;
+      const max = Math.max(0, servicesGridEl.scrollWidth - servicesGridEl.clientWidth);
+      const left = Math.max(0, Math.min(max, card.offsetLeft - ((servicesGridEl.clientWidth - card.offsetWidth) / 2)));
+      servicesGridEl.scrollTo({ left, behavior: 'smooth' });
+    };
+
+    const rebindButton = (selector, handler) => {
+      const oldButton = servicesShell.querySelector(selector);
+      if (!oldButton) return null;
+      const newButton = oldButton.cloneNode(true);
+      oldButton.replaceWith(newButton);
+      newButton.addEventListener('click', handler);
+      return newButton;
+    };
+
+    const findNearestCardIndex = (cards) => {
+      const center = servicesGridEl.scrollLeft + (servicesGridEl.clientWidth / 2);
+      let bestIndex = 0;
+      let bestDistance = Infinity;
+      cards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(cardCenter - center);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = index;
+        }
+      });
+      return bestIndex;
+    };
+
+    rebindButton('.services-rail-prev', () => {
+      if (window.innerWidth > 760) return;
+      const cards = getVisibleCards();
+      if (!cards.length) return;
+      const index = findNearestCardIndex(cards);
+      const nextIndex = index <= 0 ? cards.length - 1 : index - 1;
+      scrollToCard(cards[nextIndex]);
+    });
+
+    rebindButton('.services-rail-next', () => {
+      if (window.innerWidth > 760) return;
+      const cards = getVisibleCards();
+      if (!cards.length) return;
+      const index = findNearestCardIndex(cards);
+      const nextIndex = index >= cards.length - 1 ? 0 : index + 1;
+      scrollToCard(cards[nextIndex]);
+    });
+  }
+
+  const reviewsShell = document.querySelector('.reviews-carousel-shell');
+  const reviewsGridEl = document.querySelector('.reviews-grid');
+  if (reviewsShell && reviewsGridEl) {
+    const reviewCards = () => Array.from(reviewsGridEl.querySelectorAll('.review-card'));
+    const dotsWrap = document.createElement('div');
+    dotsWrap.className = 'reviews-dots';
+    reviewsShell.insertAdjacentElement('afterend', dotsWrap);
+
+    const getActiveIndex = () => {
+      const cards = reviewCards();
+      const center = reviewsGridEl.scrollLeft + (reviewsGridEl.clientWidth / 2);
+      let bestIndex = 0;
+      let bestDistance = Infinity;
+      cards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(cardCenter - center);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = index;
+        }
+      });
+      return bestIndex;
+    };
+
+    const goToReview = (index) => {
+      const cards = reviewCards();
+      const card = cards[index];
+      if (!card) return;
+      if (window.innerWidth > 760) {
+        // desktop: rotate DOM order until selected card is first
+        while (Array.from(reviewsGridEl.children).indexOf(card) > 0) {
+          reviewsGridEl.appendChild(reviewsGridEl.firstElementChild);
+        }
+        renderDots();
+        return;
+      }
+      const max = Math.max(0, reviewsGridEl.scrollWidth - reviewsGridEl.clientWidth);
+      const left = Math.max(0, Math.min(max, card.offsetLeft - ((reviewsGridEl.clientWidth - card.offsetWidth) / 2)));
+      reviewsGridEl.scrollTo({ left, behavior: 'smooth' });
+      renderDots(index);
+    };
+
+    const renderDots = (forcedIndex = null) => {
+      const cards = reviewCards();
+      const activeIndex = forcedIndex ?? getActiveIndex();
+      dotsWrap.innerHTML = '';
+      cards.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = `reviews-dot${index === activeIndex ? ' is-active' : ''}`;
+        dot.setAttribute('aria-label', `Go to review ${index + 1}`);
+        dot.addEventListener('click', () => goToReview(index));
+        dotsWrap.appendChild(dot);
+      });
+    };
+
+    const rebindReviewButton = (selector, direction) => {
+      const oldButton = reviewsShell.querySelector(selector);
+      if (!oldButton) return;
+      const newButton = oldButton.cloneNode(true);
+      oldButton.replaceWith(newButton);
+      newButton.addEventListener('click', () => {
+        const cards = reviewCards();
+        if (!cards.length) return;
+        if (window.innerWidth > 760) {
+          if (direction === 'next') {
+            reviewsGridEl.appendChild(reviewsGridEl.firstElementChild);
+          } else {
+            reviewsGridEl.insertBefore(reviewsGridEl.lastElementChild, reviewsGridEl.firstElementChild);
+          }
+          renderDots(0);
+          return;
+        }
+        const currentIndex = getActiveIndex();
+        const nextIndex = direction === 'next'
+          ? (currentIndex + 1) % cards.length
+          : (currentIndex - 1 + cards.length) % cards.length;
+        goToReview(nextIndex);
+      });
+    };
+
+    rebindReviewButton('.reviews-cycle-prev', 'prev');
+    rebindReviewButton('.reviews-cycle-next', 'next');
+    reviewsGridEl.addEventListener('scroll', () => window.requestAnimationFrame(() => renderDots()), { passive: true });
+    window.addEventListener('resize', () => renderDots());
+    renderDots();
+  }
+})();

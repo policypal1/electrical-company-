@@ -41,6 +41,102 @@
     .service-media.has-photo::after {
       z-index: 1;
     }
+
+    /* v24 requested refinements: mobile image behavior, review arrows, work centering, and service-area bolts */
+    .service-area-bolt {
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      color: var(--brand-gold);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .service-area-tags span,
+    .service-area-tags-mobile span {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    @media (max-width: 760px) {
+      /* Keep image cards static on mobile. */
+      .project-card,
+      .project-card::before,
+      .work-card {
+        transition: none !important;
+      }
+
+      .project-card:hover,
+      .work-card:hover {
+        filter: none !important;
+      }
+
+      .project-card-main:hover,
+      .hero-visual.main-focused .project-card-main {
+        z-index: 2 !important;
+        transform: translateX(-50%) rotateY(-6deg) rotateZ(1deg) translateZ(12px) !important;
+        filter: none !important;
+        border-color: rgba(255,255,255,.18) !important;
+      }
+
+      .project-card-small:hover,
+      .hero-visual.main-focused .project-card-small {
+        z-index: 5 !important;
+        transform: rotateY(8deg) rotateX(-2deg) rotateZ(-2deg) translateZ(68px) !important;
+        filter: none !important;
+        opacity: 1 !important;
+      }
+
+      .project-card-third:hover,
+      .hero-visual.main-focused .project-card-third {
+        z-index: 6 !important;
+        transform: rotateY(-7deg) rotateX(-1deg) rotateZ(2.5deg) translateZ(82px) !important;
+        filter: none !important;
+        opacity: 1 !important;
+      }
+
+      .reviews-carousel-shell {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 12px;
+        align-items: center;
+      }
+
+      .reviews-carousel-shell .reviews-grid {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-button {
+        position: static !important;
+        top: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-prev {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: end;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-next {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start;
+      }
+
+      .reviews-dots {
+        margin-top: 10px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -238,8 +334,8 @@
           </article>
 
           <article class="service-card" data-aliases="ev|ev charger|ev charging|electric vehicle|electric car|car charger|home car charger|home ev charger|tesla|tesla charger|tesla wall connector|wall connector|level 2 charger|level two charger|charging station|240 outlet for car|nema 14 50|14 50 outlet">
-            <div class="service-media service-media-2" aria-label="Photo placeholder for EV Chargers">
-              <span>EV CHARGER PHOTO</span>
+            <div class="service-media service-media-2 has-photo" aria-label="EV charger project photo">
+              <img src="jv-ev-charger-pedestal.webp" alt="Outdoor dedicated power setup for an EV charging installation" loading="lazy" style="object-position: center 48%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3v6m8-6v6M6 9h12v3a6 6 0 0 1-12 0V9Zm6 9v3"/></svg></div>
@@ -252,7 +348,7 @@
 
           <article class="service-card" data-aliases="lighting|lights|light|light fixture|light fixtures|install light|replace light|ceiling light|recessed lighting|recessed lights|can lights|pot lights|security lighting|security lights|outdoor lights|indoor lights|porch light|motion light|motion lights|led lighting">
             <div class="service-media service-media-3 has-photo" aria-label="Lighting project photo">
-              <img src="jv-modern-chandelier.webp" alt="Residential chandelier lighting installation" loading="lazy" style="object-position: center 38%;" />
+              <img src="jv-recessed-lighting-room.webp" alt="Residential recessed lighting installation in a finished room" loading="lazy" style="object-position: center 58%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"/></svg></div>
@@ -278,7 +374,7 @@
 
           <article class="service-card service-secondary" data-aliases="repair|repairs|electrical repair|electrician repair|troubleshooting|troubleshoot|diagnose|diagnostic|flickering lights|lights flicker|breaker keeps tripping|tripping breaker|dead outlet|outlet not working|no power|lost power|power issue|power problem|electrical problem|electrical issue|short circuit|burning smell|buzzing outlet">
             <div class="service-media service-media-5 has-photo" aria-label="Electrical repair project photo">
-              <img src="jv-electrician-outlet-work.webp" alt="JV Electric electrician working on an exterior electrical box" loading="lazy" style="object-position: center 40%;" />
+              <img src="jv-electrical-repairs-tech.webp" alt="JV Electric electrician performing residential electrical repair work" loading="lazy" style="object-position: center 42%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m14 2-8 11h6l-2 9 8-12h-6l2-8Z"/></svg></div>
@@ -317,7 +413,7 @@
 
           <article class="service-card service-secondary" data-aliases="dedicated circuit|dedicated circuits|new circuit|add circuit|circuit install|circuit installation|20 amp circuit|30 amp circuit|40 amp circuit|50 amp circuit|60 amp circuit|220|220v|220 volt|240v|240 volt|240 outlet|220 outlet|dedicated power|appliance circuit|mini split circuit|ac circuit|air conditioner circuit">
             <div class="service-media service-media-8 has-photo" aria-label="Dedicated circuit project photo">
-              <img src="jv-goodman-heat-pump.webp" alt="Dedicated power installed for a mini-split heat pump" loading="lazy" style="object-position: center 58%;" />
+              <img src="jv-dedicated-circuit-outlet.webp" alt="New dedicated power outlet installation on an outdoor post" loading="lazy" style="object-position: center 38%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h5l3-8v16l3-8h5"/></svg></div>
@@ -458,21 +554,21 @@
             <span class="section-kicker section-kicker-light">Recent Work</span>
             <h2>See the Work for Yourself.</h2>
           </div>
-          <p>Use real JV Electric project photos here. The new dark background keeps this section premium while letting the work stay front and center.</p>
+          <p>Real JV Electric work, including a clean mini-split power install, a stairway before-and-after, and finished kitchen lighting detail.</p>
         </div>
 
         <div class="work-gallery" aria-label="JV Electric project gallery">
           <figure class="work-card work-card-featured">
-            <div class="work-placeholder has-photo"><img src="jv-service-panel-post.webp" alt="New outdoor electrical service and meter installation" loading="lazy" style="object-position: center 47%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-daikin-heat-pump.webp" alt="Daikin mini-split power installation" loading="lazy" style="object-position: center 54%;" /></div>
           </figure>
           <figure class="work-card work-card-top">
-            <div class="work-placeholder has-photo"><img src="jv-daikin-heat-pump.webp" alt="Daikin mini-split power installation" loading="lazy" style="object-position: center 62%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-stairway-before-chandelier.webp" alt="Stairway before the finished chandelier installation" loading="lazy" style="object-position: center 52%;" /></div>
           </figure>
           <figure class="work-card work-card-bottom">
-            <div class="work-placeholder has-photo"><img src="jv-vanity-lighting.webp" alt="Finished bathroom vanity lighting installation" loading="lazy" style="object-position: center 46%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-modern-chandelier.webp" alt="Finished stairway chandelier installation" loading="lazy" style="object-position: center 42%;" /></div>
           </figure>
           <figure class="work-card work-card-wide">
-            <div class="work-placeholder has-photo"><img src="jv-undercabinet-lighting.webp" alt="Kitchen under-cabinet lighting and outlet work" loading="lazy" style="object-position: center 50%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-undercabinet-lighting.webp" alt="Kitchen under-cabinet lighting and outlet work" loading="lazy" style="object-position: center 51%;" /></div>
           </figure>
         </div>
       </div>
@@ -532,10 +628,10 @@
           <h2>Proudly Serving Southwest Washington.</h2>
           <p class="service-area-copy-desktop">Serving homeowners across Southwest Washington.</p>
           <div class="service-area-tags" aria-label="Areas served">
-            <span><i aria-hidden="true">⚡</i> Longview</span>
-            <span><i aria-hidden="true">⚡</i> Vancouver</span>
-            <span><i aria-hidden="true">⚡</i> Kelso</span>
-            <span><i aria-hidden="true">⚡</i> Olympia</span>
+            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Longview</span>
+            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Vancouver</span>
+            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Kelso</span>
+            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Olympia</span>
           </div>
         </div>
 
@@ -546,10 +642,10 @@
         </div>
 
         <div class="service-area-tags-mobile" aria-label="Areas served">
-          <span><i aria-hidden="true">⚡</i> Longview</span>
-          <span><i aria-hidden="true">⚡</i> Kelso</span>
-          <span><i aria-hidden="true">⚡</i> Vancouver</span>
-          <span><i aria-hidden="true">⚡</i> Olympia</span>
+          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Longview</span>
+          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Kelso</span>
+          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Vancouver</span>
+          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Olympia</span>
         </div>
 
         <p class="service-area-copy-mobile">Serving homeowners across Southwest Washington.</p>

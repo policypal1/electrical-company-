@@ -42,7 +42,7 @@
       z-index: 1;
     }
 
-    /* v24 requested refinements: mobile image behavior, review arrows, work centering, and service-area bolts */
+    /* v25 requested refinements: static mobile hero cards, top review controls, and icon-based service-area tags */
     .service-area-bolt {
       display: inline-grid;
       place-items: center;
@@ -50,10 +50,14 @@
       height: 18px;
       margin-right: 8px;
       color: var(--brand-gold);
-      font-size: 15px;
-      font-weight: 800;
-      line-height: 1;
       flex: 0 0 auto;
+    }
+
+    .service-area-bolt svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: currentColor;
     }
 
     .service-area-tags span,
@@ -63,7 +67,7 @@
     }
 
     @media (max-width: 760px) {
-      /* Keep image cards static on mobile. */
+      /* Keep hero image cards completely static on mobile. */
       .project-card,
       .project-card::before,
       .work-card {
@@ -75,68 +79,71 @@
         filter: none !important;
       }
 
+      .project-card-main,
       .project-card-main:hover,
       .hero-visual.main-focused .project-card-main {
-        z-index: 2 !important;
         transform: translateX(-50%) rotateY(-6deg) rotateZ(1deg) translateZ(12px) !important;
         filter: none !important;
         border-color: rgba(255,255,255,.18) !important;
       }
 
+      .project-card-small,
       .project-card-small:hover,
       .hero-visual.main-focused .project-card-small {
-        z-index: 5 !important;
-        transform: rotateY(8deg) rotateX(-2deg) rotateZ(-2deg) translateZ(68px) !important;
+        transform: rotateY(6deg) rotateZ(-2deg) translateZ(48px) !important;
         filter: none !important;
         opacity: 1 !important;
       }
 
+      .project-card-third,
       .project-card-third:hover,
       .hero-visual.main-focused .project-card-third {
-        z-index: 6 !important;
-        transform: rotateY(-7deg) rotateX(-1deg) rotateZ(2.5deg) translateZ(82px) !important;
+        transform: rotateY(-5deg) rotateZ(2deg) translateZ(58px) !important;
         filter: none !important;
         opacity: 1 !important;
       }
 
-      .reviews-carousel-shell {
+      .hero-review-carousel {
         display: grid !important;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px 12px;
+        grid-template-columns: auto 1fr auto;
+        gap: 14px 12px;
         align-items: center;
       }
 
-      .reviews-carousel-shell .reviews-grid {
+      .hero-review-track {
         grid-column: 1 / -1;
         grid-row: 1;
-        padding-left: 18px !important;
-        padding-right: 18px !important;
       }
 
-      .reviews-carousel-shell .reviews-cycle-button {
+      .hero-review-button {
         position: static !important;
         top: auto !important;
         transform: none !important;
         margin: 0 !important;
       }
 
-      .reviews-carousel-shell .reviews-cycle-prev {
+      .hero-review-prev {
         grid-column: 1;
         grid-row: 2;
         justify-self: end;
       }
 
-      .reviews-carousel-shell .reviews-cycle-next {
-        grid-column: 2;
+      .hero-review-next {
+        grid-column: 3;
         grid-row: 2;
         justify-self: start;
       }
 
-      .reviews-dots {
-        margin-top: 10px !important;
+      .hero-review-dots {
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 !important;
       }
     }
-
   </style>
 </head>
 <body>
@@ -189,8 +196,8 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="hero-slogan">Your Power, Our Priority.</p>
-          <h1>Residential Electrical Work Done Right.</h1>
-          <p>Trusted electrical service for homeowners across Southwest Washington, backed by 10+ years of hands-on experience.</p>
+          <h1>Residential Electrical Work You Can Feel Good About.</h1>
+          <p>Need a repair, an upgrade, or help with a new project? JV Electric helps homeowners across Southwest Washington with clean work, clear communication, and dependable results.</p>
           <div class="hero-actions">
             <a class="hero-call" href="tel:+13604423618">Call Now</a>
             <a class="hero-quote" href="#contact">Get a Quote</a>
@@ -212,7 +219,7 @@
 
           <div class="project-card project-card-third">
             <div class="project-placeholder has-photo">
-              <img src="jv-modern-chandelier.webp" alt="Finished residential chandelier installation" loading="lazy" style="object-position: center 42%;" />
+              <img src="jv-service-upgrade-open.webp" alt="Open residential electrical service upgrade with organized wiring" loading="lazy" style="object-position: center 50%;" />
             </div>
           </div>
         </div>
@@ -303,7 +310,7 @@
             <span class="section-kicker">Residential Electrical Services</span>
             <h2>One Electrician for the Whole House.</h2>
           </div>
-          <p>From quick repairs to major upgrades, JV Electric handles residential electrical work across Southwest Washington. If it runs on power in your home, ask us about it.</p>
+          <p>Need help with a dead outlet, a panel upgrade, new lighting, an EV charger, or wiring for a project? JV Electric handles residential work of all sizes and keeps the process straightforward.</p>
         </div>
 
         <div class="services-tools">
@@ -312,7 +319,7 @@
             <input id="services-search-input" type="search" inputmode="search" autocomplete="off" placeholder="What do you need? House wiring, breaker box, RV hookup..." aria-describedby="services-search-meta" />
             <button class="services-search-clear" type="button" aria-label="Clear service search" hidden>×</button>
           </label>
-          <p class="services-search-meta" id="services-search-meta">Browse all residential services or search by project type.</p>
+          <p class="services-search-meta" id="services-search-meta">Search by project type or browse the full list below.</p>
         </div>
 
         <div class="services-rail-shell">
@@ -328,7 +335,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h2M13 10h2"/></svg></div>
               <div class="service-copy">
                 <h3>Panel Upgrades</h3>
-                <p>Panel replacements, capacity upgrades, breakers, and modern service improvements.</p>
+                <p>Need more capacity or an older panel replaced? We handle panel upgrades, breakers, and service improvements.</p>
               </div>
             </div>
           </article>
@@ -341,7 +348,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3v6m8-6v6M6 9h12v3a6 6 0 0 1-12 0V9Zm6 9v3"/></svg></div>
               <div class="service-copy">
                 <h3>EV Chargers</h3>
-                <p>Home EV charger installations with the dedicated power your vehicle needs.</p>
+                <p>Home EV charger installs with the dedicated power and clean setup your vehicle needs.</p>
               </div>
             </div>
           </article>
@@ -354,7 +361,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"/></svg></div>
               <div class="service-copy">
                 <h3>Lighting</h3>
-                <p>Interior, exterior, recessed, accent, security, and lighting upgrades.</p>
+                <p>From recessed lights to exterior fixtures, we install lighting that looks good and works the way it should.</p>
               </div>
             </div>
           </article>
@@ -367,7 +374,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm2 5v2m6-2v2m-6 4h6"/></svg></div>
               <div class="service-copy">
                 <h3>Outlets &amp; Switches</h3>
-                <p>New outlets, GFCI protection, switches, USB receptacles, and replacements.</p>
+                <p>Add, move, or replace outlets, GFCIs, switches, and USB receptacles where you actually need them.</p>
               </div>
             </div>
           </article>
@@ -380,7 +387,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m14 2-8 11h6l-2 9 8-12h-6l2-8Z"/></svg></div>
               <div class="service-copy">
                 <h3>Electrical Repairs</h3>
-                <p>Troubleshooting for dead circuits, flickering lights, breakers, and electrical issues.</p>
+                <p>If something is flickering, tripping, dead, or acting strange, we’ll track down the problem and fix it right.</p>
               </div>
             </div>
           </article>
@@ -393,7 +400,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 14h16M7 14v3m10-3v3M6 10h12l-1-5H7l-1 5Zm1 10h10"/></svg></div>
               <div class="service-copy">
                 <h3>Swim Spas &amp; Hot Tubs</h3>
-                <p>Dedicated circuits and safe electrical connections for spas and outdoor equipment.</p>
+                <p>Safe power for spas, hot tubs, and outdoor equipment, with the dedicated circuits they require.</p>
               </div>
             </div>
           </article>
@@ -406,7 +413,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h14l4 4v6H3V8Zm4 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM17 8v4h4"/></svg></div>
               <div class="service-copy">
                 <h3>RV Outlets</h3>
-                <p>30-amp and 50-amp RV power connections installed where you need them.</p>
+                <p>30-amp and 50-amp RV hookups installed in the right spot for easy, reliable access.</p>
               </div>
             </div>
           </article>
@@ -419,7 +426,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h5l3-8v16l3-8h5"/></svg></div>
               <div class="service-copy">
                 <h3>Dedicated Circuits</h3>
-                <p>New circuits for appliances, workshops, equipment, additions, and high-demand loads.</p>
+                <p>New dedicated circuits for appliances, workshops, mini-splits, equipment, and other heavy loads.</p>
               </div>
             </div>
           </article>
@@ -432,7 +439,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V9l6-5 6 5v11M9 13h6m-6 3h6"/></svg></div>
               <div class="service-copy">
                 <h3>Remodel Wiring</h3>
-                <p>Electrical updates for kitchens, bathrooms, additions, renovations, and remodels.</p>
+                <p>Electrical work for kitchens, bathrooms, additions, remodels, and other home updates.</p>
               </div>
             </div>
           </article>
@@ -445,7 +452,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3h8v4H8V3Zm-2 4h12v14H6V7Zm3 4h6m-6 4h6"/></svg></div>
               <div class="service-copy">
                 <h3>Appliance Circuits</h3>
-                <p>Proper power for ranges, dryers, dishwashers, microwaves, and household appliances.</p>
+                <p>Proper power for ranges, dryers, dishwashers, microwaves, and other everyday appliances.</p>
               </div>
             </div>
           </article>
@@ -458,7 +465,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7Zm0 4v4m0 4h.01"/></svg></div>
               <div class="service-copy">
                 <h3>Smoke &amp; CO Detectors</h3>
-                <p>Hardwired smoke and carbon monoxide detector installation and replacement.</p>
+                <p>Hardwired smoke and carbon monoxide detector installs and replacements to help keep your home protected.</p>
               </div>
             </div>
           </article>
@@ -471,7 +478,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v6m0 0 5-3m-5 3-5-3m5 3v5m-7 4h14M8 21h8"/></svg></div>
               <div class="service-copy">
                 <h3>Ceiling Fans</h3>
-                <p>Fan installation, replacement, wiring, controls, and new fan locations.</p>
+                <p>Ceiling fan installs, replacements, switches, and wiring for new or existing rooms.</p>
               </div>
             </div>
           </article>
@@ -484,7 +491,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4Zm0 5v10m-4-5h8"/></svg></div>
               <div class="service-copy">
                 <h3>Surge Protection</h3>
-                <p>Whole-home surge protection for sensitive electronics and appliances.</p>
+                <p>Whole-home surge protection to help protect the electronics and appliances you count on.</p>
               </div>
             </div>
           </article>
@@ -497,7 +504,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V8h12v10M9 8V5h6v3m-5 4h4"/></svg></div>
               <div class="service-copy">
                 <h3>Garage &amp; Shop Power</h3>
-                <p>Outlets, lighting, circuits, and electrical upgrades for garages and workspaces.</p>
+                <p>Outlets, lighting, and dedicated power for garages, shops, and workspaces.</p>
               </div>
             </div>
           </article>
@@ -510,7 +517,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h18M5 8h14M7 4h10M7 16h10M9 20h6"/></svg></div>
               <div class="service-copy">
                 <h3>Outdoor Electrical</h3>
-                <p>Weather-rated outlets, exterior lighting, outdoor circuits, and backyard power.</p>
+                <p>Exterior outlets, landscape lighting, backyard power, and other weather-rated electrical work.</p>
               </div>
             </div>
           </article>
@@ -523,7 +530,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5V4Zm4 4h6m-6 4h6m-6 4h3"/></svg></div>
               <div class="service-copy">
                 <h3>Electrical Updates</h3>
-                <p>General residential electrical improvements, replacements, corrections, and modernization.</p>
+                <p>Clean, code-minded upgrades that bring older electrical systems up to date.</p>
               </div>
             </div>
           </article>
@@ -542,7 +549,7 @@
             <span>View All Residential Services</span>
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
           </button>
-          <p>Don't see what you need? <a href="#contact">Ask JV Electric about your project.</a></p>
+          <p>Not seeing your project listed? <a href="#contact">Reach out and ask about it.</a></p>
         </div>
       </div>
     </section>
@@ -552,23 +559,23 @@
         <div class="work-heading">
           <div>
             <span class="section-kicker section-kicker-light">Recent Work</span>
-            <h2>See the Work for Yourself.</h2>
+            <h2>A Look at Recent JV Electric Work.</h2>
           </div>
-          <p>Real JV Electric work, including a clean mini-split power install, a stairway before-and-after, and finished kitchen lighting detail.</p>
+          <p>A few real projects from the field, including outdoor power by a rock feature, a clean service upgrade, finished lighting, and detailed panel work.</p>
         </div>
 
         <div class="work-gallery" aria-label="JV Electric project gallery">
           <figure class="work-card work-card-featured">
-            <div class="work-placeholder has-photo"><img src="jv-daikin-heat-pump.webp" alt="Daikin mini-split power installation" loading="lazy" style="object-position: center 54%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-outdoor-gfci-fountain.webp" alt="Outdoor electrical power installed beside a rock water feature" loading="lazy" style="object-position: center 50%;" /></div>
           </figure>
           <figure class="work-card work-card-top">
-            <div class="work-placeholder has-photo"><img src="jv-stairway-before-chandelier.webp" alt="Stairway before the finished chandelier installation" loading="lazy" style="object-position: center 52%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-service-upgrade-open.webp" alt="Organized residential service upgrade wiring" loading="lazy" style="object-position: center 50%;" /></div>
           </figure>
           <figure class="work-card work-card-bottom">
-            <div class="work-placeholder has-photo"><img src="jv-modern-chandelier.webp" alt="Finished stairway chandelier installation" loading="lazy" style="object-position: center 42%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-modern-chandelier.webp" alt="Finished chandelier installation in a stairway" loading="lazy" style="object-position: center 50%;" /></div>
           </figure>
           <figure class="work-card work-card-wide">
-            <div class="work-placeholder has-photo"><img src="jv-undercabinet-lighting.webp" alt="Kitchen under-cabinet lighting and outlet work" loading="lazy" style="object-position: center 51%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-breaker-panel-interior.webp" alt="Finished residential breaker panel with organized wiring" loading="lazy" style="object-position: center 50%;" /></div>
           </figure>
         </div>
       </div>
@@ -580,7 +587,7 @@
         <div class="process-intro">
           <span class="section-kicker">How It Works</span>
           <h2><span class="process-title-desktop">Simple From the First Call to the Final Check.</span><span class="process-title-mobile">Simple From First Call to Final Check.</span></h2>
-          <p><span class="process-copy-desktop">Electrical work should not feel complicated. JV Electric keeps the process straightforward, communicates clearly, and gets the job handled properly.</span><span class="process-copy-mobile">Electrical work should not feel complicated.</span></p>
+          <p><span class="process-copy-desktop">No runaround. Just clear communication, honest recommendations, and electrical work handled the right way.</span><span class="process-copy-mobile">No runaround. Just straightforward service.</span></p>
         </div>
 
         <div class="process-steps" aria-label="JV Electric service process">
@@ -591,7 +598,7 @@
             </div>
             <div>
               <h3>Reach Out</h3>
-              <p>Call or request an estimate and give us a quick rundown of the electrical work you need done.</p>
+              <p>Call or send an estimate request and tell us what you need help with.</p>
             </div>
           </article>
 
@@ -602,7 +609,7 @@
             </div>
             <div>
               <h3>Plan the Work</h3>
-              <p>We confirm the scope, answer questions, and make sure the right electrical solution is lined up for your home.</p>
+              <p>We talk through the project, answer your questions, and line up the right solution for your home.</p>
             </div>
           </article>
 
@@ -613,11 +620,11 @@
             </div>
             <div>
               <h3>Get It Done Right</h3>
-              <p>JV Electric completes the work, checks the finished installation, and leaves you with dependable power.</p>
+              <p>We complete the work cleanly, test everything, and make sure you feel good before we leave.</p>
             </div>
           </article>
         </div>
-        <a class="process-cta process-cta-mobile" href="#contact">Start With an Estimate</a>
+        <a class="process-cta process-cta-mobile" href="#contact">Get an Estimate</a>
       </div>
     </section>
 
@@ -625,13 +632,13 @@
       <div class="service-area-inner">
         <div class="service-area-copy">
           <span class="section-kicker section-kicker-light">Service Area</span>
-          <h2>Proudly Serving Southwest Washington.</h2>
-          <p class="service-area-copy-desktop">Serving homeowners across Southwest Washington.</p>
+          <h2>Serving Homeowners Across Southwest Washington.</h2>
+          <p class="service-area-copy-desktop">From Longview to Vancouver, with work available north toward Olympia.</p>
           <div class="service-area-tags" aria-label="Areas served">
-            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Longview</span>
-            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Vancouver</span>
-            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Kelso</span>
-            <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Olympia</span>
+            <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Longview</span>
+            <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Vancouver</span>
+            <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Kelso</span>
+            <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Olympia</span>
           </div>
         </div>
 
@@ -642,13 +649,13 @@
         </div>
 
         <div class="service-area-tags-mobile" aria-label="Areas served">
-          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Longview</span>
-          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Kelso</span>
-          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Vancouver</span>
-          <span><span class="service-area-bolt" aria-hidden="true">⚡</span> Olympia</span>
+          <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Longview</span>
+          <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Kelso</span>
+          <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Vancouver</span>
+          <span><span class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/></svg></span> Olympia</span>
         </div>
 
-        <p class="service-area-copy-mobile">Serving homeowners across Southwest Washington.</p>
+        <p class="service-area-copy-mobile">From Longview to Vancouver, with work available north toward Olympia.</p>
       </div>
     </section>
 
@@ -657,7 +664,7 @@
         <div class="reviews-heading">
           <div>
             <span class="section-kicker section-kicker-light">Customer Reviews</span>
-            <h2>What Homeowners Are Saying.</h2>
+            <h2>What It’s Like Working With JV Electric.</h2>
           </div>
           <div class="reviews-heading-controls" aria-label="Review links">
             <div class="reviews-heading-links">
@@ -732,7 +739,7 @@
           <div class="about-content">
             <div>
               <span class="section-kicker">About JV Electric</span>
-              <h2>Local Electrical Work With a Professional Standard.</h2>
+              <h2>Local Electricians Who Take Pride in the Work.</h2>
             </div>
 
             <div class="about-points">
@@ -740,7 +747,7 @@
                 <span class="about-point-icon" aria-hidden="true">1</span>
                 <div>
                   <h3>Family &amp; Veteran Owned</h3>
-                  <p>Independent, local ownership with a hands-on approach to every residential project.</p>
+                  <p>Local ownership means you are working with a team that cares about the result and the people in the home.</p>
                 </div>
               </div>
 
@@ -748,7 +755,7 @@
                 <span class="about-point-icon" aria-hidden="true">2</span>
                 <div>
                   <h3>Hablamos Español</h3>
-                  <p>Spanish-speaking service is available so homeowners can communicate comfortably and clearly.</p>
+                  <p>Spanish-speaking service is available so communication stays easy and comfortable from start to finish.</p>
                 </div>
               </div>
 
@@ -756,7 +763,7 @@
                 <span class="about-point-icon" aria-hidden="true">3</span>
                 <div>
                   <h3>Residential Specialists</h3>
-                  <p>Repairs, upgrades, EV chargers, panels, RV power, spas, lighting, and more.</p>
+                  <p>From repairs and lighting to panels, EV chargers, RV power, and more, residential electrical work is what we do.</p>
                 </div>
               </div>
             </div>
@@ -769,7 +776,7 @@
           <div class="about-content">
             <div class="about-heading-block">
               <span class="section-kicker">About JV Electric</span>
-              <h2>Local Electrical Work With a Professional Standard.</h2>
+              <h2>Local Electricians Who Take Pride in the Work.</h2>
             </div>
 
             <div class="about-visual about-visual-mobile-inline">
@@ -787,21 +794,21 @@
                 <span class="about-point-icon" aria-hidden="true">1</span>
                 <div>
                   <h3>Family &amp; Veteran Owned</h3>
-                  <p>Independent, local ownership with a hands-on approach to every residential project.</p>
+                  <p>Local ownership means you are working with a team that cares about the result and the people in the home.</p>
                 </div>
               </div>
               <div class="about-point">
                 <span class="about-point-icon" aria-hidden="true">2</span>
                 <div>
                   <h3>Hablamos Español</h3>
-                  <p>Spanish-speaking service is available so homeowners can communicate comfortably and clearly.</p>
+                  <p>Spanish-speaking service is available so communication stays easy and comfortable from start to finish.</p>
                 </div>
               </div>
               <div class="about-point">
                 <span class="about-point-icon" aria-hidden="true">3</span>
                 <div>
                   <h3>Residential Specialists</h3>
-                  <p>Repairs, upgrades, EV chargers, panels, RV power, spas, lighting, and more.</p>
+                  <p>From repairs and lighting to panels, EV chargers, RV power, and more, residential electrical work is what we do.</p>
                 </div>
               </div>
             </div>
@@ -814,8 +821,8 @@
       <div class="contact-inner">
         <div class="contact-copy">
           <span class="section-kicker section-kicker-light">Get in Touch</span>
-          <h2>Ready to Get the Electrical Work Handled?</h2>
-          <p>Send a quick estimate request and we’ll follow up with you about the project, pricing, and next steps.</p>
+          <h2>Tell Us What You Need. We’ll Take It From There.</h2>
+          <p>Send a quick message and we’ll follow up about the work, timing, and next steps.</p>
         </div>
 
         <div class="contact-form-card">
@@ -856,7 +863,7 @@
         <div class="faq-heading faq-heading-simple">
           <div>
             <span class="section-kicker">Frequently Asked Questions</span>
-            <h2>Good Questions. Straight Answers.</h2>
+            <h2>Real Questions. Straight Answers.</h2>
           </div>
         </div>
 
@@ -877,7 +884,7 @@
               <span class="faq-plus" aria-hidden="true"></span>
             </button>
             <div class="faq-panel">
-              <p>Yes. 24-hour calls are available for urgent residential electrical needs.</p>
+              <p>Yes. If you have an urgent residential electrical issue, 24-hour service is available.</p>
             </div>
           </article>
 
@@ -897,7 +904,7 @@
               <span class="faq-plus" aria-hidden="true"></span>
             </button>
             <div class="faq-panel">
-              <p>Yes. EV charger installation and RV outlet installation are both core residential services.</p>
+              <p>Yes. EV charger installs and RV outlet hookups are both part of our regular residential work.</p>
             </div>
           </article>
 

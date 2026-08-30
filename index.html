@@ -543,6 +543,187 @@
       }
     }
 
+
+    /* ===== v31 service order, review motion, mobile contrast, footer cleanup ===== */
+
+    .reviews-carousel-shell .review-card {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .reviews-carousel-shell .review-author {
+      margin-top: auto !important;
+    }
+
+    .reviews-cycle-button:disabled,
+    .hero-review-button:disabled {
+      opacity: .34 !important;
+      cursor: default !important;
+      pointer-events: none !important;
+    }
+
+    @media (min-width: 761px) {
+      .reviews-carousel-shell .reviews-grid {
+        transition: transform 360ms cubic-bezier(.22,.72,.22,1) !important;
+        will-change: transform;
+      }
+
+      .reviews-carousel-shell .review-card,
+      .reviews-carousel-shell .review-card-featured,
+      .reviews-carousel-shell .review-card:nth-child(n+4) {
+        display: flex !important;
+        flex-direction: column !important;
+        align-self: stretch !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-review-strip {
+        background: #0e1012 !important;
+      }
+
+      .hero-review-card {
+        background: #15171a !important;
+        border-color: rgba(255,255,255,.09) !important;
+        box-shadow: 0 14px 28px rgba(0,0,0,.24) !important;
+      }
+
+      .reviews-section {
+        background: #111315 !important;
+        color: #fff !important;
+      }
+
+      .reviews-section::before {
+        opacity: .24 !important;
+      }
+
+      .reviews-heading h2,
+      .review-author {
+        color: #fff !important;
+      }
+
+      .reviews-heading .section-kicker {
+        color: var(--brand-gold) !important;
+      }
+
+      .review-card,
+      .review-card-featured {
+        background: #17191c !important;
+        border-color: rgba(255,255,255,.09) !important;
+        box-shadow: 0 14px 30px rgba(0,0,0,.22) !important;
+        backdrop-filter: none !important;
+      }
+
+      .review-text {
+        color: rgba(255,255,255,.78) !important;
+      }
+
+      .reviews-link-secondary {
+        background: rgba(255,255,255,.055) !important;
+        color: #fff !important;
+        border: 1px solid rgba(255,255,255,.26) !important;
+      }
+
+      .reviews-link-secondary .external-link-icon,
+      .reviews-link-secondary svg {
+        color: #fff !important;
+        stroke: currentColor !important;
+      }
+
+      .reviews-heading-links,
+      .reviews-actions {
+        gap: 10px !important;
+      }
+
+      .reviews-heading-links .reviews-link,
+      .reviews-actions .reviews-link {
+        min-height: 46px !important;
+      }
+
+      .reviews-carousel-shell .reviews-grid,
+      .hero-review-track {
+        scroll-snap-type: x mandatory !important;
+        scroll-behavior: smooth !important;
+        overscroll-behavior-inline: contain !important;
+      }
+
+      .reviews-carousel-shell .review-card,
+      .hero-review-card {
+        scroll-snap-align: center !important;
+        scroll-snap-stop: always !important;
+      }
+
+      .footer-inner-compact {
+        padding: 18px 0 10px !important;
+        gap: 12px !important;
+      }
+
+      .footer-brand-compact {
+        padding-bottom: 11px !important;
+        border-bottom: 1px solid rgba(255,255,255,.09) !important;
+      }
+
+      .footer-brand-compact p {
+        margin: 2px 0 0 !important;
+      }
+
+      .footer-column-group {
+        grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+        gap: 12px 18px !important;
+      }
+
+      .footer-column-group > .footer-column:nth-child(2) {
+        display: none !important;
+      }
+
+      .footer-column-group > .footer-column:nth-child(5) {
+        display: block !important;
+        order: 1 !important;
+        grid-column: 1 !important;
+      }
+
+      .footer-column-group > .footer-column:nth-child(3) {
+        display: block !important;
+        order: 2 !important;
+        grid-column: 2 !important;
+      }
+
+      .footer-column-group > .footer-column:nth-child(4) {
+        display: flex !important;
+        order: 3 !important;
+        grid-column: 1 / -1 !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 4px 14px !important;
+        padding-top: 9px !important;
+        border-top: 1px solid rgba(255,255,255,.08) !important;
+      }
+
+      .footer-column-group > .footer-column:nth-child(4) h3 {
+        display: none !important;
+      }
+
+      .footer-column-group > .footer-column:nth-child(4) a {
+        margin: 0 !important;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 6px !important;
+        font-size: 13px !important;
+      }
+
+      .footer-column p,
+      .footer-column a {
+        margin-bottom: 3px !important;
+        font-size: 12px !important;
+        line-height: 1.38 !important;
+      }
+
+      .footer-bottom-compact {
+        padding: 9px 0 12px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -726,6 +907,19 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
           </button>
           <div class="services-grid" id="services-grid">
+          <article class="service-card" data-aliases="repair|repairs|electrical repair|electrician repair|troubleshooting|troubleshoot|diagnose|diagnostic|flickering lights|lights flicker|breaker keeps tripping|tripping breaker|dead outlet|outlet not working|no power|lost power|power issue|power problem|electrical problem|electrical issue|short circuit|burning smell|buzzing outlet">
+            <div class="service-media service-media-5 has-photo" aria-label="Electrical repair project photo">
+              <img src="jv-electrical-repairs-tech.webp" alt="JV Electric electrician performing residential electrical repair work" loading="lazy" style="object-position: center 42%;" />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m14 2-8 11h6l-2 9 8-12h-6l2-8Z"/></svg></div>
+              <div class="service-copy">
+                <h3>Electrical Repairs</h3>
+                <p>If something is flickering, tripping, dead, or acting strange, we’ll track down the problem and fix it right.</p>
+              </div>
+            </div>
+          </article>
+
           <article class="service-card" data-aliases="panel|panels|panel upgrade|panel replacement|electrical panel|breaker panel|breaker box|fuse box|electrical box|main panel|main breaker|service panel|service upgrade|service change|subpanel|sub panel|amp upgrade|200 amp|200a|100 amp|breaker replacement|breakers">
             <div class="service-media service-media-1 has-photo" aria-label="Panel upgrade project photo">
               <img src="jv-breaker-panel-interior.webp" alt="Residential breaker panel upgrade" loading="lazy" style="object-position: center 48%;" />
@@ -735,32 +929,6 @@
               <div class="service-copy">
                 <h3>Panel Upgrades</h3>
                 <p>Need more capacity or an older panel replaced? We handle panel upgrades, breakers, and service improvements.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-card" data-aliases="ev|ev charger|ev charging|electric vehicle|electric car|car charger|home car charger|home ev charger|tesla|tesla charger|tesla wall connector|wall connector|level 2 charger|level two charger|charging station|240 outlet for car|nema 14 50|14 50 outlet">
-            <div class="service-media service-media-2 has-photo" aria-label="EV charger project photo">
-              <img src="jv-ev-charger-stock.webp" alt="Electric vehicle charging stations" loading="lazy" style="object-position: center 50%;" />
-            </div>
-            <div class="service-card-body">
-              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3v6m8-6v6M6 9h12v3a6 6 0 0 1-12 0V9Zm6 9v3"/></svg></div>
-              <div class="service-copy">
-                <h3>EV Chargers</h3>
-                <p>Home EV charger installs with the dedicated power and clean setup your vehicle needs.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-card" data-aliases="lighting|lights|light|light fixture|light fixtures|install light|replace light|ceiling light|recessed lighting|recessed lights|can lights|pot lights|security lighting|security lights|outdoor lights|indoor lights|porch light|motion light|motion lights|led lighting">
-            <div class="service-media service-media-3 has-photo" aria-label="Lighting project photo">
-              <img src="jv-recessed-lighting-room.webp" alt="Residential recessed lighting installation in a finished room" loading="lazy" style="object-position: center 58%;" />
-            </div>
-            <div class="service-card-body">
-              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"/></svg></div>
-              <div class="service-copy">
-                <h3>Lighting</h3>
-                <p>From recessed lights to exterior fixtures, we install lighting that looks good and works the way it should.</p>
               </div>
             </div>
           </article>
@@ -778,41 +946,15 @@
             </div>
           </article>
 
-          <article class="service-card service-secondary" data-aliases="repair|repairs|electrical repair|electrician repair|troubleshooting|troubleshoot|diagnose|diagnostic|flickering lights|lights flicker|breaker keeps tripping|tripping breaker|dead outlet|outlet not working|no power|lost power|power issue|power problem|electrical problem|electrical issue|short circuit|burning smell|buzzing outlet">
-            <div class="service-media service-media-5 has-photo" aria-label="Electrical repair project photo">
-              <img src="jv-electrical-repairs-tech.webp" alt="JV Electric electrician performing residential electrical repair work" loading="lazy" style="object-position: center 42%;" />
+          <article class="service-card" data-aliases="lighting|lights|light|light fixture|light fixtures|install light|replace light|ceiling light|recessed lighting|recessed lights|can lights|pot lights|security lighting|security lights|outdoor lights|indoor lights|porch light|motion light|motion lights|led lighting">
+            <div class="service-media service-media-3 has-photo" aria-label="Lighting project photo">
+              <img src="jv-recessed-lighting-room.webp" alt="Residential recessed lighting installation in a finished room" loading="lazy" style="object-position: center 58%;" />
             </div>
             <div class="service-card-body">
-              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m14 2-8 11h6l-2 9 8-12h-6l2-8Z"/></svg></div>
+              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"/></svg></div>
               <div class="service-copy">
-                <h3>Electrical Repairs</h3>
-                <p>If something is flickering, tripping, dead, or acting strange, we’ll track down the problem and fix it right.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-card service-secondary" data-aliases="hot tub|hot tub hookup|hot tub electrical|hot tub wiring|spa|spa hookup|spa electrical|spa wiring|swim spa|swim spa wiring|jacuzzi|jacuzzi wiring|50 amp spa|60 amp spa|hot tub power">
-            <div class="service-media service-media-6 has-photo" aria-label="Swim spa and hot tub electrical project photo">
-              <img src="jv-hot-tub-spa.webp" alt="Outdoor hot tub and swim spa with integrated lighting" loading="lazy" style="object-position: center 55%;" />
-            </div>
-            <div class="service-card-body">
-              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 14h16M7 14v3m10-3v3M6 10h12l-1-5H7l-1 5Zm1 10h10"/></svg></div>
-              <div class="service-copy">
-                <h3>Swim Spas &amp; Hot Tubs</h3>
-                <p>Safe power for spas, hot tubs, and outdoor equipment, with the dedicated circuits they require.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-card service-secondary" data-aliases="rv|rv outlet|rv plug|rv hookup|rv power|rv electrical|motorhome|motor home|motor|camper|camper hookup|travel trailer|trailer hookup|shore power|30 amp|30 amp rv|50 amp|50 amp rv|rv receptacle|rv connection|rv pedestal">
-            <div class="service-media service-media-7 has-photo" aria-label="RV outlet project photo">
-              <img src="jv-rv-power-outlet.webp" alt="RV power outlet installation" loading="lazy" style="object-position: center 28%;" />
-            </div>
-            <div class="service-card-body">
-              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h14l4 4v6H3V8Zm4 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM17 8v4h4"/></svg></div>
-              <div class="service-copy">
-                <h3>RV Outlets</h3>
-                <p>30-amp and 50-amp RV hookups installed in the right spot for easy, reliable access.</p>
+                <h3>Lighting</h3>
+                <p>From recessed lights to exterior fixtures, we install lighting that looks good and works the way it should.</p>
               </div>
             </div>
           </article>
@@ -830,7 +972,7 @@
             </div>
           </article>
 
-          <article class="service-card service-extra" data-aliases="remodel|remodel wiring|renovation|renovation wiring|addition|addition wiring|bathroom remodel|bathroom wiring|kitchen remodel|kitchen wiring|rewire|rewiring|rewire house|house rewire|home rewire|whole house wiring|house wiring|home wiring|residential wiring|wiring|wire|new wiring|new construction wiring|room addition electrical">
+          <article class="service-card service-secondary" data-aliases="remodel|remodel wiring|renovation|renovation wiring|addition|addition wiring|bathroom remodel|bathroom wiring|kitchen remodel|kitchen wiring|rewire|rewiring|rewire house|house rewire|home rewire|whole house wiring|house wiring|home wiring|residential wiring|wiring|wire|new wiring|new construction wiring|room addition electrical">
             <div class="service-media service-media-9 has-photo" aria-label="Remodel wiring project photo">
               <img src="jv-remodel-wiring-roughin.webp" alt="Electrical rough-in wiring during a home remodel" loading="lazy" style="object-position: center 50%;" />
             </div>
@@ -843,7 +985,7 @@
             </div>
           </article>
 
-          <article class="service-card service-extra" data-aliases="appliance|appliance circuit|appliance wiring|range|range circuit|range outlet|stove|stove outlet|oven|oven circuit|dryer|dryer circuit|dryer outlet|dryer plug|dishwasher|dishwasher circuit|microwave|microwave circuit|laundry|laundry circuit|kitchen circuit|garbage disposal|disposal circuit">
+          <article class="service-card service-secondary" data-aliases="appliance|appliance circuit|appliance wiring|range|range circuit|range outlet|stove|stove outlet|oven|oven circuit|dryer|dryer circuit|dryer outlet|dryer plug|dishwasher|dishwasher circuit|microwave|microwave circuit|laundry|laundry circuit|kitchen circuit|garbage disposal|disposal circuit">
             <div class="service-media service-media-10 has-photo" aria-label="Appliance circuit photo">
               <!-- CC0 stock image: Wikimedia Commons, NEMA 14-50 outlet -->
               <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/NEMA_14-50_outlet.jpg" alt="240 volt NEMA 14-50 receptacle for a high-demand appliance circuit" loading="lazy" referrerpolicy="no-referrer" style="object-position: center 50%;" />
@@ -857,21 +999,7 @@
             </div>
           </article>
 
-          <article class="service-card service-extra" data-aliases="smoke detector|smoke detectors|smoke alarm|smoke alarms|carbon monoxide|co detector|co detectors|carbon monoxide detector|carbon monoxide alarm|hardwired smoke detector|hardwired alarm|alarms|detectors">
-            <div class="service-media service-media-11 has-photo" aria-label="Smoke and carbon monoxide detector photo">
-              <!-- Public-domain stock image: Wikimedia Commons, Residential smoke detector -->
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Residential_smoke_detector.jpg" alt="Residential smoke detector" loading="lazy" referrerpolicy="no-referrer" style="object-position: center 50%;" />
-            </div>
-            <div class="service-card-body">
-              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7Zm0 4v4m0 4h.01"/></svg></div>
-              <div class="service-copy">
-                <h3>Smoke &amp; CO Detectors</h3>
-                <p>Hardwired smoke and carbon monoxide detector installs and replacements to help keep your home protected.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-card service-extra" data-aliases="ceiling fan|ceiling fans|fan|fans|fan install|fan installation|fan replacement|install ceiling fan|replace ceiling fan|fan wiring|fan switch|ceiling fan wiring">
+          <article class="service-card service-secondary" data-aliases="ceiling fan|ceiling fans|fan|fans|fan install|fan installation|fan replacement|install ceiling fan|replace ceiling fan|fan wiring|fan switch|ceiling fan wiring">
             <div class="service-media service-media-12 has-photo" aria-label="Ceiling fan project photo">
               <img src="jv-ceiling-fan.webp" alt="Modern black residential ceiling fan" loading="lazy" style="object-position: center 46%;" />
             </div>
@@ -880,20 +1008,6 @@
               <div class="service-copy">
                 <h3>Ceiling Fans</h3>
                 <p>Ceiling fan installs, replacements, switches, and wiring for new or existing rooms.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-card service-extra" data-aliases="surge|surge protection|surge protector|whole home surge|whole house surge|whole home surge protector|whole house surge protector|panel surge protector|power surge protection">
-            <div class="service-media service-media-13 has-photo" aria-label="Whole-home surge protection photo">
-              <!-- CC0 stock image: Wikimedia Commons, DIN-rail surge protection device -->
-              <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/SwitchboardSurgeProtector-40kA-DinRail.jpg" alt="Electrical surge protection device for a switchboard" loading="lazy" referrerpolicy="no-referrer" style="object-position: center 50%;" />
-            </div>
-            <div class="service-card-body">
-              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4Zm0 5v10m-4-5h8"/></svg></div>
-              <div class="service-copy">
-                <h3>Surge Protection</h3>
-                <p>Whole-home surge protection to help protect the electronics and appliances you count on.</p>
               </div>
             </div>
           </article>
@@ -936,10 +1050,46 @@
               </div>
             </div>
           </article>
-          </div>
-          <button class="services-rail-button services-rail-next" type="button" aria-label="Next electrical service">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
+
+          <article class="service-card service-extra" data-aliases="ev|ev charger|ev charging|electric vehicle|electric car|car charger|home car charger|home ev charger|tesla|tesla charger|tesla wall connector|wall connector|level 2 charger|level two charger|charging station|240 outlet for car|nema 14 50|14 50 outlet">
+            <div class="service-media service-media-2 has-photo" aria-label="EV charger project photo">
+              <!-- Free Unsplash photo: Andersen EV, residential home-garage charging setup -->
+              <img src="https://unsplash.com/photos/CRa_dWoilkg/download?force=true&amp;w=1600" alt="Electric vehicle charging from a wall-mounted charger in a home garage" loading="lazy" referrerpolicy="no-referrer" style="object-position: center 52%;" />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3v6m8-6v6M6 9h12v3a6 6 0 0 1-12 0V9Zm6 9v3"/></svg></div>
+              <div class="service-copy">
+                <h3>EV Chargers</h3>
+                <p>Home EV charger installs with the dedicated power and clean setup your vehicle needs.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card service-extra" data-aliases="hot tub|hot tub hookup|hot tub electrical|hot tub wiring|spa|spa hookup|spa electrical|spa wiring|swim spa|swim spa wiring|jacuzzi|jacuzzi wiring|50 amp spa|60 amp spa|hot tub power">
+            <div class="service-media service-media-6 has-photo" aria-label="Swim spa and hot tub electrical project photo">
+              <img src="jv-hot-tub-spa.webp" alt="Outdoor hot tub and swim spa with integrated lighting" loading="lazy" style="object-position: center 55%;" />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 14h16M7 14v3m10-3v3M6 10h12l-1-5H7l-1 5Zm1 10h10"/></svg></div>
+              <div class="service-copy">
+                <h3>Swim Spas &amp; Hot Tubs</h3>
+                <p>Safe power for spas, hot tubs, and outdoor equipment, with the dedicated circuits they require.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card service-extra" data-aliases="rv|rv outlet|rv plug|rv hookup|rv power|rv electrical|motorhome|motor home|motor|camper|camper hookup|travel trailer|trailer hookup|shore power|30 amp|30 amp rv|50 amp|50 amp rv|rv receptacle|rv connection|rv pedestal">
+            <div class="service-media service-media-7 has-photo" aria-label="RV outlet project photo">
+              <img src="jv-rv-power-outlet.webp" alt="RV power outlet installation" loading="lazy" style="object-position: center 28%;" />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8h14l4 4v6H3V8Zm4 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM17 8v4h4"/></svg></div>
+              <div class="service-copy">
+                <h3>RV Outlets</h3>
+                <p>30-amp and 50-amp RV hookups installed in the right spot for easy, reliable access.</p>
+              </div>
+            </div>
+          </article>
         </div>
 
         <div class="services-empty" id="services-empty" hidden>
@@ -1092,31 +1242,31 @@
             <article class="review-card">
               <div class="review-stars" aria-label="Five star rating">★★★★★</div>
               <p class="review-text">We had a great experience working with Daniel. He was kind, reliable, and very responsive. He came out quickly, fixed our long-term garbage disposal issue right away, and even double-checked the kitchen lights. You can tell he takes pride in his work and genuinely cares about helping customers.</p>
-              <div class="review-author">Pepe Jimenez</div>
+              <div class="review-author">- Pepe Jimenez</div>
             </article>
 
             <article class="review-card review-card-featured">
               <div class="review-stars" aria-label="Five star rating">★★★★★</div>
               <p class="review-text">Juan has been doing various electrical tasks for us for some time now, from simple indoor outlets to subpanels and our new mini split with an exterior surge protector. Always prompt and polite. He does exactly what we need and makes sure we are happy before the job is done.</p>
-              <div class="review-author">Heidi Heidi</div>
+              <div class="review-author">- Heidi Heidi</div>
             </article>
 
             <article class="review-card">
               <div class="review-stars" aria-label="Five star rating">★★★★★</div>
               <p class="review-text">Did a great job installing a hot water heater, as well as electrical hookups for a washer and dryer. Super reliable and communicative. He made time to come out earlier and quickly get our new hot water heater going. Great pricing. Can&apos;t recommend him enough.</p>
-              <div class="review-author">Austin Bowen</div>
+              <div class="review-author">- Austin Bowen</div>
             </article>
 
             <article class="review-card">
               <div class="review-stars" aria-label="Five star rating">★★★★★</div>
               <p class="review-text">I had a great experience with this electrician. He was extremely polite, responded right away, and came out immediately when I needed help. The price was very fair, and the whole process felt smooth and stress-free. I will definitely be a repeat customer. Highly recommend.</p>
-              <div class="review-author">Skylar Hanks</div>
+              <div class="review-author">- Skylar Hanks</div>
             </article>
 
             <article class="review-card">
               <div class="review-stars" aria-label="Five star rating">★★★★★</div>
               <p class="review-text">Juan fixed my heat pump and did a great job. He is very knowledgeable and a very nice guy.</p>
-              <div class="review-author">Barbara Walton</div>
+              <div class="review-author">- Barbara Walton</div>
             </article>
           </div>
 
@@ -1394,204 +1544,255 @@
 
   <script>
     (() => {
-      /*
-       * This runs after the site's existing script.
-       * Cloning the interactive elements removes the older overlapping listeners
-       * that were fighting each other when DevTools crossed the mobile breakpoint.
-       */
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+      const cloneElement = (element) => {
+        if (!element) return null;
+        const clean = element.cloneNode(true);
+        element.replaceWith(clean);
+        return clean;
+      };
+
+      const makeDots = (container, count, className, onSelect) => {
+        if (!container) return [];
+        container.innerHTML = '';
+        return Array.from({ length: count }, (_, index) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = className;
+          dot.setAttribute('aria-label', `Go to review ${index + 1}`);
+          dot.addEventListener('click', () => onSelect(index));
+          container.appendChild(dot);
+          return dot;
+        });
+      };
+
+      const updateDots = (dots, activeIndex) => {
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('is-active', index === activeIndex);
+          dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
+        });
+      };
+
+      const nearestIndex = (track, cards) => {
+        if (!cards.length) return 0;
+        const center = track.scrollLeft + track.clientWidth / 2;
+        let bestIndex = 0;
+        let bestDistance = Infinity;
+        cards.forEach((card, index) => {
+          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+          const distance = Math.abs(cardCenter - center);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            bestIndex = index;
+          }
+        });
+        return bestIndex;
+      };
+
+      const centeredLeft = (track, card) => {
+        const max = Math.max(0, track.scrollWidth - track.clientWidth);
+        return clamp(card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2), 0, max);
+      };
 
       const heroVisual = document.querySelector('.hero-visual');
       const oldMainCard = heroVisual?.querySelector('.project-card-main');
-
       if (heroVisual && oldMainCard) {
-        const cleanMainCard = oldMainCard.cloneNode(true);
-        oldMainCard.replaceWith(cleanMainCard);
+        const cleanMainCard = cloneElement(oldMainCard);
         heroVisual.classList.remove('main-focused');
-        cleanMainCard.setAttribute('aria-pressed', 'false');
+        cleanMainCard?.setAttribute('aria-pressed', 'false');
       }
 
+      /* MAIN REVIEWS */
       const shell = document.querySelector('.reviews-carousel-shell');
       const viewport = shell?.querySelector('.reviews-track-viewport');
       const oldTrack = viewport?.querySelector('.reviews-grid');
       const oldPrev = shell?.querySelector('.reviews-cycle-prev');
       const oldNext = shell?.querySelector('.reviews-cycle-next');
-      const dots = document.querySelector('.reviews-dots');
 
-      if (!shell || !viewport || !oldTrack || !oldPrev || !oldNext) return;
+      if (shell && viewport && oldTrack && oldPrev && oldNext) {
+        const track = cloneElement(oldTrack);
+        track.querySelectorAll('.carousel-clone').forEach((node) => node.remove());
+        const prev = cloneElement(oldPrev);
+        const next = cloneElement(oldNext);
 
-      const track = oldTrack.cloneNode(true);
-      track.querySelectorAll('.carousel-clone').forEach((node) => node.remove());
-      oldTrack.replaceWith(track);
+        let oldDots = document.querySelector('.reviews-dots');
+        let dotsWrap;
+        if (oldDots) {
+          dotsWrap = cloneElement(oldDots);
+        } else {
+          dotsWrap = document.createElement('div');
+          dotsWrap.className = 'reviews-dots';
+          shell.insertAdjacentElement('afterend', dotsWrap);
+        }
 
-      const prev = oldPrev.cloneNode(true);
-      const next = oldNext.cloneNode(true);
-      oldPrev.replaceWith(prev);
-      oldNext.replaceWith(next);
+        const cards = Array.from(track.querySelectorAll('.review-card'));
+        let desktopIndex = 0;
+        let mobileIndex = 0;
+        let mobileDots = [];
+        let settleTimer = 0;
 
-      let desktopAnimating = false;
-      let mobileIndex = 0;
-      let scrollTimer = 0;
+        const step = () => {
+          if (!cards.length) return 0;
+          const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
+          return cards[0].getBoundingClientRect().width + gap;
+        };
 
-      const cards = () => Array.from(track.querySelectorAll('.review-card'));
+        const equalizeDesktopCards = () => {
+          cards.forEach((card) => card.style.height = '');
+          if (window.innerWidth <= 760 || !cards.length) return;
+          const tallest = Math.max(...cards.map((card) => card.getBoundingClientRect().height));
+          cards.forEach((card) => card.style.height = `${Math.ceil(tallest)}px`);
+        };
 
-      const cardStep = () => {
-        const first = cards()[0];
-        if (!first) return 0;
-        const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
-        return first.getBoundingClientRect().width + gap;
-      };
+        const maxDesktopIndex = () => Math.max(0, cards.length - 3);
 
-      const equalizeDesktopCards = () => {
-        const list = cards();
-        list.forEach((card) => {
-          card.style.height = '';
+        const renderDesktop = (animate = true) => {
+          desktopIndex = clamp(desktopIndex, 0, maxDesktopIndex());
+          track.style.transition = animate
+            ? 'transform 360ms cubic-bezier(.22,.72,.22,1)'
+            : 'none';
+          track.style.transform = `translateX(-${desktopIndex * step()}px)`;
+          prev.disabled = desktopIndex === 0;
+          next.disabled = desktopIndex === maxDesktopIndex();
+        };
+
+        const setMobileIndex = (index, behavior = 'smooth') => {
+          mobileIndex = clamp(index, 0, cards.length - 1);
+          const card = cards[mobileIndex];
+          if (!card) return;
+          track.scrollTo({ left: centeredLeft(track, card), behavior });
+          updateDots(mobileDots, mobileIndex);
+          prev.disabled = mobileIndex === 0;
+          next.disabled = mobileIndex === cards.length - 1;
+        };
+
+        const settleMobile = () => {
+          mobileIndex = nearestIndex(track, cards);
+          updateDots(mobileDots, mobileIndex);
+          prev.disabled = mobileIndex === 0;
+          next.disabled = mobileIndex === cards.length - 1;
+        };
+
+        prev.addEventListener('click', () => {
+          if (window.innerWidth <= 760) {
+            setMobileIndex(mobileIndex - 1);
+          } else {
+            desktopIndex -= 1;
+            renderDesktop(true);
+          }
         });
 
-        if (window.innerWidth <= 760 || !list.length) return;
-
-        const tallest = Math.max(...list.map((card) => card.getBoundingClientRect().height));
-        list.forEach((card) => {
-          card.style.height = `${Math.ceil(tallest)}px`;
+        next.addEventListener('click', () => {
+          if (window.innerWidth <= 760) {
+            setMobileIndex(mobileIndex + 1);
+          } else {
+            desktopIndex += 1;
+            renderDesktop(true);
+          }
         });
-      };
 
-      const renderMobileDots = () => {
-        if (!dots) return;
-        dots.innerHTML = '';
+        track.addEventListener('scroll', () => {
+          if (window.innerWidth > 760) return;
+          clearTimeout(settleTimer);
+          settleTimer = window.setTimeout(settleMobile, 150);
+        }, { passive: true });
 
-        if (window.innerWidth > 760) return;
+        if ('onscrollend' in window) {
+          track.addEventListener('scrollend', () => {
+            if (window.innerWidth <= 760) settleMobile();
+          }, { passive: true });
+        }
 
-        cards().forEach((_, index) => {
-          const dot = document.createElement('button');
-          dot.type = 'button';
-          dot.className = `reviews-dot${index === mobileIndex ? ' is-active' : ''}`;
-          dot.setAttribute('aria-label', `Go to review ${index + 1}`);
-          dot.addEventListener('click', () => goMobile(index));
-          dots.appendChild(dot);
-        });
-      };
-
-      const goMobile = (index) => {
-        const list = cards();
-        if (!list.length) return;
-
-        mobileIndex = (index + list.length) % list.length;
-        const target = list[mobileIndex];
-        const left = Math.max(0, target.offsetLeft - ((track.clientWidth - target.offsetWidth) / 2));
-        track.scrollTo({ left, behavior: 'smooth' });
-        renderMobileDots();
-      };
-
-      const desktopNext = () => {
-        if (desktopAnimating) return;
-
-        const distance = cardStep();
-        if (!distance || cards().length < 2) return;
-
-        desktopAnimating = true;
-        track.style.transition = 'transform 300ms cubic-bezier(.22,.78,.24,1)';
-        track.style.transform = `translateX(-${distance}px)`;
-
-        track.addEventListener('transitionend', () => {
-          track.style.transition = 'none';
-          track.appendChild(track.firstElementChild);
-          track.style.transform = 'translateX(0)';
-
-          requestAnimationFrame(() => {
-            track.style.transition = '';
-            desktopAnimating = false;
+        const syncMain = () => {
+          if (window.innerWidth <= 760) {
+            cards.forEach((card) => card.style.height = '');
+            track.style.transition = 'none';
+            track.style.transform = 'none';
+            mobileDots = makeDots(dotsWrap, cards.length, 'reviews-dot', (index) => setMobileIndex(index));
+            setMobileIndex(mobileIndex, 'auto');
+          } else {
+            track.scrollLeft = 0;
+            dotsWrap.innerHTML = '';
             equalizeDesktopCards();
-          });
-        }, { once: true });
-      };
+            renderDesktop(false);
+          }
+        };
 
-      const desktopPrev = () => {
-        if (desktopAnimating) return;
+        window.addEventListener('resize', syncMain);
+        window.addEventListener('load', syncMain);
+        requestAnimationFrame(syncMain);
+      }
 
-        const distance = cardStep();
-        if (!distance || cards().length < 2) return;
+      /* HIGHLIGHTED MOBILE REVIEWS */
+      const heroCarousel = document.querySelector('.hero-review-carousel');
+      const oldHeroTrack = heroCarousel?.querySelector('.hero-review-track');
+      const oldHeroPrev = heroCarousel?.querySelector('.hero-review-prev');
+      const oldHeroNext = heroCarousel?.querySelector('.hero-review-next');
+      const oldHeroDots = document.querySelector('.hero-review-dots');
 
-        desktopAnimating = true;
-        track.style.transition = 'none';
-        track.insertBefore(track.lastElementChild, track.firstElementChild);
-        track.style.transform = `translateX(-${distance}px)`;
+      if (heroCarousel && oldHeroTrack && oldHeroPrev && oldHeroNext && oldHeroDots) {
+        const track = cloneElement(oldHeroTrack);
+        track.querySelectorAll('.carousel-clone').forEach((node) => node.remove());
+        const prev = cloneElement(oldHeroPrev);
+        const next = cloneElement(oldHeroNext);
+        const dotsWrap = cloneElement(oldHeroDots);
+        const cards = Array.from(track.querySelectorAll('.hero-review-card'));
 
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            track.style.transition = 'transform 300ms cubic-bezier(.22,.78,.24,1)';
-            track.style.transform = 'translateX(0)';
+        let index = 0;
+        let dots = [];
+        let settleTimer = 0;
 
-            track.addEventListener('transitionend', () => {
-              track.style.transition = '';
-              desktopAnimating = false;
-              equalizeDesktopCards();
-            }, { once: true });
-          });
+        const setIndex = (targetIndex, behavior = 'smooth') => {
+          index = clamp(targetIndex, 0, cards.length - 1);
+          const card = cards[index];
+          if (!card) return;
+          track.scrollTo({ left: centeredLeft(track, card), behavior });
+          updateDots(dots, index);
+          prev.disabled = index === 0;
+          next.disabled = index === cards.length - 1;
+        };
+
+        const settle = () => {
+          index = nearestIndex(track, cards);
+          updateDots(dots, index);
+          prev.disabled = index === 0;
+          next.disabled = index === cards.length - 1;
+        };
+
+        prev.addEventListener('click', () => {
+          if (window.innerWidth <= 760) setIndex(index - 1);
         });
-      };
 
-      prev.addEventListener('click', () => {
-        if (window.innerWidth <= 760) {
-          goMobile(mobileIndex - 1);
-        } else {
-          desktopPrev();
+        next.addEventListener('click', () => {
+          if (window.innerWidth <= 760) setIndex(index + 1);
+        });
+
+        track.addEventListener('scroll', () => {
+          if (window.innerWidth > 760) return;
+          clearTimeout(settleTimer);
+          settleTimer = window.setTimeout(settle, 150);
+        }, { passive: true });
+
+        if ('onscrollend' in window) {
+          track.addEventListener('scrollend', () => {
+            if (window.innerWidth <= 760) settle();
+          }, { passive: true });
         }
-      });
 
-      next.addEventListener('click', () => {
-        if (window.innerWidth <= 760) {
-          goMobile(mobileIndex + 1);
-        } else {
-          desktopNext();
-        }
-      });
+        const syncHero = () => {
+          if (window.innerWidth <= 760) {
+            dots = makeDots(dotsWrap, cards.length, 'hero-review-dot', (dotIndex) => setIndex(dotIndex));
+            setIndex(index, 'auto');
+          } else {
+            track.scrollLeft = 0;
+            dotsWrap.innerHTML = '';
+          }
+        };
 
-      track.addEventListener('scroll', () => {
-        if (window.innerWidth > 760) return;
-
-        clearTimeout(scrollTimer);
-        scrollTimer = window.setTimeout(() => {
-          const list = cards();
-          if (!list.length) return;
-
-          const center = track.scrollLeft + (track.clientWidth / 2);
-          let bestIndex = 0;
-          let bestDistance = Infinity;
-
-          list.forEach((card, index) => {
-            const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-            const distance = Math.abs(cardCenter - center);
-            if (distance < bestDistance) {
-              bestDistance = distance;
-              bestIndex = index;
-            }
-          });
-
-          mobileIndex = bestIndex;
-          renderMobileDots();
-        }, 80);
-      }, { passive: true });
-
-      const syncResponsiveReviews = () => {
-        desktopAnimating = false;
-        track.style.transition = '';
-        track.style.transform = '';
-
-        if (window.innerWidth <= 760) {
-          cards().forEach((card) => {
-            card.style.height = '';
-          });
-          goMobile(mobileIndex);
-        } else {
-          track.scrollLeft = 0;
-          if (dots) dots.innerHTML = '';
-          equalizeDesktopCards();
-        }
-      };
-
-      window.addEventListener('resize', syncResponsiveReviews);
-      window.addEventListener('load', syncResponsiveReviews);
-      requestAnimationFrame(syncResponsiveReviews);
+        window.addEventListener('resize', syncHero);
+        requestAnimationFrame(syncHero);
+      }
     })();
   </script>
 

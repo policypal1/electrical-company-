@@ -145,7 +145,9 @@
       }
     }
 
-    /* ===== v26 desktop + mobile cleanup ===== */
+
+
+    /* ===== v27 carousel + responsive stability fixes ===== */
 
     .service-area-bolt {
       display: inline-grid !important;
@@ -162,6 +164,7 @@
       color: var(--brand-gold) !important;
       line-height: 1 !important;
       flex: 0 0 18px !important;
+      font-style: normal !important;
     }
 
     .service-area-bolt svg {
@@ -171,8 +174,14 @@
       fill: currentColor;
     }
 
+    .reviews-track-viewport {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
     @media (min-width: 761px) {
-      /* Bring the "Your Power, Our Priority" eyebrow to desktop too. */
       .hero-slogan {
         display: block !important;
         max-width: none !important;
@@ -185,41 +194,69 @@
         text-transform: uppercase !important;
       }
 
-      /* Desktop reviews: keep three visible, but move only one review per click. */
+      /* Exactly three equal-size reviews are visible. The next card stays clipped. */
       .reviews-carousel-shell {
+        position: relative !important;
+        overflow: visible !important;
+      }
+
+      .reviews-track-viewport {
         overflow: hidden !important;
       }
 
       .reviews-carousel-shell .reviews-grid {
         display: flex !important;
-        grid-template-columns: none !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        min-width: 0 !important;
         gap: 18px !important;
-        overflow: visible !important;
         padding: 0 !important;
+        overflow: visible !important;
         transform: translateX(0);
+        opacity: 1 !important;
         will-change: transform;
       }
 
       .reviews-carousel-shell .review-card,
-      .reviews-carousel-shell .review-card-featured {
+      .reviews-carousel-shell .review-card-featured,
+      .reviews-carousel-shell .review-card:nth-child(n+4) {
         display: block !important;
         flex: 0 0 calc((100% - 36px) / 3) !important;
         width: calc((100% - 36px) / 3) !important;
         min-width: calc((100% - 36px) / 3) !important;
-        min-height: 300px !important;
-      }
-
-      .reviews-carousel-shell .review-card:nth-child(n+4) {
-        display: block !important;
+        max-width: calc((100% - 36px) / 3) !important;
+        height: auto !important;
+        margin: 0 !important;
+        transform: none !important;
       }
 
       .reviews-grid.is-cycling-next,
       .reviews-grid.is-cycling-prev {
         opacity: 1 !important;
-        transform: none;
       }
 
-      /* Restore the About copy and remove the oversized blank gap. */
+      .reviews-carousel-shell .reviews-cycle-button {
+        position: absolute !important;
+        z-index: 20 !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-prev {
+        left: -62px !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-next {
+        right: -62px !important;
+      }
+
+      .reviews-dots {
+        display: none !important;
+      }
+
+      /* Restore the About text and keep the heading close to the content. */
       .about-desktop-layout .about-content {
         justify-content: flex-start !important;
       }
@@ -242,7 +279,6 @@
         line-height: 1.6 !important;
       }
 
-      /* Simpler desktop footer: JV Electric | Legal | Quick Links | Service Area | Contact. */
       .footer-inner-compact {
         grid-template-columns: minmax(260px, .9fr) minmax(0, 2.1fr) !important;
         gap: 46px !important;
@@ -259,16 +295,25 @@
       }
     }
 
+    @media (max-width: 900px) and (min-width: 761px) {
+      .reviews-carousel-shell .reviews-cycle-prev {
+        left: -20px !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-next {
+        right: -20px !important;
+      }
+    }
+
     @media (max-width: 760px) {
-      /* The hero cards should not react, pop forward, or change depth on mobile. */
+      /* Make the hero photo stack completely non-interactive on phones. */
       .hero-visual .project-card {
         pointer-events: none !important;
         cursor: default !important;
+        transition: none !important;
       }
 
-      .project-card,
       .project-card:hover {
-        transition: none !important;
         filter: none !important;
       }
 
@@ -303,7 +348,42 @@
         opacity: 1 !important;
       }
 
-      /* Fix service-area city rows: one clean city card with one real bolt icon. */
+      /* Main review section stays a normal one-card mobile slider. */
+      .reviews-track-viewport {
+        overflow: hidden !important;
+      }
+
+      .reviews-carousel-shell .reviews-grid {
+        display: flex !important;
+        width: 100% !important;
+        gap: 12px !important;
+        padding: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scroll-snap-type: x mandatory !important;
+        scroll-behavior: smooth !important;
+        scrollbar-width: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+
+      .reviews-carousel-shell .reviews-grid::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      .reviews-carousel-shell .review-card,
+      .reviews-carousel-shell .review-card-featured,
+      .reviews-carousel-shell .review-card:nth-child(n+4) {
+        display: block !important;
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        scroll-snap-align: center !important;
+        transform: none !important;
+      }
+
       .service-area-tags-mobile > span {
         min-height: 44px !important;
         padding: 0 14px !important;
@@ -868,6 +948,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
           </button>
 
+          <div class="reviews-track-viewport">
           <div class="reviews-grid" aria-label="JV Electric customer reviews">
             <article class="review-card">
               <div class="review-stars" aria-label="Five star rating">★★★★★</div>
@@ -899,6 +980,8 @@
               <div class="review-author">Barbara Walton</div>
             </article>
           </div>
+
+        </div>
 
           <button class="reviews-cycle-button reviews-cycle-next" type="button" aria-label="Next reviews">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
@@ -1172,95 +1255,207 @@
 
   <script>
     (() => {
+      /*
+       * This runs after the site's existing script.
+       * Cloning the interactive elements removes the older overlapping listeners
+       * that were fighting each other when DevTools crossed the mobile breakpoint.
+       */
+
       const heroVisual = document.querySelector('.hero-visual');
-      if (heroVisual) {
-        const clearMobileHeroFocus = () => {
-          if (window.innerWidth <= 760) {
-            heroVisual.classList.remove('main-focused');
-            const main = heroVisual.querySelector('.project-card-main');
-            if (main) main.setAttribute('aria-pressed', 'false');
-          }
-        };
+      const oldMainCard = heroVisual?.querySelector('.project-card-main');
 
-        ['pointerdown', 'touchstart', 'click'].forEach((eventName) => {
-          heroVisual.addEventListener(eventName, clearMobileHeroFocus);
-        });
-
-        const observer = new MutationObserver(clearMobileHeroFocus);
-        observer.observe(heroVisual, { attributes: true, attributeFilter: ['class'] });
-        window.addEventListener('resize', clearMobileHeroFocus);
-        clearMobileHeroFocus();
+      if (heroVisual && oldMainCard) {
+        const cleanMainCard = oldMainCard.cloneNode(true);
+        oldMainCard.replaceWith(cleanMainCard);
+        heroVisual.classList.remove('main-focused');
+        cleanMainCard.setAttribute('aria-pressed', 'false');
       }
 
       const shell = document.querySelector('.reviews-carousel-shell');
-      const track = shell?.querySelector('.reviews-grid');
-      const prev = shell?.querySelector('.reviews-cycle-prev');
-      const next = shell?.querySelector('.reviews-cycle-next');
+      const viewport = shell?.querySelector('.reviews-track-viewport');
+      const oldTrack = viewport?.querySelector('.reviews-grid');
+      const oldPrev = shell?.querySelector('.reviews-cycle-prev');
+      const oldNext = shell?.querySelector('.reviews-cycle-next');
+      const dots = document.querySelector('.reviews-dots');
 
-      if (!shell || !track || !prev || !next) return;
+      if (!shell || !viewport || !oldTrack || !oldPrev || !oldNext) return;
 
-      let animating = false;
+      const track = oldTrack.cloneNode(true);
+      track.querySelectorAll('.carousel-clone').forEach((node) => node.remove());
+      oldTrack.replaceWith(track);
 
-      const stepSize = () => {
-        const first = track.querySelector('.review-card');
+      const prev = oldPrev.cloneNode(true);
+      const next = oldNext.cloneNode(true);
+      oldPrev.replaceWith(prev);
+      oldNext.replaceWith(next);
+
+      let desktopAnimating = false;
+      let mobileIndex = 0;
+      let scrollTimer = 0;
+
+      const cards = () => Array.from(track.querySelectorAll('.review-card'));
+
+      const cardStep = () => {
+        const first = cards()[0];
         if (!first) return 0;
-        const styles = getComputedStyle(track);
-        const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+        const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
         return first.getBoundingClientRect().width + gap;
       };
 
-      const finish = () => {
-        track.style.transition = 'none';
-        track.style.transform = 'translateX(0)';
-        requestAnimationFrame(() => {
-          track.style.transition = '';
-          animating = false;
+      const equalizeDesktopCards = () => {
+        const list = cards();
+        list.forEach((card) => {
+          card.style.height = '';
+        });
+
+        if (window.innerWidth <= 760 || !list.length) return;
+
+        const tallest = Math.max(...list.map((card) => card.getBoundingClientRect().height));
+        list.forEach((card) => {
+          card.style.height = `${Math.ceil(tallest)}px`;
         });
       };
 
-      next.addEventListener('click', (event) => {
-        if (window.innerWidth <= 760) return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if (animating) return;
+      const renderMobileDots = () => {
+        if (!dots) return;
+        dots.innerHTML = '';
 
-        const distance = stepSize();
-        if (!distance || track.children.length < 2) return;
+        if (window.innerWidth > 760) return;
 
-        animating = true;
-        track.style.transition = 'transform 320ms cubic-bezier(.22,.78,.24,1)';
+        cards().forEach((_, index) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = `reviews-dot${index === mobileIndex ? ' is-active' : ''}`;
+          dot.setAttribute('aria-label', `Go to review ${index + 1}`);
+          dot.addEventListener('click', () => goMobile(index));
+          dots.appendChild(dot);
+        });
+      };
+
+      const goMobile = (index) => {
+        const list = cards();
+        if (!list.length) return;
+
+        mobileIndex = (index + list.length) % list.length;
+        const target = list[mobileIndex];
+        const left = Math.max(0, target.offsetLeft - ((track.clientWidth - target.offsetWidth) / 2));
+        track.scrollTo({ left, behavior: 'smooth' });
+        renderMobileDots();
+      };
+
+      const desktopNext = () => {
+        if (desktopAnimating) return;
+
+        const distance = cardStep();
+        if (!distance || cards().length < 2) return;
+
+        desktopAnimating = true;
+        track.style.transition = 'transform 300ms cubic-bezier(.22,.78,.24,1)';
         track.style.transform = `translateX(-${distance}px)`;
 
         track.addEventListener('transitionend', () => {
+          track.style.transition = 'none';
           track.appendChild(track.firstElementChild);
-          finish();
+          track.style.transform = 'translateX(0)';
+
+          requestAnimationFrame(() => {
+            track.style.transition = '';
+            desktopAnimating = false;
+            equalizeDesktopCards();
+          });
         }, { once: true });
-      }, true);
+      };
 
-      prev.addEventListener('click', (event) => {
-        if (window.innerWidth <= 760) return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if (animating) return;
+      const desktopPrev = () => {
+        if (desktopAnimating) return;
 
-        const distance = stepSize();
-        if (!distance || track.children.length < 2) return;
+        const distance = cardStep();
+        if (!distance || cards().length < 2) return;
 
-        animating = true;
-        track.insertBefore(track.lastElementChild, track.firstElementChild);
+        desktopAnimating = true;
         track.style.transition = 'none';
+        track.insertBefore(track.lastElementChild, track.firstElementChild);
         track.style.transform = `translateX(-${distance}px)`;
 
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            track.style.transition = 'transform 320ms cubic-bezier(.22,.78,.24,1)';
+            track.style.transition = 'transform 300ms cubic-bezier(.22,.78,.24,1)';
             track.style.transform = 'translateX(0)';
-            track.addEventListener('transitionend', finish, { once: true });
+
+            track.addEventListener('transitionend', () => {
+              track.style.transition = '';
+              desktopAnimating = false;
+              equalizeDesktopCards();
+            }, { once: true });
           });
         });
-      }, true);
+      };
+
+      prev.addEventListener('click', () => {
+        if (window.innerWidth <= 760) {
+          goMobile(mobileIndex - 1);
+        } else {
+          desktopPrev();
+        }
+      });
+
+      next.addEventListener('click', () => {
+        if (window.innerWidth <= 760) {
+          goMobile(mobileIndex + 1);
+        } else {
+          desktopNext();
+        }
+      });
+
+      track.addEventListener('scroll', () => {
+        if (window.innerWidth > 760) return;
+
+        clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(() => {
+          const list = cards();
+          if (!list.length) return;
+
+          const center = track.scrollLeft + (track.clientWidth / 2);
+          let bestIndex = 0;
+          let bestDistance = Infinity;
+
+          list.forEach((card, index) => {
+            const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+            const distance = Math.abs(cardCenter - center);
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              bestIndex = index;
+            }
+          });
+
+          mobileIndex = bestIndex;
+          renderMobileDots();
+        }, 80);
+      }, { passive: true });
+
+      const syncResponsiveReviews = () => {
+        desktopAnimating = false;
+        track.style.transition = '';
+        track.style.transform = '';
+
+        if (window.innerWidth <= 760) {
+          cards().forEach((card) => {
+            card.style.height = '';
+          });
+          goMobile(mobileIndex);
+        } else {
+          track.scrollLeft = 0;
+          if (dots) dots.innerHTML = '';
+          equalizeDesktopCards();
+        }
+      };
+
+      window.addEventListener('resize', syncResponsiveReviews);
+      window.addEventListener('load', syncResponsiveReviews);
+      requestAnimationFrame(syncResponsiveReviews);
     })();
   </script>
+
 </body>
 </html>
 

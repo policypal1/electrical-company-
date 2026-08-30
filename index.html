@@ -908,6 +908,66 @@
           visibility 0s linear 0s !important;
       }
     }
+
+
+    /* ===== carousel stability + final placement fixes ===== */
+    @media (min-width: 761px) {
+      /* Remove the old decorative yellow glow from About on desktop. */
+      .about-section::after {
+        content: none !important;
+        display: none !important;
+        background: none !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      /* Keep the mini-review arrows immediately beside the navigation dots. */
+      .hero-review-carousel {
+        grid-template-columns: 1fr 40px max-content 40px 1fr !important;
+        column-gap: 3px !important;
+        row-gap: 10px !important;
+      }
+
+      .hero-review-prev {
+        grid-column: 2 !important;
+        justify-self: end !important;
+      }
+
+      .hero-review-dots {
+        grid-column: 3 !important;
+        justify-self: center !important;
+        gap: 6px !important;
+        min-width: 58px;
+      }
+
+      .hero-review-next {
+        grid-column: 4 !important;
+        justify-self: start !important;
+      }
+
+      .hero-review-button {
+        width: 38px !important;
+        height: 38px !important;
+      }
+
+      /* Slightly larger floating call button, still isolated in the bottom-right. */
+      .mobile-floating-call {
+        z-index: 999 !important;
+        right: 12px !important;
+        bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+        min-height: 56px !important;
+        padding: 0 22px !important;
+        font-size: 15px !important;
+        gap: 10px !important;
+        border-radius: 999px !important;
+      }
+
+      .mobile-floating-call svg {
+        width: 20px !important;
+        height: 20px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -960,7 +1020,7 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="hero-slogan">Your Power, Our Priority.</p>
-          <h1><span class="desktop-copy-only">Your Local Residential Electrician.</span><span class="mobile-copy-only">Your Local Electrician.</span></h1>
+          <h1><span class="desktop-copy-only">Your Local Residential Electrician.</span><span class="mobile-copy-only">Your Local Electrician for Repairs, Upgrades &amp; More.</span></h1>
           <p><span class="desktop-copy-only">Repairs, upgrades, and projects across Southwest Washington.</span><span class="mobile-copy-only">Repairs, upgrades, and home projects across Southwest Washington.</span></p>
           <div class="hero-actions">
             <a class="hero-call" href="tel:+13604423618">Call Now</a>
@@ -1811,99 +1871,83 @@
         }
 
         const cards = Array.from(track.querySelectorAll('.review-card'));
-        const originalCards = [...cards];
+        let desktopIndex = 0;
         let mobileIndex = 0;
         let mobileDots = [];
         let mobileScrollRaf = 0;
-        let desktopBusy = false;
+        let mobileProgrammatic = false;
+        let mobileProgrammaticTimer = 0;
 
         const step = () => {
-          const firstCard = track.querySelector('.review-card');
-          if (!firstCard) return 0;
+          if (!cards.length) return 0;
           const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
-          return firstCard.getBoundingClientRect().width + gap;
+          return cards[0].getBoundingClientRect().width + gap;
         };
 
         const equalizeReviewCards = () => {
-          cards.forEach((card) => card.style.height = '');
+          cards.forEach((card) => { card.style.height = ''; });
           if (!cards.length) return;
           const tallest = Math.max(...cards.map((card) => card.getBoundingClientRect().height));
-          cards.forEach((card) => card.style.height = `${Math.ceil(tallest)}px`);
+          cards.forEach((card) => { card.style.height = `${Math.ceil(tallest)}px`; });
         };
 
-        const resetDesktopOrder = () => {
-          originalCards.forEach((card) => track.appendChild(card));
-          track.style.transition = 'none';
-          track.style.transform = 'translateX(0)';
-          desktopBusy = false;
+        const maxDesktopIndex = () => Math.max(0, cards.length - 3);
+
+        const wrapDesktopIndex = (index) => {
+          const count = maxDesktopIndex() + 1;
+          if (count <= 0) return 0;
+          return ((index % count) + count) % count;
         };
 
-        const cycleDesktop = (direction) => {
-          if (desktopBusy || cards.length < 2) return;
-          desktopBusy = true;
+        const renderDesktop = (targetIndex, animate = true) => {
+          desktopIndex = wrapDesktopIndex(targetIndex);
+          track.style.transition = animate
+            ? 'transform 420ms cubic-bezier(.22,.72,.22,1)'
+            : 'none';
+          track.style.transform = `translateX(-${desktopIndex * step()}px)`;
           prev.disabled = false;
           next.disabled = false;
-
-          const distance = step();
-          const duration = 360;
-          const easing = 'cubic-bezier(.22,.72,.22,1)';
-
-          if (direction > 0) {
-            track.style.transition = `transform ${duration}ms ${easing}`;
-            requestAnimationFrame(() => {
-              track.style.transform = `translateX(-${distance}px)`;
-            });
-
-            window.setTimeout(() => {
-              track.style.transition = 'none';
-              const firstCard = track.querySelector('.review-card');
-              if (firstCard) track.appendChild(firstCard);
-              track.style.transform = 'translateX(0)';
-              void track.offsetWidth;
-              desktopBusy = false;
-            }, duration + 20);
-          } else {
-            track.style.transition = 'none';
-            const orderedCards = Array.from(track.querySelectorAll('.review-card'));
-            const lastCard = orderedCards[orderedCards.length - 1];
-            if (lastCard) track.insertBefore(lastCard, track.firstElementChild);
-            track.style.transform = `translateX(-${distance}px)`;
-            void track.offsetWidth;
-
-            requestAnimationFrame(() => {
-              track.style.transition = `transform ${duration}ms ${easing}`;
-              track.style.transform = 'translateX(0)';
-            });
-
-            window.setTimeout(() => {
-              track.style.transition = 'none';
-              desktopBusy = false;
-            }, duration + 20);
-          }
-        };
-
-        const setMobileIndex = (index, behavior = 'smooth') => {
-          mobileIndex = clamp(index, 0, cards.length - 1);
-          const card = cards[mobileIndex];
-          if (!card) return;
-          track.scrollTo({ left: centeredLeft(track, card), behavior });
-          updateDots(mobileDots, mobileIndex);
-          prev.disabled = mobileIndex === 0;
-          next.disabled = mobileIndex === cards.length - 1;
         };
 
         const settleMobile = () => {
           mobileIndex = nearestIndex(track, cards);
           updateDots(mobileDots, mobileIndex);
-          prev.disabled = mobileIndex === 0;
-          next.disabled = mobileIndex === cards.length - 1;
+          prev.disabled = false;
+          next.disabled = false;
+        };
+
+        const finishMobileProgrammaticMove = () => {
+          clearTimeout(mobileProgrammaticTimer);
+          mobileProgrammaticTimer = window.setTimeout(() => {
+            mobileProgrammatic = false;
+            settleMobile();
+          }, 470);
+        };
+
+        const setMobileIndex = (targetIndex, behavior = 'smooth') => {
+          if (!cards.length) return;
+          mobileIndex = ((targetIndex % cards.length) + cards.length) % cards.length;
+          const card = cards[mobileIndex];
+          if (!card) return;
+
+          mobileProgrammatic = behavior === 'smooth';
+          track.scrollTo({ left: centeredLeft(track, card), behavior });
+          updateDots(mobileDots, mobileIndex);
+          prev.disabled = false;
+          next.disabled = false;
+
+          if (mobileProgrammatic) {
+            finishMobileProgrammaticMove();
+          } else {
+            mobileProgrammatic = false;
+          }
         };
 
         prev.addEventListener('click', () => {
           if (window.innerWidth <= 760) {
             setMobileIndex(mobileIndex - 1);
           } else {
-            cycleDesktop(-1);
+            renderDesktop(desktopIndex - 1, true);
           }
         });
 
@@ -1911,24 +1955,31 @@
           if (window.innerWidth <= 760) {
             setMobileIndex(mobileIndex + 1);
           } else {
-            cycleDesktop(1);
+            renderDesktop(desktopIndex + 1, true);
           }
         });
 
         track.addEventListener('scroll', () => {
-          if (window.innerWidth > 760) return;
+          if (window.innerWidth > 760 || mobileProgrammatic) return;
           cancelAnimationFrame(mobileScrollRaf);
           mobileScrollRaf = requestAnimationFrame(settleMobile);
         }, { passive: true });
 
         if ('onscrollend' in window) {
           track.addEventListener('scrollend', () => {
-            if (window.innerWidth <= 760) settleMobile();
+            if (window.innerWidth > 760) return;
+            if (mobileProgrammatic) {
+              mobileProgrammatic = false;
+              clearTimeout(mobileProgrammaticTimer);
+            }
+            settleMobile();
           }, { passive: true });
         }
 
         const syncMain = () => {
-          resetDesktopOrder();
+          clearTimeout(mobileProgrammaticTimer);
+          mobileProgrammatic = false;
+
           if (window.innerWidth <= 760) {
             track.style.transition = 'none';
             track.style.transform = 'none';
@@ -1939,8 +1990,7 @@
             track.scrollLeft = 0;
             dotsWrap.innerHTML = '';
             equalizeReviewCards();
-            prev.disabled = false;
-            next.disabled = false;
+            renderDesktop(desktopIndex, false);
           }
         };
 
@@ -1967,22 +2017,41 @@
         let index = 0;
         let dots = [];
         let scrollRaf = 0;
-
-        const setIndex = (targetIndex, behavior = 'smooth') => {
-          index = clamp(targetIndex, 0, cards.length - 1);
-          const card = cards[index];
-          if (!card) return;
-          track.scrollTo({ left: centeredLeft(track, card), behavior });
-          updateDots(dots, index);
-          prev.disabled = index === 0;
-          next.disabled = index === cards.length - 1;
-        };
+        let programmatic = false;
+        let programmaticTimer = 0;
 
         const settle = () => {
           index = nearestIndex(track, cards);
           updateDots(dots, index);
-          prev.disabled = index === 0;
-          next.disabled = index === cards.length - 1;
+          prev.disabled = false;
+          next.disabled = false;
+        };
+
+        const finishProgrammaticMove = () => {
+          clearTimeout(programmaticTimer);
+          programmaticTimer = window.setTimeout(() => {
+            programmatic = false;
+            settle();
+          }, 470);
+        };
+
+        const setIndex = (targetIndex, behavior = 'smooth') => {
+          if (!cards.length) return;
+          index = ((targetIndex % cards.length) + cards.length) % cards.length;
+          const card = cards[index];
+          if (!card) return;
+
+          programmatic = behavior === 'smooth';
+          track.scrollTo({ left: centeredLeft(track, card), behavior });
+          updateDots(dots, index);
+          prev.disabled = false;
+          next.disabled = false;
+
+          if (programmatic) {
+            finishProgrammaticMove();
+          } else {
+            programmatic = false;
+          }
         };
 
         prev.addEventListener('click', () => {
@@ -1994,18 +2063,25 @@
         });
 
         track.addEventListener('scroll', () => {
-          if (window.innerWidth > 760) return;
+          if (window.innerWidth > 760 || programmatic) return;
           cancelAnimationFrame(scrollRaf);
           scrollRaf = requestAnimationFrame(settle);
         }, { passive: true });
 
         if ('onscrollend' in window) {
           track.addEventListener('scrollend', () => {
-            if (window.innerWidth <= 760) settle();
+            if (window.innerWidth > 760) return;
+            if (programmatic) {
+              programmatic = false;
+              clearTimeout(programmaticTimer);
+            }
+            settle();
           }, { passive: true });
         }
 
         const syncHero = () => {
+          clearTimeout(programmaticTimer);
+          programmatic = false;
           if (window.innerWidth <= 760) {
             dots = makeDots(dotsWrap, cards.length, 'hero-review-dot', (dotIndex) => setIndex(dotIndex));
             setIndex(index, 'auto');

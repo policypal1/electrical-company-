@@ -968,6 +968,61 @@
       }
     }
 
+
+    /* ===== final checkover fixes ===== */
+    .services-search:focus-within {
+      border-color: #cfd1cd !important;
+      box-shadow: 0 10px 28px rgba(17,18,20,.06) !important;
+    }
+
+    .services-search input:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    @media (max-width: 760px) {
+      /* Arrows physically flank the review dots now that all controls share one grid. */
+      .hero-review-carousel {
+        grid-template-columns: 1fr 42px max-content 42px 1fr !important;
+        column-gap: 4px !important;
+        align-items: center !important;
+      }
+
+      .hero-review-track {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+      }
+
+      .hero-review-prev {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        justify-self: end !important;
+      }
+
+      .hero-review-dots {
+        grid-column: 3 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
+        margin: 0 !important;
+        min-width: 58px !important;
+      }
+
+      .hero-review-next {
+        grid-column: 4 !important;
+        grid-row: 2 !important;
+        justify-self: start !important;
+      }
+
+      /* Make sure both service navigation arrows remain visible on phones. */
+      .services-rail-button {
+        display: grid !important;
+      }
+
+      .services-rail-prev { left: 6px !important; }
+      .services-rail-next { right: 6px !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -1020,7 +1075,7 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="hero-slogan">Your Power, Our Priority.</p>
-          <h1><span class="desktop-copy-only">Your Local Residential Electrician.</span><span class="mobile-copy-only">Your Local Electrician for Repairs, Upgrades &amp; More.</span></h1>
+          <h1><span class="desktop-copy-only">Your Local Residential Electrician.</span><span class="mobile-copy-only">Your Local Electrician for Repairs, Upgrades &amp; Home Projects.</span></h1>
           <p><span class="desktop-copy-only">Repairs, upgrades, and projects across Southwest Washington.</span><span class="mobile-copy-only">Repairs, upgrades, and home projects across Southwest Washington.</span></p>
           <div class="hero-actions">
             <a class="hero-call" href="tel:+13604423618">Call Now</a>
@@ -1122,8 +1177,9 @@
           <button class="hero-review-button hero-review-next" type="button" aria-label="Next highlighted review">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
           </button>
+
+          <div class="hero-review-dots" aria-label="Highlighted review navigation"></div>
         </div>
-        <div class="hero-review-dots" aria-label="Highlighted review navigation"></div>
       </div>
     </section>
 
@@ -1335,6 +1391,10 @@
             </div>
           </article>
         </div>
+          <button class="services-rail-button services-rail-next" type="button" aria-label="Next electrical service">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
 
         <div class="services-empty" id="services-empty" hidden>
           <p>No exact match found. Try terms like <strong>panel</strong>, <strong>EV</strong>, <strong>motorhome</strong>, or <strong>hot tub</strong>.</p>
@@ -1365,10 +1425,10 @@
             <div class="work-placeholder has-photo"><img src="jv-outdoor-gfci-fountain.webp" alt="Outdoor electrical power installed beside a rock water feature" loading="lazy" style="object-position: center 50%;" /></div>
           </figure>
           <figure class="work-card work-card-top">
-            <div class="work-placeholder has-photo"><img src="jv-service-upgrade-open.webp" alt="Organized residential service upgrade wiring" loading="lazy" style="object-position: center 50%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-recessed-lighting-room.webp" alt="Finished recessed lighting installation in a residential room" loading="lazy" style="object-position: center 58%;" /></div>
           </figure>
           <figure class="work-card work-card-bottom">
-            <div class="work-placeholder has-photo"><img src="jv-recessed-lighting-room.webp" alt="Finished recessed lighting installation in a residential room" loading="lazy" style="object-position: center 58%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-service-upgrade-open.webp" alt="Organized residential service upgrade wiring" loading="lazy" style="object-position: center 50%;" /></div>
           </figure>
           <figure class="work-card work-card-wide">
             <div class="work-placeholder has-photo"><img src="jv-breaker-panel-interior.webp" alt="Finished residential breaker panel with organized wiring" loading="lazy" style="object-position: center 50%;" /></div>
@@ -1382,7 +1442,7 @@
       <div class="process-inner">
         <div class="process-intro">
           <span class="section-kicker">How It Works</span>
-          <h2><span class="process-title-desktop">Simple From the First Call to the Final Check.</span><span class="process-title-mobile">Simple From First Call to Final Check.</span></h2>
+          <h2><span class="process-title-desktop">From the First Call to Finished Work.</span><span class="process-title-mobile">From the First Call to Finished Work.</span></h2>
           <p class="process-intro-copy"><span class="process-copy-desktop">We keep the process simple and make sure you know what to expect.</span><span class="process-copy-mobile"></span></p>
         </div>
 

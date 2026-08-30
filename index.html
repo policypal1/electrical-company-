@@ -724,6 +724,48 @@
       }
     }
 
+
+
+    /* ===== final desktop-only copy + service cleanup ===== */
+    .desktop-copy-only {
+      display: none;
+    }
+
+    @media (min-width: 761px) {
+      .desktop-copy-only {
+        display: inline !important;
+      }
+
+      .mobile-copy-only {
+        display: none !important;
+      }
+
+      .services-grid .service-icon {
+        display: none !important;
+      }
+
+      .services-grid .service-card-body {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+
+      .services-grid .service-copy {
+        width: 100% !important;
+      }
+
+      .process-intro-copy {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .desktop-copy-only {
+        display: none !important;
+      }
+
+      .mobile-copy-only {
+        display: inline !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -776,8 +818,8 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="hero-slogan">Your Power, Our Priority.</p>
-          <h1>Residential Electrical Work You Can Feel Good About.</h1>
-          <p>Need a repair, an upgrade, or help with a new project? JV Electric helps homeowners across Southwest Washington with clean work, clear communication, and dependable results.</p>
+          <h1><span class="desktop-copy-only">Residential Electrical Work, Done Right.</span><span class="mobile-copy-only">Residential Electrical Work You Can Feel Good About.</span></h1>
+          <p><span class="desktop-copy-only">Repairs, upgrades, and projects across Southwest Washington.</span><span class="mobile-copy-only">Need a repair, an upgrade, or help with a new project? JV Electric helps homeowners across Southwest Washington with clean work, clear communication, and dependable results.</span></p>
           <div class="hero-actions">
             <a class="hero-call" href="tel:+13604423618">Call Now</a>
             <a class="hero-quote" href="#contact">Get a Quote</a>
@@ -954,7 +996,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"/></svg></div>
               <div class="service-copy">
                 <h3>Lighting</h3>
-                <p>From recessed lights to exterior fixtures, we install lighting that looks good and works the way it should.</p>
+                <p><span class="desktop-copy-only">Ceiling lights, outdoor fixtures, and everyday home lighting installed cleanly and set up right.</span><span class="mobile-copy-only">From recessed lights to exterior fixtures, we install lighting that looks good and works the way it should.</span></p>
               </div>
             </div>
           </article>
@@ -1046,7 +1088,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5V4Zm4 4h6m-6 4h6m-6 4h3"/></svg></div>
               <div class="service-copy">
                 <h3>Electrical Updates</h3>
-                <p>Clean, code-minded upgrades that bring older electrical systems up to date.</p>
+                <p><span class="desktop-copy-only">Updates for older electrical systems, wiring, and components throughout the home.</span><span class="mobile-copy-only">Clean, code-minded upgrades that bring older electrical systems up to date.</span></p>
               </div>
             </div>
           </article>
@@ -1139,7 +1181,7 @@
         <div class="process-intro">
           <span class="section-kicker">How It Works</span>
           <h2><span class="process-title-desktop">Simple From the First Call to the Final Check.</span><span class="process-title-mobile">Simple From First Call to Final Check.</span></h2>
-          <p><span class="process-copy-desktop">No runaround. Just clear communication, honest recommendations, and electrical work handled the right way.</span><span class="process-copy-mobile">No runaround. Just straightforward service.</span></p>
+          <p class="process-intro-copy"><span class="process-copy-desktop">No runaround. Just clear communication, honest recommendations, and electrical work handled the right way.</span><span class="process-copy-mobile">No runaround. Just straightforward service.</span></p>
         </div>
 
         <div class="process-steps" aria-label="JV Electric service process">
@@ -1185,7 +1227,7 @@
         <div class="service-area-copy">
           <span class="section-kicker section-kicker-light">Service Area</span>
           <h2>Serving Homeowners Across Southwest Washington.</h2>
-          <p class="service-area-copy-desktop">From Longview to Vancouver, with work available north toward Olympia.</p>
+          <p class="service-area-copy-desktop">We serve Longview, Kelso, Vancouver, and nearby areas, with service available as far north as Olympia.</p>
           <div class="service-area-tags" aria-label="Areas served">
             <span><i class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2 5.7 13.2h5l-1.1 8.8 8.7-12.6h-5.1L13.2 2Z"/></svg></i> Longview</span>
             <span><i class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2 5.7 13.2h5l-1.1 8.8 8.7-12.6h-5.1L13.2 2Z"/></svg></i> Vancouver</span>
@@ -1308,7 +1350,7 @@
                 <span class="about-point-icon" aria-hidden="true">1</span>
                 <div>
                   <h3>Family &amp; Veteran Owned</h3>
-                  <p>Local ownership means you are working with a team that cares about the result and the people in the home.</p>
+                  <p>We’re a local, family-run company, and we take pride in doing solid work for our neighbors.</p>
                 </div>
               </div>
 
@@ -1316,7 +1358,7 @@
                 <span class="about-point-icon" aria-hidden="true">2</span>
                 <div>
                   <h3>Hablamos Español</h3>
-                  <p>Spanish-speaking service is available so communication stays easy and comfortable from start to finish.</p>
+                  <p>Spanish-speaking service is available if that’s more comfortable for you.</p>
                 </div>
               </div>
 
@@ -1324,7 +1366,7 @@
                 <span class="about-point-icon" aria-hidden="true">3</span>
                 <div>
                   <h3>Residential Specialists</h3>
-                  <p>From repairs and lighting to panels, EV chargers, RV power, and more, residential electrical work is what we do.</p>
+                  <p>Repairs, panels, lighting, EV chargers, RV power, and more. Residential work is our focus.</p>
                 </div>
               </div>
             </div>
@@ -1627,15 +1669,17 @@
         }
 
         const cards = Array.from(track.querySelectorAll('.review-card'));
-        let desktopIndex = 0;
+        const originalCards = [...cards];
         let mobileIndex = 0;
         let mobileDots = [];
         let settleTimer = 0;
+        let desktopBusy = false;
 
         const step = () => {
-          if (!cards.length) return 0;
+          const firstCard = track.querySelector('.review-card');
+          if (!firstCard) return 0;
           const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
-          return cards[0].getBoundingClientRect().width + gap;
+          return firstCard.getBoundingClientRect().width + gap;
         };
 
         const equalizeDesktopCards = () => {
@@ -1645,16 +1689,55 @@
           cards.forEach((card) => card.style.height = `${Math.ceil(tallest)}px`);
         };
 
-        const maxDesktopIndex = () => Math.max(0, cards.length - 3);
+        const resetDesktopOrder = () => {
+          originalCards.forEach((card) => track.appendChild(card));
+          track.style.transition = 'none';
+          track.style.transform = 'translateX(0)';
+          desktopBusy = false;
+        };
 
-        const renderDesktop = (animate = true) => {
-          desktopIndex = clamp(desktopIndex, 0, maxDesktopIndex());
-          track.style.transition = animate
-            ? 'transform 360ms cubic-bezier(.22,.72,.22,1)'
-            : 'none';
-          track.style.transform = `translateX(-${desktopIndex * step()}px)`;
-          prev.disabled = desktopIndex === 0;
-          next.disabled = desktopIndex === maxDesktopIndex();
+        const cycleDesktop = (direction) => {
+          if (desktopBusy || cards.length < 2) return;
+          desktopBusy = true;
+          prev.disabled = false;
+          next.disabled = false;
+
+          const distance = step();
+          const duration = 360;
+          const easing = 'cubic-bezier(.22,.72,.22,1)';
+
+          if (direction > 0) {
+            track.style.transition = `transform ${duration}ms ${easing}`;
+            requestAnimationFrame(() => {
+              track.style.transform = `translateX(-${distance}px)`;
+            });
+
+            window.setTimeout(() => {
+              track.style.transition = 'none';
+              const firstCard = track.querySelector('.review-card');
+              if (firstCard) track.appendChild(firstCard);
+              track.style.transform = 'translateX(0)';
+              void track.offsetWidth;
+              desktopBusy = false;
+            }, duration + 20);
+          } else {
+            track.style.transition = 'none';
+            const orderedCards = Array.from(track.querySelectorAll('.review-card'));
+            const lastCard = orderedCards[orderedCards.length - 1];
+            if (lastCard) track.insertBefore(lastCard, track.firstElementChild);
+            track.style.transform = `translateX(-${distance}px)`;
+            void track.offsetWidth;
+
+            requestAnimationFrame(() => {
+              track.style.transition = `transform ${duration}ms ${easing}`;
+              track.style.transform = 'translateX(0)';
+            });
+
+            window.setTimeout(() => {
+              track.style.transition = 'none';
+              desktopBusy = false;
+            }, duration + 20);
+          }
         };
 
         const setMobileIndex = (index, behavior = 'smooth') => {
@@ -1678,8 +1761,7 @@
           if (window.innerWidth <= 760) {
             setMobileIndex(mobileIndex - 1);
           } else {
-            desktopIndex -= 1;
-            renderDesktop(true);
+            cycleDesktop(-1);
           }
         });
 
@@ -1687,8 +1769,7 @@
           if (window.innerWidth <= 760) {
             setMobileIndex(mobileIndex + 1);
           } else {
-            desktopIndex += 1;
-            renderDesktop(true);
+            cycleDesktop(1);
           }
         });
 
@@ -1705,6 +1786,7 @@
         }
 
         const syncMain = () => {
+          resetDesktopOrder();
           if (window.innerWidth <= 760) {
             cards.forEach((card) => card.style.height = '');
             track.style.transition = 'none';
@@ -1715,7 +1797,8 @@
             track.scrollLeft = 0;
             dotsWrap.innerHTML = '';
             equalizeDesktopCards();
-            renderDesktop(false);
+            prev.disabled = false;
+            next.disabled = false;
           }
         };
 
@@ -1798,4 +1881,3 @@
 
 </body>
 </html>
-

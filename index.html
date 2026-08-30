@@ -766,6 +766,148 @@
         display: inline !important;
       }
     }
+
+    /* ===== final mobile polish ===== */
+    @media (max-width: 760px) {
+      .hero-copy h1 {
+        max-width: 360px !important;
+      }
+
+      .hero-copy > p:not(.hero-slogan) {
+        max-width: 350px !important;
+      }
+
+      .hero-review-carousel {
+        grid-template-columns: 1fr 38px auto 38px 1fr !important;
+        column-gap: 6px !important;
+        row-gap: 12px !important;
+      }
+
+      .hero-review-track {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory !important;
+      }
+
+      .hero-review-prev {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+      }
+
+      .hero-review-dots {
+        grid-column: 3 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        gap: 6px !important;
+      }
+
+      .hero-review-next {
+        grid-column: 4 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+      }
+
+      .hero-review-button {
+        width: 36px !important;
+        height: 36px !important;
+      }
+
+      .hero-review-card {
+        scroll-snap-stop: normal !important;
+      }
+
+      .process-intro-copy {
+        display: none !important;
+      }
+
+      .reviews-section {
+        background: #f7f7f4 !important;
+        color: #151618 !important;
+        border-top-color: #e5e5e1 !important;
+      }
+
+      .reviews-section::before {
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: auto !important;
+        height: 100% !important;
+        background:
+          linear-gradient(rgba(17,18,20,.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17,18,20,.035) 1px, transparent 1px) !important;
+        background-size: 36px 36px !important;
+        opacity: .72 !important;
+        pointer-events: none !important;
+      }
+
+      .reviews-heading h2,
+      .review-author {
+        color: #111214 !important;
+      }
+
+      .reviews-heading .section-kicker,
+      .reviews-section .section-kicker-light {
+        color: #8a6d00 !important;
+      }
+
+      .review-card,
+      .review-card-featured {
+        display: flex !important;
+        flex-direction: column !important;
+        background: #fff !important;
+        border-color: #dedfdc !important;
+        color: #151618 !important;
+        box-shadow: 0 16px 34px rgba(17,18,20,.07) !important;
+      }
+
+      .review-text {
+        color: #5e6368 !important;
+      }
+
+      .review-author {
+        margin-top: auto !important;
+      }
+
+      .reviews-link-secondary {
+        background: #fff !important;
+        color: #111214 !important;
+        border: 1px solid #d5d7d3 !important;
+      }
+
+      .mobile-floating-call {
+        left: auto !important;
+        right: 14px !important;
+        bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+        width: auto !important;
+        min-height: 50px !important;
+        padding: 0 18px !important;
+        border: 1px solid rgba(0,0,0,.12) !important;
+        border-radius: 999px !important;
+        box-shadow: 0 12px 28px rgba(0,0,0,.24) !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translate3d(0, 22px, 0) scale(.96) !important;
+        pointer-events: none !important;
+        will-change: transform, opacity;
+        transition:
+          opacity 260ms ease,
+          transform 320ms cubic-bezier(.22,.78,.24,1),
+          visibility 0s linear 320ms !important;
+      }
+
+      .mobile-floating-call.is-visible {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translate3d(0, 0, 0) scale(1) !important;
+        pointer-events: auto !important;
+        transition:
+          opacity 260ms ease,
+          transform 320ms cubic-bezier(.22,.78,.24,1),
+          visibility 0s linear 0s !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -818,8 +960,8 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="hero-slogan">Your Power, Our Priority.</p>
-          <h1><span class="desktop-copy-only">Residential Electrical Work, Done Right.</span><span class="mobile-copy-only">Residential Electrical Work You Can Feel Good About.</span></h1>
-          <p><span class="desktop-copy-only">Repairs, upgrades, and projects across Southwest Washington.</span><span class="mobile-copy-only">Need a repair, an upgrade, or help with a new project? JV Electric helps homeowners across Southwest Washington with clean work, clear communication, and dependable results.</span></p>
+          <h1><span class="desktop-copy-only">Your Local Residential Electrician.</span><span class="mobile-copy-only">Your Local Electrician.</span></h1>
+          <p><span class="desktop-copy-only">Repairs, upgrades, and projects across Southwest Washington.</span><span class="mobile-copy-only">Repairs, upgrades, and home projects across Southwest Washington.</span></p>
           <div class="hero-actions">
             <a class="hero-call" href="tel:+13604423618">Call Now</a>
             <a class="hero-quote" href="#contact">Get a Quote</a>
@@ -996,7 +1138,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z"/></svg></div>
               <div class="service-copy">
                 <h3>Lighting</h3>
-                <p><span class="desktop-copy-only">Ceiling lights, outdoor fixtures, and everyday home lighting installed cleanly and set up right.</span><span class="mobile-copy-only">From recessed lights to exterior fixtures, we install lighting that looks good and works the way it should.</span></p>
+                <p><span class="desktop-copy-only">Ceiling lights, outdoor fixtures, and everyday home lighting installed cleanly and set up right.</span><span class="mobile-copy-only">Indoor and outdoor lighting installed or replaced where you need it.</span></p>
               </div>
             </div>
           </article>
@@ -1088,7 +1230,7 @@
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5V4Zm4 4h6m-6 4h6m-6 4h3"/></svg></div>
               <div class="service-copy">
                 <h3>Electrical Updates</h3>
-                <p><span class="desktop-copy-only">Updates for older electrical systems, wiring, and components throughout the home.</span><span class="mobile-copy-only">Clean, code-minded upgrades that bring older electrical systems up to date.</span></p>
+                <p><span class="desktop-copy-only">Updates for older electrical systems, wiring, and components throughout the home.</span><span class="mobile-copy-only">Updates for older wiring, outlets, panels, and other electrical parts around the home.</span></p>
               </div>
             </div>
           </article>
@@ -1153,9 +1295,9 @@
         <div class="work-heading">
           <div>
             <span class="section-kicker section-kicker-light">Recent Work</span>
-            <h2>A Look at Recent JV Electric Work.</h2>
+            <h2>See Our Recent Work.</h2>
           </div>
-          <p>A few real projects from the field, including outdoor power by a rock feature, a clean service upgrade, finished lighting, and detailed panel work.</p>
+          <p>A few recent projects completed by JV Electric around Southwest Washington.</p>
         </div>
 
         <div class="work-gallery" aria-label="JV Electric project gallery">
@@ -1181,7 +1323,7 @@
         <div class="process-intro">
           <span class="section-kicker">How It Works</span>
           <h2><span class="process-title-desktop">Simple From the First Call to the Final Check.</span><span class="process-title-mobile">Simple From First Call to Final Check.</span></h2>
-          <p class="process-intro-copy"><span class="process-copy-desktop">No runaround. Just clear communication, honest recommendations, and electrical work handled the right way.</span><span class="process-copy-mobile">No runaround. Just straightforward service.</span></p>
+          <p class="process-intro-copy"><span class="process-copy-desktop">We keep the process simple and make sure you know what to expect.</span><span class="process-copy-mobile"></span></p>
         </div>
 
         <div class="process-steps" aria-label="JV Electric service process">
@@ -1192,7 +1334,7 @@
             </div>
             <div>
               <h3>Reach Out</h3>
-              <p>Call or send an estimate request and tell us what you need help with.</p>
+              <p>Call us or send an estimate request and tell us what you need.</p>
             </div>
           </article>
 
@@ -1203,7 +1345,7 @@
             </div>
             <div>
               <h3>Plan the Work</h3>
-              <p>We talk through the project, answer your questions, and line up the right solution for your home.</p>
+              <p>We’ll go over the job, answer your questions, and figure out the best way to handle it.</p>
             </div>
           </article>
 
@@ -1213,8 +1355,8 @@
               <svg viewBox="0 0 24 24"><path d="m14 2-8 11h6l-2 9 8-12h-6l2-8Z"/></svg>
             </div>
             <div>
-              <h3>Get It Done Right</h3>
-              <p>We complete the work cleanly, test everything, and make sure you feel good before we leave.</p>
+              <h3>Get It Done</h3>
+              <p>We do the work, test everything, and clean up before we leave.</p>
             </div>
           </article>
         </div>
@@ -1226,8 +1368,8 @@
       <div class="service-area-inner">
         <div class="service-area-copy">
           <span class="section-kicker section-kicker-light">Service Area</span>
-          <h2>Serving Homeowners Across Southwest Washington.</h2>
-          <p class="service-area-copy-desktop">We serve Longview, Kelso, Vancouver, and nearby areas, with service available as far north as Olympia.</p>
+          <h2><span class="desktop-copy-only">Serving Homeowners Across Southwest Washington.</span><span class="mobile-copy-only">Serving Southwest Washington.</span></h2>
+          <p class="service-area-copy-desktop">We serve Longview, Kelso, Vancouver, and nearby areas. Service is available as far north as Olympia.</p>
           <div class="service-area-tags" aria-label="Areas served">
             <span><i class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2 5.7 13.2h5l-1.1 8.8 8.7-12.6h-5.1L13.2 2Z"/></svg></i> Longview</span>
             <span><i class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2 5.7 13.2h5l-1.1 8.8 8.7-12.6h-5.1L13.2 2Z"/></svg></i> Vancouver</span>
@@ -1255,7 +1397,7 @@
           <span><i class="service-area-bolt" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2 5.7 13.2h5l-1.1 8.8 8.7-12.6h-5.1L13.2 2Z"/></svg></i> Olympia</span>
         </div>
 
-        <p class="service-area-copy-mobile">From Longview to Vancouver, with work available north toward Olympia.</p>
+        <p class="service-area-copy-mobile">Longview, Kelso, Vancouver, and nearby areas. Service is available as far north as Olympia.</p>
       </div>
     </section>
 
@@ -1397,21 +1539,21 @@
                 <span class="about-point-icon" aria-hidden="true">1</span>
                 <div>
                   <h3>Family &amp; Veteran Owned</h3>
-                  <p>Local ownership means you are working with a team that cares about the result and the people in the home.</p>
+                  <p>We’re a local, family-run company, and we take pride in doing solid work for our neighbors.</p>
                 </div>
               </div>
               <div class="about-point">
                 <span class="about-point-icon" aria-hidden="true">2</span>
                 <div>
                   <h3>Hablamos Español</h3>
-                  <p>Spanish-speaking service is available so communication stays easy and comfortable from start to finish.</p>
+                  <p>Spanish-speaking service is available if that’s more comfortable for you.</p>
                 </div>
               </div>
               <div class="about-point">
                 <span class="about-point-icon" aria-hidden="true">3</span>
                 <div>
                   <h3>Residential Specialists</h3>
-                  <p>From repairs and lighting to panels, EV chargers, RV power, and more, residential electrical work is what we do.</p>
+                  <p>Repairs, panels, lighting, EV chargers, RV power, and more. Residential work is our focus.</p>
                 </div>
               </div>
             </div>
@@ -1425,7 +1567,7 @@
         <div class="contact-copy">
           <span class="section-kicker section-kicker-light">Get in Touch</span>
           <h2>Tell Us What You Need. We’ll Take It From There.</h2>
-          <p>Send a quick message and we’ll follow up about the work, timing, and next steps.</p>
+          <p>Send us a quick message and we’ll follow up with timing and next steps.</p>
         </div>
 
         <div class="contact-form-card">
@@ -1517,7 +1659,7 @@
               <span class="faq-plus" aria-hidden="true"></span>
             </button>
             <div class="faq-panel">
-              <p>Service is available across Southwest Washington, from Longview to Vancouver, with travel available north toward Olympia.</p>
+              <p>We serve Longview, Kelso, Vancouver, and nearby areas, with service available as far north as Olympia.</p>
             </div>
           </article>
         </div>
@@ -1672,7 +1814,7 @@
         const originalCards = [...cards];
         let mobileIndex = 0;
         let mobileDots = [];
-        let settleTimer = 0;
+        let mobileScrollRaf = 0;
         let desktopBusy = false;
 
         const step = () => {
@@ -1682,9 +1824,9 @@
           return firstCard.getBoundingClientRect().width + gap;
         };
 
-        const equalizeDesktopCards = () => {
+        const equalizeReviewCards = () => {
           cards.forEach((card) => card.style.height = '');
-          if (window.innerWidth <= 760 || !cards.length) return;
+          if (!cards.length) return;
           const tallest = Math.max(...cards.map((card) => card.getBoundingClientRect().height));
           cards.forEach((card) => card.style.height = `${Math.ceil(tallest)}px`);
         };
@@ -1775,8 +1917,8 @@
 
         track.addEventListener('scroll', () => {
           if (window.innerWidth > 760) return;
-          clearTimeout(settleTimer);
-          settleTimer = window.setTimeout(settleMobile, 150);
+          cancelAnimationFrame(mobileScrollRaf);
+          mobileScrollRaf = requestAnimationFrame(settleMobile);
         }, { passive: true });
 
         if ('onscrollend' in window) {
@@ -1788,15 +1930,15 @@
         const syncMain = () => {
           resetDesktopOrder();
           if (window.innerWidth <= 760) {
-            cards.forEach((card) => card.style.height = '');
             track.style.transition = 'none';
             track.style.transform = 'none';
+            equalizeReviewCards();
             mobileDots = makeDots(dotsWrap, cards.length, 'reviews-dot', (index) => setMobileIndex(index));
             setMobileIndex(mobileIndex, 'auto');
           } else {
             track.scrollLeft = 0;
             dotsWrap.innerHTML = '';
-            equalizeDesktopCards();
+            equalizeReviewCards();
             prev.disabled = false;
             next.disabled = false;
           }
@@ -1824,7 +1966,7 @@
 
         let index = 0;
         let dots = [];
-        let settleTimer = 0;
+        let scrollRaf = 0;
 
         const setIndex = (targetIndex, behavior = 'smooth') => {
           index = clamp(targetIndex, 0, cards.length - 1);
@@ -1853,8 +1995,8 @@
 
         track.addEventListener('scroll', () => {
           if (window.innerWidth > 760) return;
-          clearTimeout(settleTimer);
-          settleTimer = window.setTimeout(settle, 150);
+          cancelAnimationFrame(scrollRaf);
+          scrollRaf = requestAnimationFrame(settle);
         }, { passive: true });
 
         if ('onscrollend' in window) {

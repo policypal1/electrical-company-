@@ -413,6 +413,136 @@
       }
     }
 
+
+    /* ===== v28 final desktop/mobile cleanup ===== */
+
+    /* Real service-area map replaces the placeholder treatment. */
+    .service-area-map-card.has-map {
+      position: relative;
+      overflow: hidden;
+      padding: 0 !important;
+      background: #17191c !important;
+    }
+
+    .service-area-map-card.has-map::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    .service-area-map-card.has-map iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      display: block;
+      border: 0;
+    }
+
+    @media (max-width: 760px) {
+      /* Slight separation from the dark hero without changing the overall theme. */
+      .hero-review-strip {
+        background: #15171a !important;
+      }
+
+      .hero-review-card {
+        background: #1b1d20 !important;
+        border-color: rgba(255,255,255,.10) !important;
+      }
+
+      /* Keep the service-area map comfortably sized on phones. */
+      .service-area-map-card.has-map {
+        min-height: 310px !important;
+      }
+
+      /* Tighter, more organized mobile footer. */
+      .footer-inner,
+      .footer-inner-compact {
+        width: calc(100% - 28px) !important;
+        padding: 24px 0 16px !important;
+        gap: 20px !important;
+      }
+
+      .footer-brand-compact {
+        width: 100%;
+        max-width: none !important;
+        gap: 6px !important;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(255,255,255,.10);
+      }
+
+      .footer-logo img {
+        width: 132px !important;
+      }
+
+      .footer-brand-compact p {
+        margin: 0 !important;
+        font-size: 12px !important;
+        line-height: 1.35 !important;
+      }
+
+      .footer-column-group {
+        display: grid !important;
+        grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+        gap: 20px 24px !important;
+      }
+
+      .footer-column-group > .footer-column {
+        min-width: 0;
+      }
+
+      /* Quick Links */
+      .footer-column-group > .footer-column:nth-child(2) {
+        order: 1;
+      }
+
+      /* Contact */
+      .footer-column-group > .footer-column:nth-child(5) {
+        order: 2;
+        grid-column: auto !important;
+      }
+
+      /* Service Area */
+      .footer-column-group > .footer-column:nth-child(3) {
+        order: 3;
+      }
+
+      /* Mobile Legal */
+      .footer-column-group > .footer-column:nth-child(4) {
+        order: 4;
+      }
+
+      .footer-column h3,
+      .footer-legal-mobile h3 {
+        margin: 0 0 8px !important;
+        font-size: 14px !important;
+      }
+
+      .footer-column a,
+      .footer-column p,
+      .footer-legal-mobile a {
+        margin: 0 0 5px !important;
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+      }
+
+      .footer-column a[href^="mailto:"] {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .footer-bottom,
+      .footer-bottom-compact {
+        width: calc(100% - 28px) !important;
+        padding: 12px 0 14px !important;
+      }
+
+      .footer-bottom p {
+        margin: 0 !important;
+        font-size: 11px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -662,8 +792,8 @@
           </article>
 
           <article class="service-card service-secondary" data-aliases="hot tub|hot tub hookup|hot tub electrical|hot tub wiring|spa|spa hookup|spa electrical|spa wiring|swim spa|swim spa wiring|jacuzzi|jacuzzi wiring|50 amp spa|60 amp spa|hot tub power">
-            <div class="service-media service-media-6" aria-label="Photo placeholder for Swim Spas &amp; Hot Tubs">
-              <span>SPA / HOT TUB PHOTO</span>
+            <div class="service-media service-media-6 has-photo" aria-label="Swim spa and hot tub electrical project photo">
+              <img src="jv-hot-tub-spa.webp" alt="Outdoor hot tub and swim spa with integrated lighting" loading="lazy" style="object-position: center 55%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 14h16M7 14v3m10-3v3M6 10h12l-1-5H7l-1 5Zm1 10h10"/></svg></div>
@@ -714,8 +844,9 @@
           </article>
 
           <article class="service-card service-extra" data-aliases="appliance|appliance circuit|appliance wiring|range|range circuit|range outlet|stove|stove outlet|oven|oven circuit|dryer|dryer circuit|dryer outlet|dryer plug|dishwasher|dishwasher circuit|microwave|microwave circuit|laundry|laundry circuit|kitchen circuit|garbage disposal|disposal circuit">
-            <div class="service-media service-media-10" aria-label="Photo placeholder for Appliance Circuits">
-              <span>APPLIANCE CIRCUIT PHOTO</span>
+            <div class="service-media service-media-10 has-photo" aria-label="Appliance circuit photo">
+              <!-- CC0 stock image: Wikimedia Commons, NEMA 14-50 outlet -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/NEMA_14-50_outlet.jpg" alt="240 volt NEMA 14-50 receptacle for a high-demand appliance circuit" loading="lazy" referrerpolicy="no-referrer" style="object-position: center 50%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3h8v4H8V3Zm-2 4h12v14H6V7Zm3 4h6m-6 4h6"/></svg></div>
@@ -727,8 +858,9 @@
           </article>
 
           <article class="service-card service-extra" data-aliases="smoke detector|smoke detectors|smoke alarm|smoke alarms|carbon monoxide|co detector|co detectors|carbon monoxide detector|carbon monoxide alarm|hardwired smoke detector|hardwired alarm|alarms|detectors">
-            <div class="service-media service-media-11" aria-label="Photo placeholder for Smoke &amp; CO Detectors">
-              <span>DETECTOR PHOTO</span>
+            <div class="service-media service-media-11 has-photo" aria-label="Smoke and carbon monoxide detector photo">
+              <!-- Public-domain stock image: Wikimedia Commons, Residential smoke detector -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Residential_smoke_detector.jpg" alt="Residential smoke detector" loading="lazy" referrerpolicy="no-referrer" style="object-position: center 50%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a7 7 0 0 0-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 0 0-7-7Zm0 4v4m0 4h.01"/></svg></div>
@@ -740,8 +872,8 @@
           </article>
 
           <article class="service-card service-extra" data-aliases="ceiling fan|ceiling fans|fan|fans|fan install|fan installation|fan replacement|install ceiling fan|replace ceiling fan|fan wiring|fan switch|ceiling fan wiring">
-            <div class="service-media service-media-12" aria-label="Photo placeholder for Ceiling Fans">
-              <span>CEILING FAN PHOTO</span>
+            <div class="service-media service-media-12 has-photo" aria-label="Ceiling fan project photo">
+              <img src="jv-ceiling-fan.webp" alt="Modern black residential ceiling fan" loading="lazy" style="object-position: center 46%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v6m0 0 5-3m-5 3-5-3m5 3v5m-7 4h14M8 21h8"/></svg></div>
@@ -753,8 +885,9 @@
           </article>
 
           <article class="service-card service-extra" data-aliases="surge|surge protection|surge protector|whole home surge|whole house surge|whole home surge protector|whole house surge protector|panel surge protector|power surge protection">
-            <div class="service-media service-media-13" aria-label="Photo placeholder for Surge Protection">
-              <span>SURGE PROTECTION PHOTO</span>
+            <div class="service-media service-media-13 has-photo" aria-label="Whole-home surge protection photo">
+              <!-- CC0 stock image: Wikimedia Commons, DIN-rail surge protection device -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/SwitchboardSurgeProtector-40kA-DinRail.jpg" alt="Electrical surge protection device for a switchboard" loading="lazy" referrerpolicy="no-referrer" style="object-position: center 50%;" />
             </div>
             <div class="service-card-body">
               <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4Zm0 5v10m-4-5h8"/></svg></div>
@@ -841,7 +974,7 @@
             <div class="work-placeholder has-photo"><img src="jv-service-upgrade-open.webp" alt="Organized residential service upgrade wiring" loading="lazy" style="object-position: center 50%;" /></div>
           </figure>
           <figure class="work-card work-card-bottom">
-            <div class="work-placeholder has-photo"><img src="jv-modern-chandelier.webp" alt="Finished chandelier installation in a stairway" loading="lazy" style="object-position: center 50%;" /></div>
+            <div class="work-placeholder has-photo"><img src="jv-recessed-lighting-room.webp" alt="Finished recessed lighting installation in a residential room" loading="lazy" style="object-position: center 58%;" /></div>
           </figure>
           <figure class="work-card work-card-wide">
             <div class="work-placeholder has-photo"><img src="jv-breaker-panel-interior.webp" alt="Finished residential breaker panel with organized wiring" loading="lazy" style="object-position: center 50%;" /></div>
@@ -912,8 +1045,14 @@
         </div>
 
         <div class="service-area-visual">
-          <div class="service-area-map-card">
-            <span>LARGE SERVICE AREA MAP / IMAGE</span>
+          <div class="service-area-map-card has-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1386704.5381791121!2d-123.37914560543221!3d47.247738279078284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485e5ffe7c3b0f9%3A0x944278686c5ff3ba!2sWashington!5e0!3m2!1sen!2sus!4v1788049048009!5m2!1sen!2sus"
+              title="JV Electric service area in Southwest Washington"
+              loading="lazy"
+              allowfullscreen=""
+              referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
           </div>
         </div>
 
@@ -1047,7 +1186,7 @@
         <div class="about-inner">
           <div class="about-content">
             <div class="about-heading-block">
-              <span class="section-kicker">About JV Electric</span>
+              <span class="section-kicker">About Us</span>
               <h2>Local Electricians Who Take Pride in the Work.</h2>
             </div>
 

@@ -950,3 +950,211 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
   `;
   document.head.appendChild(style);
 })();
+
+
+// ===== v23 EV service image swap + true looping bottom review carousel =====
+(() => {
+  const swapEvServiceImage = () => {
+    const evImage = document.querySelector('.service-card[data-aliases*="ev charger"] .service-media img');
+    if (!evImage) return;
+    evImage.src = 'jv-ev-charger-home.jpg';
+    evImage.alt = 'Blue electric vehicle charging from a wall-mounted home charger in a residential driveway';
+    evImage.removeAttribute('referrerpolicy');
+    evImage.style.objectPosition = 'center 52%';
+  };
+
+  const initBottomReviewLoop = () => {
+    const shell = document.querySelector('.reviews-carousel-shell');
+    const viewport = shell?.querySelector('.reviews-track-viewport');
+    const track = viewport?.querySelector('.reviews-grid');
+    let prev = shell?.querySelector('.reviews-cycle-prev');
+    let next = shell?.querySelector('.reviews-cycle-next');
+    if (!shell || !viewport || !track || !prev || !next) return;
+    if (shell.dataset.trueLoopReady === 'true') return;
+    shell.dataset.trueLoopReady = 'true';
+
+    const prevClone = prev.cloneNode(true);
+    const nextClone = next.cloneNode(true);
+    prev.replaceWith(prevClone);
+    next.replaceWith(nextClone);
+    prev = prevClone;
+    next = nextClone;
+
+    let dotsWrap = document.querySelector('.reviews-dots');
+    if (!dotsWrap) {
+      dotsWrap = document.createElement('div');
+      dotsWrap.className = 'reviews-dots';
+      shell.insertAdjacentElement('afterend', dotsWrap);
+    }
+
+    const reviewCards = () => Array.from(track.querySelectorAll('.review-card')).filter((card) => !card.classList.contains('carousel-clone'));
+    const gap = () => parseFloat(getComputedStyle(track).gap || '0') || 0;
+    const step = () => {
+      const first = reviewCards()[0];
+      return first ? first.getBoundingClientRect().width + gap() : 0;
+    };
+    const centeredLeft = (card) => {
+      const max = Math.max(0, track.scrollWidth - track.clientWidth);
+      return Math.max(0, Math.min(max, card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2)));
+    };
+    const nearestMobileIndex = () => {
+      const cards = reviewCards();
+      if (!cards.length) return 0;
+      const center = track.scrollLeft + (track.clientWidth / 2);
+      let bestIndex = 0;
+      let bestDistance = Infinity;
+      cards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(cardCenter - center);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = index;
+        }
+      });
+      return bestIndex;
+    };
+
+    let mobileIndex = 0;
+    let mobileDots = [];
+    let mobileScrollTimer = 0;
+    let desktopCycling = false;
+
+    const updateDots = () => {
+      mobileDots.forEach((dot, index) => {
+        const active = index === mobileIndex;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+    };
+
+    const buildMobileDots = () => {
+      dotsWrap.innerHTML = '';
+      mobileDots = reviewCards().map((_, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'reviews-dot';
+        dot.setAttribute('aria-label', `Go to review ${index + 1}`);
+        dot.addEventListener('click', () => goMobile(index));
+        dotsWrap.appendChild(dot);
+        return dot;
+      });
+      updateDots();
+    };
+
+    const goMobile = (targetIndex, behavior = 'smooth') => {
+      const cards = reviewCards();
+      if (!cards.length) return;
+      mobileIndex = ((targetIndex % cards.length) + cards.length) % cards.length;
+      const card = cards[mobileIndex];
+      if (!card) return;
+      track.scrollTo({ left: centeredLeft(card), behavior });
+      updateDots();
+    };
+
+    const settleMobile = () => {
+      mobileIndex = nearestMobileIndex();
+      updateDots();
+    };
+
+    const resetDesktopTrack = () => {
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(0)';
+      track.style.willChange = 'auto';
+    };
+
+    const cycleDesktop = (direction) => {
+      if (window.innerWidth <= 760 || desktopCycling) return;
+      const cards = reviewCards();
+      if (cards.length < 2) return;
+      const distance = step();
+      if (!distance) return;
+
+      desktopCycling = true;
+      track.style.willChange = 'transform';
+
+      if (direction > 0) {
+        track.style.transition = 'transform 360ms cubic-bezier(.22,.72,.22,1)';
+        requestAnimationFrame(() => {
+          track.style.transform = `translateX(-${distance}px)`;
+        });
+
+        const finishNext = () => {
+          track.appendChild(cards[0]);
+          resetDesktopTrack();
+          desktopCycling = false;
+        };
+
+        track.addEventListener('transitionend', finishNext, { once: true });
+        return;
+      }
+
+      const last = cards[cards.length - 1];
+      track.insertBefore(last, cards[0]);
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${distance}px)`;
+      track.getBoundingClientRect();
+
+      requestAnimationFrame(() => {
+        track.style.transition = 'transform 360ms cubic-bezier(.22,.72,.22,1)';
+        track.style.transform = 'translateX(0)';
+      });
+
+      const finishPrev = () => {
+        resetDesktopTrack();
+        desktopCycling = false;
+      };
+
+      track.addEventListener('transitionend', finishPrev, { once: true });
+    };
+
+    prev.addEventListener('click', () => {
+      if (window.innerWidth <= 760) {
+        goMobile(mobileIndex - 1);
+      } else {
+        cycleDesktop(-1);
+      }
+    });
+
+    next.addEventListener('click', () => {
+      if (window.innerWidth <= 760) {
+        goMobile(mobileIndex + 1);
+      } else {
+        cycleDesktop(1);
+      }
+    });
+
+    track.addEventListener('scroll', () => {
+      if (window.innerWidth > 760) return;
+      clearTimeout(mobileScrollTimer);
+      mobileScrollTimer = window.setTimeout(settleMobile, 70);
+    }, { passive: true });
+
+    const syncMode = () => {
+      if (window.innerWidth <= 760) {
+        track.style.transition = 'none';
+        track.style.transform = 'none';
+        buildMobileDots();
+        goMobile(mobileIndex, 'auto');
+      } else {
+        dotsWrap.innerHTML = '';
+        mobileDots = [];
+        track.scrollLeft = 0;
+        resetDesktopTrack();
+      }
+    };
+
+    window.addEventListener('resize', syncMode);
+    syncMode();
+  };
+
+  const boot = () => {
+    swapEvServiceImage();
+    initBottomReviewLoop();
+  };
+
+  if (document.readyState === 'complete') {
+    boot();
+  } else {
+    window.addEventListener('load', boot, { once: true });
+  }
+})();

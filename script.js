@@ -1,3 +1,6 @@
+// Mobile logo width fix: prevent the full JV Electric wordmark from being clipped on narrow phones.
+const mobileBrandLogoFix = document.querySelector('.mobile-brand-logo');
+if (mobileBrandLogoFix) mobileBrandLogoFix.style.width = '178px';
 
 const menuToggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');

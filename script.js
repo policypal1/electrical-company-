@@ -897,3 +897,56 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
     syncHeroStrip();
   }
 })();
+
+// ===== mobile bottom-review navigation + larger floating call button =====
+(() => {
+  const style = document.createElement('style');
+  style.setAttribute('data-jv-mobile-ui-fixes', 'true');
+  style.textContent = `
+    @media (max-width: 760px) {
+      /* Keep the lower review arrows off the cards and align them with the dots. */
+      .reviews-carousel-shell {
+        overflow: visible !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-button {
+        position: absolute !important;
+        top: auto !important;
+        bottom: -56px !important;
+        transform: none !important;
+        z-index: 6 !important;
+        width: 44px !important;
+        height: 44px !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-prev {
+        left: calc(50% - 88px) !important;
+        right: auto !important;
+      }
+
+      .reviews-carousel-shell .reviews-cycle-next {
+        right: calc(50% - 88px) !important;
+        left: auto !important;
+      }
+
+      .reviews-dots {
+        min-height: 44px !important;
+        margin-top: 12px !important;
+      }
+
+      /* Slightly larger floating Call Now pill. */
+      .mobile-floating-call {
+        min-height: 62px !important;
+        padding: 0 26px !important;
+        font-size: 16px !important;
+        gap: 11px !important;
+      }
+
+      .mobile-floating-call svg {
+        width: 22px !important;
+        height: 22px !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+})();

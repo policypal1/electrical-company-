@@ -1158,3 +1158,68 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
     window.addEventListener('load', boot, { once: true });
   }
 })();
+
+// ===== v24 higher-quality project photo placement =====
+(() => {
+  const setImage = (selector, src, alt, objectPosition = 'center center') => {
+    const image = document.querySelector(selector);
+    if (!image) return;
+    image.src = src;
+    image.alt = alt;
+    image.removeAttribute('referrerpolicy');
+    image.style.objectPosition = objectPosition;
+  };
+
+  const applyProjectPhotoUpgrades = () => {
+    // Service cards: use photos that visually match the actual work being described.
+    setImage(
+      '.service-card[data-aliases*="panel upgrade"] .service-media img',
+      'jv-panel-upgrade-new.webp',
+      'Residential electrical panel installation with organized branch-circuit wiring',
+      'center 57%'
+    );
+
+    setImage(
+      '.service-card[data-aliases*="dedicated circuit"] .service-media img',
+      'jv-dedicated-circuit-heat-pump.webp',
+      'Dedicated electrical circuit, disconnect, and conduit serving a residential heat-pump system',
+      'center 38%'
+    );
+
+    setImage(
+      '.service-card[data-aliases*="remodel wiring"] .service-media img',
+      'jv-remodel-panel-roughin-new.webp',
+      'Electrical panel and branch-circuit rough-in wiring during residential construction',
+      'center 49%'
+    );
+
+    setImage(
+      '.service-card[data-aliases*="electrical updates"] .service-media img',
+      'jv-service-upgrade-meter-new.webp',
+      'Exterior residential electrical service and meter upgrade',
+      'center 64%'
+    );
+
+    // Recent Work: replace the fountain with a clearer finished electrical/HVAC installation.
+    setImage(
+      '.work-card-featured .work-placeholder img',
+      'jv-recent-work-daikin.webp',
+      'Finished residential heat-pump electrical installation with exterior disconnect',
+      'center 54%'
+    );
+
+    // Replace the older service-upgrade photo in the lower recent-work card with a cleaner panel photo.
+    setImage(
+      '.work-card-bottom .work-placeholder img',
+      'jv-recent-work-panel-new.webp',
+      'Residential electrical panel installation with labeled branch-circuit wiring',
+      'center 65%'
+    );
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyProjectPhotoUpgrades, { once: true });
+  } else {
+    applyProjectPhotoUpgrades();
+  }
+})();

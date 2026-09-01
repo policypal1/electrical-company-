@@ -1303,3 +1303,104 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
     applyRecentWorkCleanup();
   }
 })();
+
+
+// ===== v26 copy + accent refinements =====
+(() => {
+  const injectStyle = () => {
+    if (document.getElementById('v26-copy-accent-overrides')) return;
+    const style = document.createElement('style');
+    style.id = 'v26-copy-accent-overrides';
+    style.textContent = `
+      /* Match the desktop hero slogan size to the supporting hero copy. */
+      @media (min-width: 1081px) {
+        .hero-slogan {
+          font-size: 20px !important;
+          line-height: 1.55 !important;
+          letter-spacing: normal !important;
+          text-transform: none !important;
+        }
+      }
+
+      @media (min-width: 761px) and (max-width: 1080px) {
+        .hero-slogan {
+          font-size: 18px !important;
+          line-height: 1.55 !important;
+          letter-spacing: normal !important;
+          text-transform: none !important;
+        }
+      }
+
+      /* Restore the process step numbers to the JV Electric yellow accent. */
+      .process-number,
+      .process-step-dark .process-number {
+        color: var(--brand-gold) !important;
+      }
+
+      /* Footer slogan uses the brand accent. */
+      .footer-brand-compact p,
+      .footer-brand p {
+        color: var(--brand-gold) !important;
+      }
+    `;
+    document.head.appendChild(style);
+  };
+
+  const updateCopy = () => {
+    const planText = document.querySelector('.process-step:nth-child(2) p');
+    if (planText) {
+      planText.textContent = 'We’ll review the job, answer your questions, and plan the work.';
+    }
+
+    const repairsText = document.querySelector('.service-card[data-aliases*="repair"] .service-copy p');
+    if (repairsText) {
+      repairsText.textContent = 'If something is flickering, tripping, dead, or acting strange, we’ll find the issue and get it working again.';
+    }
+
+    const lightingDesktop = document.querySelector('.service-card[data-aliases*="lighting"] .service-copy p .desktop-copy-only');
+    if (lightingDesktop) {
+      lightingDesktop.textContent = 'Ceiling lights, outdoor fixtures, and everyday home lighting installed cleanly and professionally.';
+    }
+  };
+
+  const apply = () => {
+    injectStyle();
+    updateCopy();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply, { once: true });
+  } else {
+    apply();
+  }
+})();
+
+
+// ===== v27 hot tub service image update =====
+(() => {
+  const applyHotTubImageUpdate = () => {
+    const selectors = [
+      '.service-card[data-aliases*="hot tub"] .service-media img',
+      '.service-card[data-aliases*="spa"] .service-media img',
+      '.service-card[data-aliases*="swim spa"] .service-media img'
+    ];
+
+    let image = null;
+    for (const selector of selectors) {
+      image = document.querySelector(selector);
+      if (image) break;
+    }
+
+    if (!image) return;
+    image.src = 'jv-hot-tub-spa.jpg';
+    image.alt = 'Residential hot tub and swim spa installation on an outdoor deck';
+    image.removeAttribute('referrerpolicy');
+    image.style.objectPosition = 'center 54%';
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyHotTubImageUpdate, { once: true });
+  } else {
+    applyHotTubImageUpdate();
+  }
+})();

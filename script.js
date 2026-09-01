@@ -1223,3 +1223,83 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
     applyProjectPhotoUpgrades();
   }
 })();
+
+
+// ===== v25 recent-work cleanup + dedicated-circuit revert =====
+(() => {
+  const setImage = (selector, src, alt, objectPosition = 'center center') => {
+    const image = document.querySelector(selector);
+    if (!image) return;
+    image.src = src;
+    image.alt = alt;
+    image.removeAttribute('referrerpolicy');
+    image.style.objectPosition = objectPosition;
+  };
+
+  const applyRecentWorkCleanup = () => {
+    // Put Dedicated Circuits back to the original image.
+    setImage(
+      '.service-card[data-aliases*="dedicated circuit"] .service-media img',
+      'jv-dedicated-circuit-disconnect.webp',
+      'Dedicated circuit disconnect and feeder wiring',
+      'center 46%'
+    );
+
+    // Keep the stronger upgraded service images where they fit well.
+    setImage(
+      '.service-card[data-aliases*="panel upgrade"] .service-media img',
+      'jv-panel-upgrade-new.webp',
+      'Residential electrical panel installation with organized branch-circuit wiring',
+      'center 57%'
+    );
+
+    setImage(
+      '.service-card[data-aliases*="remodel wiring"] .service-media img',
+      'jv-remodel-panel-roughin-new.webp',
+      'Electrical panel and branch-circuit rough-in wiring during residential construction',
+      'center 49%'
+    );
+
+    setImage(
+      '.service-card[data-aliases*="electrical updates"] .service-media img',
+      'jv-service-upgrade-meter-new.webp',
+      'Exterior residential electrical service and meter upgrade',
+      'center 64%'
+    );
+
+    // Recent Work: remove the AC-unit photos and use distinct wiring/panel images instead.
+    setImage(
+      '.work-card-featured .work-placeholder img',
+      'jv-remodel-panel-roughin-new.webp',
+      'Residential electrical panel rough-in with organized branch-circuit wiring during construction',
+      'center 54%'
+    );
+
+    setImage(
+      '.work-card-top .work-placeholder img',
+      'jv-panel-upgrade-new.webp',
+      'Residential electrical panel installation with color-coded branch-circuit wiring',
+      'center 57%'
+    );
+
+    setImage(
+      '.work-card-bottom .work-placeholder img',
+      'jv-recent-work-panel-new.webp',
+      'Finished residential electrical panel installation mounted in a framed wall',
+      'center 63%'
+    );
+
+    setImage(
+      '.work-card-wide .work-placeholder img',
+      'jv-service-upgrade-open.webp',
+      'Open residential service upgrade with organized electrical wiring',
+      'center 50%'
+    );
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyRecentWorkCleanup, { once: true });
+  } else {
+    applyRecentWorkCleanup();
+  }
+})();

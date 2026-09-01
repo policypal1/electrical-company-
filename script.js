@@ -1404,3 +1404,74 @@ document.querySelectorAll('.brand-logo, .mobile-brand-logo, .footer-logo').forEa
     applyHotTubImageUpdate();
   }
 })();
+
+// ===== v28 top mobile review cleanup =====
+(() => {
+  const injectTopReviewMobileStyles = () => {
+    if (document.getElementById('v28-top-review-mobile-overrides')) return;
+
+    const style = document.createElement('style');
+    style.id = 'v28-top-review-mobile-overrides';
+    style.textContent = `
+      @media (max-width: 760px) {
+        .hero-review-card {
+          display: flex !important;
+          flex-direction: column !important;
+        }
+
+        .hero-review-card p {
+          flex: 1 1 auto !important;
+        }
+
+        .hero-review-card strong {
+          display: block !important;
+          margin-top: auto !important;
+        }
+
+        .hero-review-card strong::before {
+          content: "- ";
+        }
+
+        .hero-review-card > span:last-child {
+          display: none !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  };
+
+  const equalizeTopReviewCards = () => {
+    const cards = Array.from(document.querySelectorAll('.hero-review-card'));
+    if (!cards.length) return;
+
+    if (window.innerWidth > 760) {
+      cards.forEach((card) => {
+        card.style.height = '';
+      });
+      return;
+    }
+
+    cards.forEach((card) => {
+      card.style.height = 'auto';
+    });
+
+    const tallest = Math.max(...cards.map((card) => card.getBoundingClientRect().height));
+    cards.forEach((card) => {
+      card.style.height = `${Math.ceil(tallest)}px`;
+    });
+  };
+
+  const apply = () => {
+    injectTopReviewMobileStyles();
+    requestAnimationFrame(equalizeTopReviewCards);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply, { once: true });
+  } else {
+    apply();
+  }
+
+  window.addEventListener('load', equalizeTopReviewCards);
+  window.addEventListener('resize', () => requestAnimationFrame(equalizeTopReviewCards));
+})();

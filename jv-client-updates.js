@@ -101,6 +101,30 @@
       }
 
       @media (max-width: ${MOBILE_MAX}px) {
+        /* Mobile hero: keep the desktop tilt, but make the single phone photo completely straight/flat.
+           The shorter visual container removes the empty space left behind by the two removed cards,
+           which pulls Customer Reviews closer to the hero image without changing desktop. */
+        .hero-inner {
+          padding-bottom: 18px !important;
+        }
+
+        .hero-visual {
+          height: 330px !important;
+          min-height: 330px !important;
+          margin-top: 4px !important;
+          perspective: none !important;
+          transform-style: flat !important;
+        }
+
+        .hero-visual .project-card-main,
+        .hero-visual .project-card-main:hover,
+        .hero-visual.main-focused .project-card-main {
+          top: 0 !important;
+          height: 94% !important;
+          transform: translateX(-50%) !important;
+          filter: none !important;
+        }
+
         /* One recent-work image at a time, swipeable, matching the site's other mobile carousels. */
         .work-gallery {
           display: flex !important;
@@ -226,6 +250,24 @@
           height: 27px !important;
           min-width: 27px !important;
           min-height: 27px !important;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .hero-inner {
+          padding-bottom: 16px !important;
+        }
+
+        .hero-visual {
+          height: 285px !important;
+          min-height: 285px !important;
+        }
+
+        .hero-visual .project-card-main,
+        .hero-visual .project-card-main:hover,
+        .hero-visual.main-focused .project-card-main {
+          height: 94% !important;
+          transform: translateX(-50%) !important;
         }
       }
     `;

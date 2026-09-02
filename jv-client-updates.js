@@ -4,23 +4,23 @@
 
   const desktopRecentWorkImages = [
     {
-      src: 'jv-remodel-panel-roughin-new.webp',
-      alt: 'Residential electrical panel rough-in with organized branch-circuit wiring during construction',
-      objectPosition: 'center 54%'
+      src: 'jv-outdoor-gfci-fountain.webp',
+      alt: 'Outdoor electrical power installed beside a rock water feature',
+      objectPosition: 'center 50%'
     },
     {
-      src: 'jv-panel-upgrade-new.webp',
-      alt: 'Residential electrical panel installation with color-coded branch-circuit wiring',
-      objectPosition: 'center 57%'
-    },
-    {
-      src: 'jv-recent-work-panel-new.webp',
-      alt: 'Finished residential electrical panel installation mounted in a framed wall',
-      objectPosition: 'center 63%'
+      src: 'jv-recessed-lighting-room.webp',
+      alt: 'Recent JV Electric residential electrical project',
+      objectPosition: 'center 58%'
     },
     {
       src: 'jv-service-upgrade-open.webp',
-      alt: 'Open residential service upgrade with organized electrical wiring',
+      alt: 'Recent JV Electric residential electrical project',
+      objectPosition: 'center 50%'
+    },
+    {
+      src: 'jv-breaker-panel-interior.webp',
+      alt: 'Finished residential breaker panel with organized wiring',
       objectPosition: 'center 50%'
     }
   ];
@@ -81,6 +81,42 @@
     {
       src: 'jv-recent-work-daikin-heat-pump-2.webp',
       alt: 'Daikin heat-pump electrical installation with exterior disconnect and conduit'
+    },
+    {
+      src: 'jv-recent-work-panel-wood-wall.webp',
+      alt: 'Residential electrical panel upgrade installed flush in a wood-paneled wall'
+    },
+    {
+      src: 'jv-recent-work-meter-pole-receptacle.webp',
+      alt: 'Outdoor electrical receptacle and service equipment mounted on a utility post'
+    },
+    {
+      src: 'jv-recent-work-panel-roughin-3.webp',
+      alt: 'New residential electrical panel rough-in with neatly organized branch-circuit wiring'
+    },
+    {
+      src: 'jv-recent-work-service-disconnect-splitter.webp',
+      alt: 'Exterior service disconnect and distribution equipment installed on a residential wall'
+    },
+    {
+      src: 'jv-recent-work-meter-base-plywood.webp',
+      alt: 'Electrical meter base and service mast mounted on exterior plywood wall sheathing'
+    },
+    {
+      src: 'jv-recent-work-modern-chandelier-room.webp',
+      alt: 'Modern black chandelier installed in a bright residential room'
+    },
+    {
+      src: 'jv-recent-work-bath-vanity-light.webp',
+      alt: 'Modern bathroom vanity lighting above a double sink vanity'
+    },
+    {
+      src: 'jv-recent-work-stairwell-pendant.webp',
+      alt: 'Decorative stairwell pendant light installed over a residential staircase'
+    },
+    {
+      src: 'jv-recent-work-under-cabinet-lighting.webp',
+      alt: 'Under-cabinet kitchen lighting illuminating a quartz countertop and backsplash'
     }
   ];
 

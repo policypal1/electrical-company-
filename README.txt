@@ -1,17 +1,18 @@
-JV ELECTRIC CLIENT UPDATE
+JV ELECTRIC FINAL MOBILE RECENT-WORK UPDATE
 
-Copy every file in this folder into the ROOT of the existing electrical-company- project and replace script.js when prompted.
+Copy every file in this ZIP into the ROOT of the existing electrical-company- project and replace script.js when prompted.
 
-Changes included:
-- Hero: keeps the back/main project photo and removes the two photos layered in front on desktop and mobile.
-- Hero mobile: straightens the remaining photo so it is flat with no 3D/slanted tilt; desktop keeps the slanted treatment.
-- Mobile spacing: removes the leftover blank space under the hero photo so Customer Reviews sits noticeably higher.
-- Recent Work: replaces the old gallery photos with the 9 supplied project photos.
-- Recent Work desktop: keeps the existing 4-card desktop layout.
-- Recent Work mobile: one-photo carousel with swipe, arrows, and dots; all 9 new photos are available.
-- Footer: adds compact TikTok, Instagram, and Facebook icon links without enlarging/rebuilding the footer.
+This update keeps the previously approved changes and makes the Recent Work correction requested last:
+
+- DESKTOP Recent Work is reverted to the original four-photo gallery used by the site before the supplied project-photo update.
+- MOBILE Recent Work keeps the approved one-photo swipe carousel with arrows and dots.
+- MOBILE Recent Work now includes all of the previously supplied project photos plus the 5 newly supplied photos.
+- The new 5 screenshots were cropped to remove the phone/black bars and converted to WebP.
+- The mobile hero remains flat/straight, while the desktop hero keeps its slanted presentation.
+- Customer Reviews stays pulled higher on mobile.
+- Existing footer/social work is preserved.
 
 No files were pushed to GitHub.
 
 Technical note:
-The replacement script.js loads the exact prior script.js revision from the repo's pinned current commit through jsDelivr, then loads jv-client-updates.js. This preserves all existing site behavior while keeping this update package small and copy/paste-ready.
+The replacement script.js loads the exact prior site script from the pinned repo revision through jsDelivr, then applies jv-client-updates.js. Desktop Recent Work is explicitly restored to the site's original four-photo state; the supplied Recent Work images are used only for the mobile carousel.

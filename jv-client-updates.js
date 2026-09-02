@@ -1,8 +1,31 @@
-// ===== JV Electric client updates: hero cleanup, recent-work mobile carousel, footer socials =====
+// ===== JV Electric client updates: hero cleanup, mobile-only recent-work carousel, footer socials =====
 (() => {
   const MOBILE_MAX = 760;
 
-  const recentWorkImages = [
+  const desktopRecentWorkImages = [
+    {
+      src: 'jv-remodel-panel-roughin-new.webp',
+      alt: 'Residential electrical panel rough-in with organized branch-circuit wiring during construction',
+      objectPosition: 'center 54%'
+    },
+    {
+      src: 'jv-panel-upgrade-new.webp',
+      alt: 'Residential electrical panel installation with color-coded branch-circuit wiring',
+      objectPosition: 'center 57%'
+    },
+    {
+      src: 'jv-recent-work-panel-new.webp',
+      alt: 'Finished residential electrical panel installation mounted in a framed wall',
+      objectPosition: 'center 63%'
+    },
+    {
+      src: 'jv-service-upgrade-open.webp',
+      alt: 'Open residential service upgrade with organized electrical wiring',
+      objectPosition: 'center 50%'
+    }
+  ];
+
+  const mobileRecentWorkImages = [
     {
       src: 'jv-recent-work-exterior-sconce.webp',
       alt: 'Exterior wall sconce installed beside a residential garage door'
@@ -38,8 +61,31 @@
     {
       src: 'jv-recent-work-panel.webp',
       alt: 'Finished 200 amp residential electrical panel with labeled circuits'
+    },
+    {
+      src: 'jv-recent-work-panel-roughin-2.webp',
+      alt: 'Residential electrical panel rough-in with organized branch-circuit wiring'
+    },
+    {
+      src: 'jv-recent-work-service-equipment.webp',
+      alt: 'Residential electrical service equipment and disconnect installation'
+    },
+    {
+      src: 'jv-recent-work-service-pedestal.webp',
+      alt: 'Outdoor residential electrical service pedestal installation'
+    },
+    {
+      src: 'jv-recent-work-goodman-heat-pump.webp',
+      alt: 'Goodman heat-pump electrical installation with exterior disconnect and conduit'
+    },
+    {
+      src: 'jv-recent-work-daikin-heat-pump-2.webp',
+      alt: 'Daikin heat-pump electrical installation with exterior disconnect and conduit'
     }
   ];
+
+  const activeRecentWorkImages = () =>
+    window.innerWidth <= MOBILE_MAX ? mobileRecentWorkImages : desktopRecentWorkImages;
 
   const injectStyles = () => {
     if (document.getElementById('jv-client-update-styles')) return;
@@ -53,7 +99,7 @@
         display: none !important;
       }
 
-      /* Five extra recent-work photos are mobile-only so the desktop layout stays unchanged. */
+      /* Extra recent-work photos are mobile-only; desktop keeps the original four-photo gallery. */
       .work-card-mobile-extra,
       .work-carousel-controls {
         display: none !important;
@@ -289,10 +335,10 @@
     return 'work-card work-card-mobile-extra';
   };
 
-  const recentCardMarkup = ({ src, alt }, index) => `
+  const recentCardMarkup = ({ src, alt, objectPosition = 'center center' }, index) => `
     <figure class="${recentCardClass(index)}" data-jv-recent-index="${index}">
       <div class="work-placeholder has-photo">
-        <img src="${src}" alt="${alt}" loading="lazy" />
+        <img src="${src}" alt="${alt}" loading="lazy" style="object-position: ${objectPosition};" />
       </div>
     </figure>
   `;
@@ -301,7 +347,7 @@
     const gallery = document.querySelector('.work-gallery');
     if (!gallery) return null;
 
-    gallery.innerHTML = recentWorkImages.map(recentCardMarkup).join('');
+    gallery.innerHTML = activeRecentWorkImages().map(recentCardMarkup).join('');
     gallery.setAttribute('aria-label', 'JV Electric recent project gallery');
     gallery.dataset.jvClientGallery = 'true';
 
@@ -329,20 +375,21 @@
     const gallery = document.querySelector('.work-gallery');
     if (!gallery) return;
 
+    const dataSet = activeRecentWorkImages();
     const cards = Array.from(gallery.querySelectorAll('.work-card'));
-    if (cards.length !== recentWorkImages.length) {
+    if (cards.length !== dataSet.length) {
       buildRecentWork();
       return enforceRecentWorkImages();
     }
 
     cards.forEach((card, index) => {
       const image = card.querySelector('img');
-      const data = recentWorkImages[index];
+      const data = dataSet[index];
       if (!image || !data) return;
       image.src = data.src;
       image.alt = data.alt;
       image.removeAttribute('referrerpolicy');
-      image.style.objectPosition = 'center center';
+      image.style.objectPosition = data.objectPosition || 'center center';
     });
   };
 
@@ -435,17 +482,28 @@
       scrollTimer = window.setTimeout(settle, 70);
     }, { passive: true });
 
+    let lastMobileMode = null;
+
     const syncMode = () => {
-      if (window.innerWidth <= MOBILE_MAX) {
+      const isMobile = window.innerWidth <= MOBILE_MAX;
+
+      if (lastMobileMode !== isMobile) {
+        lastMobileMode = isMobile;
+        buildRecentWork();
+        currentIndex = 0;
+      }
+
+      if (isMobile) {
         buildDots();
         requestAnimationFrame(() => goTo(currentIndex, 'auto'));
       } else {
         gallery.scrollLeft = 0;
+        if (dotsWrap) dotsWrap.innerHTML = '';
+        dots = [];
       }
     };
 
     window.addEventListener('resize', syncMode);
-    buildDots();
     syncMode();
   };
 

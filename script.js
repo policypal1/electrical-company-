@@ -23,7 +23,6 @@ window.JV_SITE_CONFIG = Object.freeze({
 
   let pending = false;
   let timeoutId = 0;
-  let loadSuccessTimer = 0;
   let responseMessageReceived = false;
 
   const style = document.createElement('style');
@@ -117,7 +116,6 @@ window.JV_SITE_CONFIG = Object.freeze({
 
   const clearPendingTimers = () => {
     window.clearTimeout(timeoutId);
-    window.clearTimeout(loadSuccessTimer);
   };
 
   const resetPending = () => {
@@ -163,20 +161,6 @@ window.JV_SITE_CONFIG = Object.freeze({
     `;
   };
 
-  /*
-   * Google Apps Script runs inside a cross-origin iframe. Its postMessage response
-   * is useful when available, but some browsers / Google redirects can prevent that
-   * message from reaching the parent page. A completed iframe load therefore acts
-   * as the reliable success fallback after a real submission.
-   */
-  iframe.addEventListener('load', () => {
-    if (!pending) return;
-
-    window.clearTimeout(loadSuccessTimer);
-    loadSuccessTimer = window.setTimeout(() => {
-      if (pending && !responseMessageReceived) showSuccess();
-    }, 700);
-  });
 
   window.addEventListener('message', (event) => {
     const data = event.data;
@@ -219,9 +203,9 @@ window.JV_SITE_CONFIG = Object.freeze({
     form.method = 'POST';
     form.target = iframe.name;
 
-    /* Only show the full error state if Google never finishes loading a response. */
+    /* Success is shown only after Apps Script explicitly confirms the email was sent. */
     timeoutId = window.setTimeout(() => {
       if (pending) showFullFormError();
-    }, 25000);
+    }, 20000);
   });
 })();

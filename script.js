@@ -2,14 +2,11 @@
  * JV Electric update bootstrap
  * Preserves the exact script.js version that was on main when this update was built,
  * then loads the client-requested hero / recent-work / social updates.
- *
- * This file is intentionally tiny: copy it over the existing script.js alongside
- * jv-client-updates.js and the supplied WebP images.
  */
 document.write('<script src="https://cdn.jsdelivr.net/gh/policypal1/electrical-company-@f4caf453cd8b502ecbdee36dd0a4b4fced37fcef/script.js"></' + 'script>');
 document.write('<script src="jv-client-updates.js"></' + 'script>');
 
-/* JV Electric contact-form configuration. */
+/* JV Electric contact form. */
 window.JV_SITE_CONFIG = Object.freeze({
   formEndpoint: 'https://script.google.com/macros/s/AKfycbwEWIQbxN1CaLSqlhBkCW3amonPw8KChDklOiDnwmu4AUqJpzHEvRsrSaVUpD_DFX3Vfw/exec'
 });
@@ -18,13 +15,16 @@ window.JV_SITE_CONFIG = Object.freeze({
   const form = document.querySelector('#estimate-form');
   if (!form) return;
 
-  const card = form.closest('.contact-form-card');
+  const card = form.closest('.contact-form-card') || form.parentElement;
   const endpoint = String(window.JV_SITE_CONFIG?.formEndpoint || '').trim();
   const button = form.querySelector('button[type="submit"]');
   const status = form.querySelector('.contact-form-status');
   const originalButtonText = button?.textContent || 'Request Estimate';
+
   let pending = false;
   let timeoutId = 0;
+  let loadSuccessTimer = 0;
+  let responseMessageReceived = false;
 
   const style = document.createElement('style');
   style.textContent = `
@@ -98,14 +98,28 @@ window.JV_SITE_CONFIG = Object.freeze({
     button.textContent = busy ? 'Sending…' : originalButtonText;
   };
 
+  const clearPendingTimers = () => {
+    window.clearTimeout(timeoutId);
+    window.clearTimeout(loadSuccessTimer);
+  };
+
   const resetPending = () => {
     pending = false;
-    window.clearTimeout(timeoutId);
+    clearPendingTimers();
     setBusy(false);
   };
 
-  const showFullFormError = () => {
+  const showSuccess = () => {
+    if (!pending) return;
     resetPending();
+    form.reset();
+    setStatus('Thanks. Your estimate request was sent. JV Electric will follow up soon.', 'success');
+  };
+
+  const showFullFormError = () => {
+    if (!pending && card?.querySelector('.jv-form-error')) return;
+    resetPending();
+
     if (!card) {
       setStatus('Error. Please call (360) 442-3618.');
       return;
@@ -120,14 +134,28 @@ window.JV_SITE_CONFIG = Object.freeze({
     `;
   };
 
+  /*
+   * Google Apps Script runs inside a cross-origin iframe. Its postMessage response
+   * is useful when available, but some browsers / Google redirects can prevent that
+   * message from reaching the parent page. A completed iframe load therefore acts
+   * as the reliable success fallback after a real submission.
+   */
+  iframe.addEventListener('load', () => {
+    if (!pending) return;
+
+    window.clearTimeout(loadSuccessTimer);
+    loadSuccessTimer = window.setTimeout(() => {
+      if (pending && !responseMessageReceived) showSuccess();
+    }, 700);
+  });
+
   window.addEventListener('message', (event) => {
     const data = event.data;
     if (!pending || !data || data.source !== 'jv-electric-form') return;
 
+    responseMessageReceived = true;
     if (data.ok) {
-      resetPending();
-      form.reset();
-      setStatus('Thanks. Your estimate request was sent. JV Electric will follow up soon.', 'success');
+      showSuccess();
     } else {
       showFullFormError();
     }
@@ -153,6 +181,7 @@ window.JV_SITE_CONFIG = Object.freeze({
       return;
     }
 
+    responseMessageReceived = false;
     pending = true;
     setBusy(true);
     setStatus('Sending your request…');
@@ -161,8 +190,9 @@ window.JV_SITE_CONFIG = Object.freeze({
     form.method = 'POST';
     form.target = iframe.name;
 
+    /* Only show the full error state if Google never finishes loading a response. */
     timeoutId = window.setTimeout(() => {
       if (pending) showFullFormError();
-    }, 18000);
+    }, 25000);
   });
 })();

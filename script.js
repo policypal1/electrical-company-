@@ -14,7 +14,7 @@ document.write('<script src="jv-client-updates.js"></' + 'script>');
  * replace the placeholder below with the /exec URL.
  */
 window.JV_SITE_CONFIG = Object.freeze({
-  formEndpoint: 'PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
+  formEndpoint: 'https://script.google.com/macros/s/AKfycbwEWIQbxN1CaLSqlhBkCW3amonPw8KChDklOiDnwmu4AUqJpzHEvRsrSaVUpD_DFX3Vfw/exec'
 });
 
 (() => {

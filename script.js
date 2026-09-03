@@ -43,7 +43,7 @@ window.JV_SITE_CONFIG = Object.freeze({
     }
     .contact-form-status.is-success { color: #207a3b; }
     .contact-form button[disabled] { opacity: .72; cursor: wait; }
-    .jv-form-error {
+    .jv-form-result {
       min-height: 330px;
       display: flex;
       flex-direction: column;
@@ -52,20 +52,20 @@ window.JV_SITE_CONFIG = Object.freeze({
       text-align: center;
       padding: 36px 22px;
     }
-    .jv-form-error h3 {
+    .jv-form-result h3 {
       margin: 0 0 12px;
       font-size: clamp(1.65rem, 3vw, 2.2rem);
       line-height: 1.1;
       color: #151515;
     }
-    .jv-form-error p {
+    .jv-form-result p {
       max-width: 520px;
       margin: 0 0 24px;
       color: #555;
       font-size: 1rem;
       line-height: 1.55;
     }
-    .jv-form-error a {
+    .jv-form-result a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -113,7 +113,18 @@ window.JV_SITE_CONFIG = Object.freeze({
     if (!pending) return;
     resetPending();
     form.reset();
-    setStatus('Thanks. Your estimate request was sent. JV Electric will follow up soon.', 'success');
+
+    if (!card) {
+      setStatus('Thanks. Your estimate request was sent. JV Electric will follow up soon.', 'success');
+      return;
+    }
+
+    card.innerHTML = `
+      <div class="jv-form-result jv-form-success" role="status" aria-live="polite">
+        <h3>Thanks! Your request was sent.</h3>
+        <p>JV Electric received your estimate request and will follow up soon.</p>
+      </div>
+    `;
   };
 
   const showFullFormError = () => {
@@ -126,7 +137,7 @@ window.JV_SITE_CONFIG = Object.freeze({
     }
 
     card.innerHTML = `
-      <div class="jv-form-error" role="alert">
+      <div class="jv-form-result jv-form-error" role="alert">
         <h3>We couldn’t send your request.</h3>
         <p>Please call JV Electric directly and we’ll help you with your estimate.</p>
         <a href="tel:+13604423618">Call (360) 442-3618</a>

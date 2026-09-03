@@ -1706,32 +1706,36 @@
 
         <div class="contact-form-card">
           <h3>Request an Estimate</h3>
-          <form class="contact-form">
+          <form class="contact-form" id="estimate-form">
             <div class="contact-form-row">
               <label>
                 <span>Name</span>
-                <input type="text" placeholder="John Smith" />
+                <input type="text" name="name" placeholder="John Smith" autocomplete="name" maxlength="100" required />
               </label>
               <label>
                 <span>Phone</span>
-                <input type="tel" placeholder="(360) 555-1234" />
+                <input type="tel" name="phone" placeholder="(360) 555-1234" autocomplete="tel" inputmode="tel" maxlength="30" required />
               </label>
             </div>
             <div class="contact-form-row">
               <label>
                 <span>Email</span>
-                <input type="email" placeholder="john@email.com" />
+                <input type="email" name="email" placeholder="john@email.com" autocomplete="email" maxlength="150" />
               </label>
               <label>
                 <span>Project Type</span>
-                <input type="text" placeholder="Panel upgrade" />
+                <input type="text" name="projectType" placeholder="Panel upgrade" maxlength="120" />
               </label>
             </div>
             <label>
               <span>Project Details</span>
-              <textarea rows="6" placeholder="Share a few details about your project"></textarea>
+              <textarea name="projectDetails" rows="6" placeholder="Share a few details about your project" maxlength="2500" required></textarea>
             </label>
+            <div class="form-honeypot" aria-hidden="true">
+              <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </div>
             <button type="submit">Request Estimate</button>
+            <p class="contact-form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>

@@ -8,7 +8,7 @@ document.write('<script src="jv-client-updates.js"></' + 'script>');
 
 /* JV Electric contact form. */
 window.JV_SITE_CONFIG = Object.freeze({
-  formEndpoint: 'https://script.google.com/macros/s/AKfycbwEWIQbxN1CaLSqlhBkCW3amonPw8KChDklOiDnwmu4AUqJpzHEvRsrSaVUpD_DFX3Vfw/exec'
+  formEndpoint: 'https://script.google.com/macros/s/AKfycbz73iO_UL8B7ZtSAZbsqay6VW8nwS2nscBEIwbkTZlJyzroGAAZllJ_Qayx67GE_HQrMQ/exec'
 });
 
 (() => {

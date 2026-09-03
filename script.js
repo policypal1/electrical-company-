@@ -58,6 +58,23 @@ window.JV_SITE_CONFIG = Object.freeze({
       line-height: 1.1;
       color: #151515;
     }
+    .jv-result-icon {
+      width: 74px;
+      height: 74px;
+      margin: 0 0 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .jv-form-success .jv-result-icon {
+      background: #e8f7ed;
+      color: #16833b;
+      border: 2px solid #16833b;
+    }
     .jv-form-result p {
       max-width: 520px;
       margin: 0 0 24px;
@@ -121,6 +138,7 @@ window.JV_SITE_CONFIG = Object.freeze({
 
     card.innerHTML = `
       <div class="jv-form-result jv-form-success" role="status" aria-live="polite">
+        <div class="jv-result-icon" aria-hidden="true">✓</div>
         <h3>Thanks! Your request was sent.</h3>
         <p>JV Electric received your estimate request and will follow up soon.</p>
       </div>
